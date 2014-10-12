@@ -8,17 +8,13 @@
     </head>
     <body>
         <div id="header">
-            <h1><a href="../index.php">Portal pracy dla studentów</a></h1>
+            <h1><a href="index.php">Portal pracy dla studentów</a></h1>
         </div>
-        <div id="menu">
-            <ul>
-                <li><a href="../index.php">Strona główna</a></li>
-                <li><a href="#">Student</a></li>
-                <li><a href="#">Nauczyciel</a></li>
-                <li><a href="#">Firma</a></li>
-
-            </ul>
-        </div>
+        <?php
+        include_once 'classPage.php';
+        $page= new Page();
+        $page->domenu();
+        ?>
         <div id="main">
             <div id="content">
                 <?php
@@ -39,9 +35,9 @@
             </div><!-- sidebar -->
             <div class="clearing">&nbsp;</div>
         </div><!-- main -->
-        <div id="footer">
-            <p>Copyright &copy; 2013, designed by <a href="http://www.alphastudio.pl/">Alpha Studio</a> | <a href="#">Privacy Policy</a></p>
-        </div>
+        <?php
+        $page->dofooter();
+        ?>
 
     </body>
 </html>

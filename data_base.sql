@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas wygenerowania: 22 Wrz 2014, 14:22
--- Wersja serwera: 5.5.34
--- Wersja PHP: 5.4.22
+-- Czas wygenerowania: 12 Paź 2014, 19:46
+-- Wersja serwera: 5.6.14
+-- Wersja PHP: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -82,20 +82,22 @@ CREATE TABLE IF NOT EXISTS `company` (
   `name` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
   `telephone` varchar(11) NOT NULL,
-  `e-mail` varchar(50) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `e_mail` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `account_create_date` datetime NOT NULL,
+  `account_create_date` date NOT NULL,
+  `photoname` varchar(30) NOT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Zrzut danych tabeli `company`
 --
 
-INSERT INTO `company` (`company_id`, `name`, `address`, `telephone`, `e-mail`, `password`, `active`, `account_create_date`) VALUES
-(1, 'IT company', '90-090 Gdańsk ul. Morska 145', '456854876', 'itcompany@poczta.pl', 'ef73781effc5774', 1, '2014-09-02 00:00:00'),
-(2, 'DeveloperStudio', '12-345 Opole ul. Piłsudskiego 49', '876428400', 'devstudio@poczta.pl', 'ef73781effc5774', 1, '2014-09-03 00:00:00');
+INSERT INTO `company` (`company_id`, `name`, `address`, `telephone`, `e_mail`, `password`, `active`, `account_create_date`, `photoname`) VALUES
+(1, 'IT company', '90-090 Gdańsk ul. Morska 145', '456854876', 'itcompany@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-02', 'itcompany.jpg'),
+(2, 'DeveloperStudio', '12-345 Opole ul. Piłsudskiego 49', '876428400', 'devstudio@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-03', 'developer.jpg'),
+(3, 'itfirm', 'ul. Zana 2 \r\n99-999 Lublin', '111111111', 'it@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 1, '2014-10-09', 'itfirm2014-10-12-19-15.jpg');
 
 -- --------------------------------------------------------
 
@@ -165,8 +167,8 @@ CREATE TABLE IF NOT EXISTS `student` (
   `last_name` varchar(45) NOT NULL,
   `address` varchar(50) NOT NULL,
   `telephone` varchar(11) NOT NULL,
-  `e-mail` varchar(50) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `e_mail` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `education` text NOT NULL,
   `languages` text NOT NULL,
   `experience` text NOT NULL,
@@ -174,21 +176,22 @@ CREATE TABLE IF NOT EXISTS `student` (
   `interest` text NOT NULL,
   `employment_form` text NOT NULL,
   `change_of_residence` tinyint(1) NOT NULL,
-  `rate` float NOT NULL,
+  `salary` float NOT NULL,
   `status` text NOT NULL,
-  `account_creation_date` datetime NOT NULL,
-  `active` tinyint(1) NOT NULL,
+  `account_creation_date` date NOT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `photoname` varchar(30) NOT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Zrzut danych tabeli `student`
 --
 
-INSERT INTO `student` (`student_id`, `name`, `last_name`, `address`, `telephone`, `e-mail`, `password`, `education`, `languages`, `experience`, `skills`, `interest`, `employment_form`, `change_of_residence`, `rate`, `status`, `account_creation_date`, `active`, `is_admin`) VALUES
-(1, 'Kamil', 'Wrona', '00-999 Warszawa ul. Cicha 17', '876654234', 'kmil.kamil@poczta.pl', 'ef73781effc5774', '2008-2011 II LO w Warszawie', 'angielski - poziom zaawansowany\r\nniemiecki - poziom zaawansowany', 'brak', 'PHP - poziom dobry\r\nJava - poziom dobry', 'sport, samochody', 'praktyki/staż', 0, 0, 'poszukuję praktyk lub stażu', '2014-09-01 00:00:00', 1, 0),
-(2, 'Agata', 'Mińska', '11-234 Łódź ul. Jasna 3 m. 7', '343434341', 'agam@poczta.pl', 'ef73781effc5774', '2002-2005 XII LO w Krakowie\r\n2005-2010 Informatyka Uniwersytet Jagielloński', 'rosyjski - zaawansowany\r\nfrancuski - zaawansowany\r\nangielski - średni\r\nniemiecki - podstawy', '2010-2014 staż i praca w IT Business Solutions - programista Java i JavaScript', 'JavaScript - zaawansowany\r\nHTML5 - zaawansowany\r\nc++ - zaawansowany\r\nJava - zaawansowany\r\nSQL - średni', 'muzyka, kulinaria, ogrodnictwo', 'umowa o pracę', 1, 3000, 'poszukuję pracy', '2014-09-01 00:00:00', 1, 1);
+INSERT INTO `student` (`student_id`, `name`, `last_name`, `address`, `telephone`, `e_mail`, `password`, `education`, `languages`, `experience`, `skills`, `interest`, `employment_form`, `change_of_residence`, `salary`, `status`, `account_creation_date`, `is_admin`, `photoname`) VALUES
+(1, 'Kamil', 'Wrona', '00-999 Warszawa ul. Cicha 17', '876654234', 'kmil.kamil@poczta.pl', 'ef73781effc5774100f87fe2f437a435', '2008-2011 II LO w Warszawie', 'angielski - poziom zaawansowany\r\nniemiecki - poziom zaawansowany', 'brak', 'PHP - poziom dobry\r\nJava - poziom dobry', 'sport, samochody', 'praktyki/staż', 0, 0, 'poszukuję praktyk lub stażu', '2014-09-01', 0, 'wrona.jpg'),
+(2, 'Agata', 'Mińska', '11-234 Łódź ul. Jasna 3 m. 7', '343434341', 'magdagrzesinska@gmail.com', 'ef73781effc5774100f87fe2f437a435', '2002-2005 XII LO w Krakowie\r\n2005-2010 Informatyka Uniwersytet Jagielloński', 'rosyjski - zaawansowany\r\nfrancuski - zaawansowany\r\nangielski - średni\r\nniemiecki - podstawy', '2010-2014 staż i praca w IT Business Solutions - programista Java i JavaScript', 'JavaScript - zaawansowany\r\nHTML5 - zaawansowany\r\nc++ - zaawansowany\r\nJava - zaawansowany\r\nSQL - średni', 'muzyka, kulinaria, ogrodnictwo', 'umowa o pracę', 1, 3000, 'poszukuję pracy', '2014-09-01', 1, 'minska.jpg'),
+(3, 'magda', 'kowalska', 'ul.zana 2\r\n20-202 Lublin', '999999999', 'magda@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 'blabal', 'blabalblabal', 'blabalblabal2', 'blabal2', 'blabal\r\nblabal\r\nblabal', 'staż', 0, 1000, 'employed', '2014-10-09', 0, 'kowalska2014-10-10-17-49.jpg');
 
 -- --------------------------------------------------------
 
@@ -202,21 +205,26 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `last_name` varchar(45) NOT NULL,
   `academic_degree` varchar(45) NOT NULL,
   `telephone` int(11) NOT NULL,
-  `e-mail` varchar(50) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `e_mail` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `account_creation_date` datetime NOT NULL,
+  `account_creation_date` date NOT NULL,
   PRIMARY KEY (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Zrzut danych tabeli `teacher`
 --
 
-INSERT INTO `teacher` (`teacher_id`, `name`, `last_name`, `academic_degree`, `telephone`, `e-mail`, `password`, `active`, `account_creation_date`) VALUES
-(1, 'Adam', 'Nowak', 'doktor', 123123123, 'nowak@poczta.pl', 'ef73781effc5774', 1, '2014-09-11 00:00:00'),
-(2, 'Jan', 'Kowalski', 'magister', 987988788, 'kowalski@poczta.pl', 'ef73781effc5774', 1, '2014-09-02 00:00:00'),
-(3, 'Anna', 'Bąk', 'profesor', 678678654, 'bak.anna@poczta.pl', 'ef73781effc5774', 1, '2014-09-03 00:00:00');
+INSERT INTO `teacher` (`teacher_id`, `name`, `last_name`, `academic_degree`, `telephone`, `e_mail`, `password`, `active`, `account_creation_date`) VALUES
+(1, 'Adam', 'Nowak', 'doktor', 123123123, 'nowak@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-11'),
+(2, 'Jan', 'Kowalski', 'magister', 987988788, 'kowalski@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-02'),
+(3, 'Anna', 'Bąk', 'profesor', 678678654, 'bak.anna@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-03'),
+(4, 'jan', 'kowalski', 'dr', 111111111, 'jan@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 0, '2014-10-09'),
+(5, 'as', 'asdfasdf', 'asa', 111111111, 'as@as.pl', '22d7fe8c185003c98f97e5d6ced420c7', 0, '2014-10-09'),
+(6, 'as', 'asdasd', 'asa', 111111111, 'as@as.pl', '22d7fe8c185003c98f97e5d6ced420c7', 0, '2014-10-09'),
+(7, 'as', 'asdasd', 'dr', 111111111, 'as2@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 0, '2014-10-09'),
+(8, 'jan', 'asdfasdf', 'profesor', 111111111, 'jan2@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 1, '2014-10-09');
 
 --
 -- Ograniczenia dla zrzutów tabel

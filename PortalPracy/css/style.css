@@ -6,7 +6,7 @@
 body {
     font: 16px "Trebuchet MS", Arial, Helvetica, sans-serif;
     color: #333333;
-    background: #202020 url('images/bg.jpg');
+    background: #202020 url('../images/bg.jpg');
 }
 
 h1, h2 {
@@ -57,7 +57,7 @@ img.block {
 
 #header {
     height: 197px;
-    background: #202020 url('images/header.jpg');
+    background: #202020 url('../images/header.jpg');
 }
 
 #header h1 {
@@ -84,7 +84,7 @@ img.block {
 #menu {
     height: 123px;
     text-align: center;
-    background: #202020 url('images/menu.jpg');
+    background: #202020 url('../images/menu.jpg');
 }
 
 #menu ul {
@@ -120,14 +120,14 @@ img.block {
     width: 1120px;
     margin: 0 auto 50px auto;
     padding: 40px 40px 0 40px;
-    background: #FEEBB2 url('images/main.jpg');
+    background: #FEEBB2 url('../images/main.jpg');
 }
 
 /* content */
 
 #content {
     float: right;
-    width: 720px;
+    width: 80%;
     padding: 0 0 20px 0;
 }
 
@@ -172,12 +172,12 @@ p.readmore a {
 
 #sidebar {
     float: left;
-    width: 340px;
+    width: 20%;
     padding: 0 0 20px 0;
 }
 
 #sidebar h2 {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 #sidebar ul {
@@ -206,7 +206,7 @@ p.readmore a {
     clear: both;
     padding: 20px 0 60px 0;
     color: #999999;
-    background: url('images/footer.jpg') no-repeat top;
+    background: url('../images/footer.jpg') no-repeat top;
 }
 
 #footer p {
@@ -214,11 +214,66 @@ p.readmore a {
 }
 /* forms */
 
-
 form {
     margin: 0;
 
 }
-tr {
-    line-height: 30px;
+
+td {
+    padding-left: 15px;
+    padding-top: 15px;
+}
+td input {
+    height: 20px;
+}
+.register_button {
+    font-size: 100%;
+    padding: 3px;
+    margin: 10px;
+}
+.submit_form_button {
+    font-size: 100%;
+    height: auto;
+    padding: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background: #95D3E7;
+    font-weight: bold;
+}
+
+.error {
+    float: none; 
+    color: #FF0000;
+    padding-left: 5px; 
+    vertical-align: top;
+}
+
+.mini_photo  {
+    width: 70px;
+    height: 70px;
+    padding: 15px;
+    float: left;
+}
+
+/*paging*/
+
+#pages ul {
+    list-style-type:none;  
+    float:left; 
+    position:relative; 
+    left:50%;
+}
+#pages li {
+    float:left; 
+    margin:0 5px; 
+    position:relative; 
+    right:50%; 
+}
+#pages li.current a{
+    color:#F00;
+}
+
+div.clear {
+    clear:both;
 }
