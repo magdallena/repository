@@ -38,7 +38,7 @@
                         echo "<h3>niepoprawny numer studenta</h3>";
                     } else {
                         $data = $db->get_student_data($id);
-                        echo "student nr " . $id;
+                        echo "<img src='../galery_student/".$data['photoname'] ."' class='photo'/>";
                     }
                 }
                 ?>

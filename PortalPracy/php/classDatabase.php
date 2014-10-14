@@ -168,6 +168,7 @@ class Database {
                 $array['change_of_residence'] = $obj->change_of_residence;
                 $array['salary'] = $obj->salary;
                 $array['status'] = $obj->status;
+                $array['photoname'] = $obj->photoname;
                 return $array;
             }
         }
@@ -199,6 +200,7 @@ class Database {
                 $array['name'] = $obj->name;
                 $array['address'] = $obj->address;
                 $array['telephone'] = $obj->telephone;
+                $array['photoname'] = $obj->photoname;
                 return $array;
             }
         }
