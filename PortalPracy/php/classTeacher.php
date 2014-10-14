@@ -202,7 +202,7 @@ class Teacher extends User {
             $_SESSION['name'] = $this->email;
             $_SESSION['id']= $this->mysqli->get_teacher_id($this->email);
             echo "<h3>Użytkownik zalogowany jako: " . $_SESSION['name'] . " <a href='logout.php'>(wyloguj)</a></h3>";
-            header('Refresh: 3; index.php');
+            header('Refresh: 2; index.php');
         }
     }
 

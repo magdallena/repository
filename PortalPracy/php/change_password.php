@@ -105,21 +105,23 @@
 
 
 
-        <?php
-    }
-}
-?>
+                        <?php
+                    }
+                }
+                ?>
 
             </div><!-- content -->
             <div id="sidebar">
-
+                <?php
+                $page->dosidebar();
+                ?>
             </div><!-- sidebar -->
             <div class="clearing">&nbsp;</div>
         </div><!-- main -->
 
-<?php
-$page->dofooter();
-?>
+        <?php
+        $page->dofooter();
+        ?>
     </body>
 </html>
 

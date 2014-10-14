@@ -77,7 +77,9 @@
                 ?>
             </div><!-- content -->
             <div id="sidebar">
-
+                <?php
+                $page->dosidebar();
+                ?>
             </div><!-- sidebar -->
             <div class="clearing">&nbsp;</div>
         </div><!-- main -->

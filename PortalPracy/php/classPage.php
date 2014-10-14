@@ -41,7 +41,7 @@ class Page {
             ?> 
             <h2>Funkcje studenta</h2>
             <ul>
-                <li><a href="#">Moje konto</a></li>
+                <li><a href="profile_student.php">Moje konto</a></li>
                 <li><a href="edit_data.php">Edytuj dane</a></li>
                 <li><a href="change_photo.php">Zmień zdjęcie</a></li>
                 <li><a href="change_password.php">Zmień hasło</a></li>
@@ -50,12 +50,12 @@ class Page {
             </ul>
             <?php
         }
-        
+
         if (isset($_SESSION['name']) and !strcmp($_SESSION['usertype'], "nauczyciel")) {
             ?> 
             <h2>Funkcje nauczyciela</h2>
             <ul>
-                <li><a href="#">Moje konto</a></li>
+                <li><a href="profile_teacher.php">Moje konto</a></li>
                 <li><a href="edit_data.php">Edytuj dane</a></li>
                 <li><a href="#"></a></li>
                 <li><a href="change_password.php">Zmień hasło</a></li>
@@ -64,12 +64,12 @@ class Page {
             </ul>
             <?php
         }
-        
+
         if (isset($_SESSION['name']) and !strcmp($_SESSION['usertype'], "firma")) {
             ?> 
             <h2>Funkcje firmy</h2>
             <ul>
-                <li><a href="#">Moje konto</a></li>
+                <li><a href="profile_company.php">Moje konto</a></li>
                 <li><a href="edit_data.php">Edytuj dane</a></li>
                 <li><a href="change_photo.php">Zmień logo</a></li>
                 <li><a href="change_password.php">Zmień hasło</a></li>
@@ -78,11 +78,36 @@ class Page {
             </ul>
             <?php
         }
-        
-        
-        
-        
-        
+    }
+
+    function dopaging($onpage, $all, $filename) {
+        $allpages = ceil($all / $onpage);
+        if (!isset($_GET['page']) or $_GET['page'] > $allpages) {
+            $current_page = 1;
+        } else {
+            $current_page = $_GET['page'];
+        }
+        $start = ($current_page - 1) * $onpage;
+        $prev = $current_page - 1;
+        $next = $current_page + 1;
+        echo "<div id='pages'><ul>";
+        if ($current_page > 1) {
+            echo "<li><a href='".$filename."?page=" . $prev . "'>Poprzednia</a></li>";
+        }
+        for ($i = 1; $i <= $allpages; $i++) {
+            if ($i == $current_page) {
+                echo "<li class='current'>";
+            } else {
+                echo "<li>";
+            }
+            echo "<a href='".$filename."?page=" . $i . "'>" . $i . "</a></li>";
+        }
+        if ($current_page < $allpages) {
+            echo "<li><a href='".$filename."?page=" . $next . "'>Następna</a></li>";
+        }
+        echo "</ul></div>";
+        echo "<div class='clear'></div>";
+        return $start;
     }
 
 }

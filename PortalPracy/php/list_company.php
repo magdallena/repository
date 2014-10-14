@@ -20,71 +20,50 @@
         ?>
         <div id="main">
             <div id="content">
-                
-                        <?php
-                        include_once 'classDatabase.php';
-                        $db = new Database();
 
-                        $onpage = 2;
-                        $all = $db->get_company_number();
-                        $allpages = ceil($all / $onpage);
-                        if (!isset($_GET['page']) or $_GET['page'] > $allpages) {
-                            $current_page = 1;
-                        } else {
-                            $current_page = $_GET['page'];
-                        }
-                        $start = ($current_page - 1) * $onpage;
-                        $prev = $current_page - 1;
-                        $next = $current_page + 1;
-                        echo "<div id='pages'><ul>";
-                        if ($current_page > 1) {
-                            echo "<li><a href='list_company.php?page=" . $prev . "'>Poprzednia</a></li>";
-                        }
-                        for ($i = 1; $i <= $allpages; $i++) {
-                            if ($i == $current_page) {
-                                echo "<li class='current'>";
-                            } else {
-                                echo "<li>";
-                            }
-                            echo "<a href='list_company.php?page=" . $i . "'>" . $i . "</a></li>";
-                        }
-                        if ($current_page < $allpages) {
-                            echo "<li><a href='list_company.php?page=" . $next . "'>Następna</a></li>";
-                        }
-                        echo "</ul></div>";
-                        echo "<div class='clear'></div>";
+                <?php
+                if (isset($_SESSION['name'])) {
+                    include_once 'classDatabase.php';
+                    $db = new Database();
 
+                    $onpage = 2;
+                    $all = $db->get_company_number();
+                    $start = $page->dopaging($onpage, $all, "list_company.php");
 
-
-                        echo "<table><tbody>";
-                        $result = $db->get_company_list($start, $onpage);
-                        while ($obj = $result->fetch_object()) {
-                            echo "<tr>";
-                            echo "<td><a href='opis.php?id=" . $obj->company_id . "'><img src='../galery_company/$obj->photoname' class='mini_photo'/></a></td>";
-                            echo "<td><a href='opis.php?id=" . $obj->company_id . "'><h3>" . $obj->name . "</h3></a></td>";
+                    echo "<table><tbody>";
+                    $result = $db->get_company_list($start, $onpage);
+                    while ($obj = $result->fetch_object()) {
+                        echo "<tr>";
+                        echo "<td><a href='profile_company.php?id=" . $obj->company_id . "'><img src='../galery_company/$obj->photoname' class='mini_photo'/></a></td>";
+                        echo "<td><a href='profile_company.php?id=" . $obj->company_id . "'><h3>" . $obj->name . "</h3></a></td>";
 //                            if (isset($_SESSION['status'])) {
 //                                if ($_SESSION['status'] == 1) {
 //                                    echo "<td><a href='edytuj.php?id=" . $obj->id . "' id='admin1'>Edytuj</a></td>";
 //                                    echo "<td><a href='usun.php?id=" . $obj->id . "'id='admin2'>Usuń</a></td>";
 //                                }
 //                            }
-                            echo "</tr>";
-                            
-                        }
-                        echo "</tbody></table>";
-                        ?>
-                    
+                        echo "</tr>";
+                    }
+                    echo "</tbody></table>";
+                    $page->dopaging($onpage, $all, "list_teacher.php");
+                } else {
+                    echo "<h3>Aby zobaczyć listę firm, musisz się <a href='login.php'>zalogować</a></h3>";
+                }
+                ?>
+
 
             </div><!-- content -->
             <div id="sidebar">
-
+                <?php
+                $page->dosidebar();
+                ?>
             </div><!-- sidebar -->
             <div class="clearing">&nbsp;</div>
         </div><!-- main -->
 
-<?php
-$page->dofooter();
-?>
+        <?php
+        $page->dofooter();
+        ?>
     </body>
 </html>
 

@@ -41,7 +41,8 @@
                 </div><!-- post -->	
             </div><!-- content -->
             <div id="sidebar">
-                <?php $page->dosidebar();
+                <?php
+                $page->dosidebar();
                 ?>
                 <h2>Integer rhoncus</h2>
                 <div class="box">

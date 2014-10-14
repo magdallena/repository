@@ -34,7 +34,7 @@
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
-                        $array = $db->get_student_edit_data($_SESSION['name']);
+                        $array = $db->get_student_data($_SESSION['id']);
                         ?>
                         <form id="student_edit_data" action='edit_data.php' method='POST'>
                             <table>
@@ -98,9 +98,10 @@
                                 </tr>
                             </table>
                         </form> 
-                    <?php }
-                } 
-                
+                    <?php
+                    }
+                }
+
                 if ($_SESSION['usertype'] == 'nauczyciel') {
                     if (isset($_POST['teacher_editdata_submit'])) {
                         include_once 'classTeacher.php';
@@ -109,25 +110,25 @@
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
-                        $array = $db->get_teacher_edit_data($_SESSION['name']);
+                        $array = $db->get_teacher_data($_SESSION['id']);
                         ?>
                         <form id="teacher_edit_data" action='edit_data.php' method='POST'>
                             <table>
                                 <tr>
                                     <td><label for="name">Imię:</label></td>
-                                    <td><input type="text" id="name" name="name" size='50' <?php echo "value='" . $array['name'] . "'"?>/></td>
+                                    <td><input type="text" id="name" name="name" size='50' <?php echo "value='" . $array['name'] . "'" ?>/></td>
                                 </tr>
                                 <tr>
                                     <td><label for="last_name">Nazwisko:</label></td>
-                                    <td><input type="text" id="last_name" name="last_name" size='50' <?php echo "value='" . $array['last_name'] . "'"?>/></td>
+                                    <td><input type="text" id="last_name" name="last_name" size='50' <?php echo "value='" . $array['last_name'] . "'" ?>/></td>
                                 </tr>
                                 <tr>
                                     <td><label for="degree">Stopień naukowy:</label></td>
-                                    <td><input type="text" id="degree" name="degree" size='50' <?php echo "value='" . $array['degree'] . "'"?>/></td>
+                                    <td><input type="text" id="degree" name="degree" size='50' <?php echo "value='" . $array['degree'] . "'" ?>/></td>
                                 </tr>
                                 <tr>
                                     <td><label for="telephone">Telefon:</label></td>
-                                    <td><input type="text" id="telephone" name="telephone" size='9' <?php echo "value='" . $array['telephone'] . "'"?>/></td>
+                                    <td><input type="text" id="telephone" name="telephone" size='9' <?php echo "value='" . $array['telephone'] . "'" ?>/></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -135,9 +136,10 @@
                                 </tr>
                             </table>
                         </form>
-                    <?php }
-                } 
-                
+                    <?php
+                    }
+                }
+
                 if ($_SESSION['usertype'] == 'firma') {
                     if (isset($_POST['company_editdata_submit'])) {
                         include_once 'classCompany.php';
@@ -146,13 +148,13 @@
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
-                        $array = $db->get_company_edit_data($_SESSION['name']);
+                        $array = $db->get_company_data($_SESSION['id']);
                         ?>
                         <form id="company_edit_data" action='edit_data.php' method='POST'>
                             <table>
                                 <tr>
                                     <td><label for="name">Nazwa:</label></td>
-                                    <td><input type="text" id="name" name="name" size='50' <?php echo "value='" . $array['name'] . "'"?>/></td>
+                                    <td><input type="text" id="name" name="name" size='50' <?php echo "value='" . $array['name'] . "'" ?>/></td>
                                 </tr>
                                 <tr>
                                     <td><label for="address">Adres:</label></td>
@@ -160,7 +162,7 @@
                                 </tr>
                                 <tr>
                                     <td><label for="telephone">Telefon:</label></td>
-                                    <td><input type="text" id="telephone" name="telephone" size='9' <?php echo "value='" . $array['telephone'] . "'"?>/></td>
+                                    <td><input type="text" id="telephone" name="telephone" size='9' <?php echo "value='" . $array['telephone'] . "'" ?>/></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -168,27 +170,21 @@
                                 </tr>
                             </table>
                         </form>
-                    <?php }
-                } 
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                    <?php
+                    }
+                }
                 ?>
             </div><!-- content -->
             <div id="sidebar">
-
+                <?php
+                $page->dosidebar();
+                ?>
             </div><!-- sidebar -->
             <div class="clearing">&nbsp;</div>
         </div><!-- main -->
 
-        <?php
-        $page->dofooter();
-        ?>
+                <?php
+                $page->dofooter();
+                ?>
     </body>
 </html>

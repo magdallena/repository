@@ -148,8 +148,8 @@ class Database {
         }
     }
 
-    function get_student_edit_data($email) {
-        if ($result = $this->db->query("SELECT * FROM `student` WHERE `e_mail`='$email'")) {
+    function get_student_data($id) {
+        if ($result = $this->db->query("SELECT * FROM `student` WHERE `student_id`='$id'")) {
             if ($result->num_rows == 0) {
                 return false;
             } else {
@@ -173,8 +173,8 @@ class Database {
         }
     }
 
-    function get_teacher_edit_data($email) {
-        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `e_mail`='$email'")) {
+    function get_teacher_data($id) {
+        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `teacher_id`='$id'")) {
             if ($result->num_rows == 0) {
                 return false;
             } else {
@@ -189,8 +189,8 @@ class Database {
         }
     }
 
-    function get_company_edit_data($email) {
-        if ($result = $this->db->query("SELECT * FROM `company` WHERE `e_mail`='$email'")) {
+    function get_company_data($id) {
+        if ($result = $this->db->query("SELECT * FROM `company` WHERE `company_id`='$id'")) {
             if ($result->num_rows == 0) {
                 return false;
             } else {
