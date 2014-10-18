@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas wygenerowania: 12 Paź 2014, 19:46
+-- Czas wygenerowania: 18 Paź 2014, 15:12
 -- Wersja serwera: 5.6.14
 -- Wersja PHP: 5.5.6
 
@@ -50,10 +50,19 @@ CREATE TABLE IF NOT EXISTS `ask_for_reference` (
   `student_id` int(11) NOT NULL,
   `teacher_id` int(11) NOT NULL,
   `date` date NOT NULL,
+  `status` tinyint(4) NOT NULL COMMENT '0 - oczekujące, 1 - zignorowane lub wysłane',
   PRIMARY KEY (`ask_id`),
   KEY `student_id` (`student_id`,`teacher_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Zrzut danych tabeli `ask_for_reference`
+--
+
+INSERT INTO `ask_for_reference` (`ask_id`, `student_id`, `teacher_id`, `date`, `status`) VALUES
+(1, 3, 2, '2014-10-17', 0),
+(2, 3, 3, '2014-10-18', 0);
 
 -- --------------------------------------------------------
 
@@ -108,14 +117,32 @@ INSERT INTO `company` (`company_id`, `name`, `address`, `telephone`, `e_mail`, `
 CREATE TABLE IF NOT EXISTS `offer` (
   `offer_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
+  `job` varchar(40) NOT NULL,
+  `description` text NOT NULL,
   `requirements` text NOT NULL,
   `place_of_work` varchar(25) NOT NULL,
   `employment_status` text NOT NULL,
-  `salary` float NOT NULL,
+  `number_of_hours` int(11) NOT NULL,
+  `length_of_contract` varchar(40) NOT NULL,
+  `salary` int(11) NOT NULL,
   `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
   PRIMARY KEY (`offer_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Zrzut danych tabeli `offer`
+--
+
+INSERT INTO `offer` (`offer_id`, `company_id`, `job`, `description`, `requirements`, `place_of_work`, `employment_status`, `number_of_hours`, `length_of_contract`, `salary`, `date_from`, `date_to`) VALUES
+(1, 3, '', '', 'asd', 'asdasd', 'umowa zlecenie', 40, '3 miesiące', 0, '0000-00-00', '0000-00-00'),
+(2, 3, '', '', 'asd', 'asdasd', 'umowa zlecenie', 40, '3 miesiące', 0, '0000-00-00', '0000-00-00'),
+(3, 3, '', '', 'asd', 'asdasd', 'umowa zlecenie', 40, '3 miesiące', 0, '2014-10-17', '2014-10-17'),
+(4, 3, '', '', 'dfsdf', 'asdfadf', 'umowa o pracę', 20, '1 rok', 1000, '2014-10-17', '2014-10-17'),
+(5, 3, '', 'asd', 'asdasd', 'asdasd', 'staż', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17'),
+(6, 3, '', 'sdf', 'sdfsdf', 'asdfadf', 'umowa o pracę', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17'),
+(7, 3, '', 'dfsdf', 'sdfsdg', 'asdasd', 'umowa o pracę', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17');
 
 -- --------------------------------------------------------
 
@@ -127,17 +154,31 @@ CREATE TABLE IF NOT EXISTS `offer_to_student` (
   `offer_to_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
+  `job` varchar(40) NOT NULL,
+  `description` text NOT NULL,
   `requirements` text NOT NULL,
   `place_of_work` varchar(25) NOT NULL,
   `employment_status` text NOT NULL,
+  `number_of_hours` int(11) NOT NULL,
+  `length_of_contract` varchar(40) NOT NULL,
   `salary` float NOT NULL,
-  `send_date` date NOT NULL,
-  `response` text NOT NULL,
-  `response_date` date NOT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  `date_send` date NOT NULL,
+  `response` text,
+  `response_date` date DEFAULT NULL,
   PRIMARY KEY (`offer_to_id`),
   KEY `company_id` (`company_id`,`student_id`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Zrzut danych tabeli `offer_to_student`
+--
+
+INSERT INTO `offer_to_student` (`offer_to_id`, `company_id`, `student_id`, `job`, `description`, `requirements`, `place_of_work`, `employment_status`, `number_of_hours`, `length_of_contract`, `salary`, `date_from`, `date_to`, `date_send`, `response`, `response_date`) VALUES
+(1, 3, 3, '', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-28', '2014-12-18', '2014-10-17', NULL, NULL),
+(2, 3, 3, '', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-28', '2014-12-18', '2014-10-17', NULL, NULL);
 
 -- --------------------------------------------------------
 

@@ -45,7 +45,7 @@ class Page {
                 <li><a href="edit_data.php">Edytuj dane</a></li>
                 <li><a href="change_photo.php">Zmień zdjęcie</a></li>
                 <li><a href="change_password.php">Zmień hasło</a></li>
-                <li><a href="#"></a></li>
+                <li><a href="send_request.php">Wyślij prośbę o referencje</a></li>
                 <li><a href="#"></a></li>
             </ul>
             <?php
@@ -57,9 +57,15 @@ class Page {
             <ul>
                 <li><a href="profile_teacher.php">Moje konto</a></li>
                 <li><a href="edit_data.php">Edytuj dane</a></li>
-                <li><a href="#"></a></li>
                 <li><a href="change_password.php">Zmień hasło</a></li>
-                <li><a href="#"></a></li>
+                <li><a href="#">Prośby o referencje 
+                        <?php
+                        include_once 'classDatabase.php';
+                        $db = new Database();
+                        $result = $db->get_asks_for_reference($_SESSION['id']);
+                        echo '(' . $result->num_rows . ')';
+                        ?>
+                    </a></li>
                 <li><a href="#"></a></li>
             </ul>
             <?php
@@ -73,8 +79,8 @@ class Page {
                 <li><a href="edit_data.php">Edytuj dane</a></li>
                 <li><a href="change_photo.php">Zmień logo</a></li>
                 <li><a href="change_password.php">Zmień hasło</a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
+                <li><a href="add_offer.php">Umieść ofertę</a></li>
+                <li><a href="add_offer.php?student=true">Wyślij ofertę do studenta</a></li>
             </ul>
             <?php
         }
@@ -92,7 +98,7 @@ class Page {
         $next = $current_page + 1;
         echo "<div id='pages'><ul>";
         if ($current_page > 1) {
-            echo "<li><a href='".$filename."?page=" . $prev . "'>Poprzednia</a></li>";
+            echo "<li><a href='" . $filename . "?page=" . $prev . "'>Poprzednia</a></li>";
         }
         for ($i = 1; $i <= $allpages; $i++) {
             if ($i == $current_page) {
@@ -100,10 +106,10 @@ class Page {
             } else {
                 echo "<li>";
             }
-            echo "<a href='".$filename."?page=" . $i . "'>" . $i . "</a></li>";
+            echo "<a href='" . $filename . "?page=" . $i . "'>" . $i . "</a></li>";
         }
         if ($current_page < $allpages) {
-            echo "<li><a href='".$filename."?page=" . $next . "'>Następna</a></li>";
+            echo "<li><a href='" . $filename . "?page=" . $next . "'>Następna</a></li>";
         }
         echo "</ul></div>";
         echo "<div class='clear'></div>";

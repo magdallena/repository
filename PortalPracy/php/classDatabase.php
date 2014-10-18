@@ -314,11 +314,11 @@ class Database {
     }
 
     function get_student_list($start, $onpage) {
-        if ($result = $this->db->query("SELECT * FROM `student` LIMIT $start, $onpage")) {
+        if ($result = $this->db->query("SELECT * FROM `student` ORDER BY `last_name` LIMIT $start, $onpage ")) {
             return $result;
         }
     }
-    
+
     function get_student_number() {
         if ($result = $this->db->query("SELECT * FROM `student`")) {
             $all = $result->num_rows;
@@ -328,11 +328,11 @@ class Database {
     }
 
     function get_teacher_list($start, $onpage) {
-        if ($result = $this->db->query("SELECT * FROM `teacher` LIMIT $start, $onpage")) {
+        if ($result = $this->db->query("SELECT * FROM `teacher` ORDER BY `last_name` LIMIT $start, $onpage")) {
             return $result;
         }
     }
-    
+
     function get_teacher_number() {
         if ($result = $this->db->query("SELECT * FROM `teacher`")) {
             $all = $result->num_rows;
@@ -340,13 +340,13 @@ class Database {
         }
         return $all;
     }
-    
+
     function get_company_list($start, $onpage) {
         if ($result = $this->db->query("SELECT * FROM `company` LIMIT $start, $onpage")) {
             return $result;
         }
     }
-    
+
     function get_company_number() {
         if ($result = $this->db->query("SELECT * FROM `company`")) {
             $all = $result->num_rows;
@@ -354,4 +354,52 @@ class Database {
         }
         return $all;
     }
+
+    function insert_offer($offer) {
+        $stmt = $this->db->prepare("INSERT INTO `offer` VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bind_param('isssssisiss', $offer->get_company_id(), $offer->get_job(), $offer->get_description(), $offer->get_requirements(), $offer->get_place_of_work(), $offer->get_employment_status(), $offer->get_number_of_hours(), $offer->get_length_of_contract(), $offer->get_salary(), $offer->get_date_from(), $offer->get_date_to());
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function insert_offer_to_student($offer) {
+        $stmt = $this->db->prepare("INSERT INTO `offer_to_student` VALUES(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?, NULL, NULL)");
+        $stmt->bind_param('iisssssisisss', $offer->get_company_id(), $offer->get_student_id(), $offer->get_job(), $offer->get_description(), $offer->get_requirements(), $offer->get_place_of_work(), $offer->get_employment_status(), $offer->get_number_of_hours(), $offer->get_length_of_contract(), $offer->get_salary(), $offer->get_date_from(), $offer->get_date_to(), $offer->get_date_send());
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function check_request($student, $teacher) {
+        if ($result = $this->db->query("SELECT * FROM `ask_for_reference` WHERE `student_id`='$student' and `teacher_id`='$teacher'")) {
+            if ($result->num_rows == 0) {
+                $result->close();
+                return false;
+            } else {
+                $result->close();
+                return true;
+            }
+        }
+    }
+
+    function insert_request($request) {
+        $stmt = $this->db->prepare("INSERT INTO `ask_for_reference` VALUES(NULL,?,?,?,0)");
+        $stmt->bind_param('iis', $request->get_student_id(), $request->get_teacher_id(), $request->get_date());
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function get_asks_for_reference($teacher_id) {
+        if ($result = $this->db->query("SELECT * FROM `ask_for_reference` WHERE `teacher_id`='$teacher_id' AND `status`=0 ORDER BY `date` DESC")) {
+            return $result;
+        } else
+            echo 'niepoprawne zapytanie';
+    }
+
+    function get_offer_to_student($student_id) {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student` o JOIN `company` c ON o.`company_id`=c.`company_id` "
+                . "WHERE `student_id`='$student_id'")) {
+            return $result;
+        }
+    }
+
 }

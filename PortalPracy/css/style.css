@@ -277,3 +277,24 @@ td input {
 div.clear {
     clear:both;
 }
+#tabs {
+    font-size:90%;
+}
+
+.conspicuous {
+    color: rgba(216, 28, 28, 1);;
+    text-transform: uppercase;
+}
+
+.offer_description li{
+    list-style: none;
+    padding-bottom: 10px;
+}
+
+#accordion1 a {
+    color:#FF0000;
+}
+
+.bold {
+    font-weight: bold;
+}
