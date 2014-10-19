@@ -166,7 +166,7 @@ class Teacher extends User {
 
     function check_email() {
         $ok = true;
-        if ($this->email == '' or $this->mysqli->chceck_teacher_email($this->email)) {
+        if ($this->email == '' or $this->mysqli->check_teacher_email($this->email)) {
             $ok = false;
         }
         return $ok;

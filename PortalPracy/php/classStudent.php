@@ -245,7 +245,7 @@ class Student extends User {
 
     function check_email() {
         $ok = true;
-        if ($this->email == '' or $this->mysqli->chceck_student_email($this->email)) {
+        if ($this->email == '' or $this->mysqli->check_student_email($this->email)) {
             $ok = false;
         }
         return $ok;
