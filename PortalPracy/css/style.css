@@ -41,6 +41,7 @@ a:hover {
 
 img {
     border: 1px solid #555555;
+	width: 120px;
 }
 
 img.block {
@@ -301,4 +302,24 @@ div.clear {
 
 .bold {
     font-weight: bold;
+}
+
+.datas_list {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.datas_list2 {
+    font-size: 25px;
+    font-style: italic;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.datas_list_name {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }

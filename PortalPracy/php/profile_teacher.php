@@ -38,7 +38,10 @@
                         echo "<h3>niepoprawny numer nauczyciela</h3>";
                     } else {
                         $data = $db->get_teacher_data($id);
-                        echo "nauczyciel nr " . $id;
+//                        echo "nauczyciel nr " . $id;
+                        echo "<h2 class='datas_list_name'>".$data['name']." ".$data['last_name']."</h2>";
+                        echo "<h3 class='datas_list'>".$data['degree']."</h2>";
+                        echo "<h3 class='datas_list'>tel. ".$data['telephone']."</h2>";
                     }
                 }
                 ?>

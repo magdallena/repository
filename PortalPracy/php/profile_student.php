@@ -39,6 +39,27 @@
                     } else {
                         $data = $db->get_student_data($id);
                         echo "<img src='../galery_student/".$data['photoname'] ."' class='photo'/>";
+                        echo "<h2 class='datas_list_name'>".$data['name']." ".$data['last_name']."</h2>";
+                        echo "<h3 class='datas_list'>".$data['address']."</h2>";
+                        echo "<h3 class='datas_list'>tel. ".$data['telephone']."</h2>";
+                        echo "<h3 class='datas_list2'>wykształcenie</h2>";
+                        echo "<h3 class='datas_list'>".$data['education']."</h2>";
+                        echo "<h3 class='datas_list2'>języki</h2>";
+                        echo "<h3 class='datas_list'>".$data['languages']."</h2>";
+                        echo "<h3 class='datas_list2'>doświadczenie</h2>";
+                        echo "<h3 class='datas_list'>".$data['experience']."</h2>";
+                        echo "<h3 class='datas_list2'>umiejętności</h2>";
+                        echo "<h3 class='datas_list'>".$data['skills']."</h2>";
+                        echo "<h3 class='datas_list2'>zainteresowania</h2>";
+                        echo "<h3 class='datas_list'>".$data['interest']."</h2>";
+                        echo "<h3 class='datas_list2'>preferowana forma zatrudnienia</h2>";
+                        echo "<h3 class='datas_list'>".$data['employment_form']."</h2>";
+                        echo "<h3 class='datas_list2'>zmiana miejsca zamieszkania</h2>";
+                        echo "<h3 class='datas_list'>".$data['change_of_residence']."</h2>";
+                        echo "<h3 class='datas_list2'>preferowane wynagrodzenie</h2>";
+                        echo "<h3 class='datas_list'>".$data['salary']."</h2>";
+                        echo "<h3 class='datas_list2'>status zatrudnienia</h2>";
+                        echo "<h3 class='datas_list'>".$data['status']."</h2>";
                     }
                 }
                 ?>

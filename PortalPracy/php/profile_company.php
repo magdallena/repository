@@ -38,7 +38,11 @@
                         echo "<h3>niepoprawny numer firmy</h3>";
                     } else {
                         $data = $db->get_company_data($id);
-                        echo "firma nr " . $id;
+//                        echo "firma nr " . $id;
+                        echo "<img src='../galery_company/".$data['photoname'] ."' class='photo'/>";
+                        echo "<h2 class='datas_list_name'>".$data['name']."</h2>";
+                        echo "<h3 class='datas_list'>".$data['address']."</h2>";
+                        echo "<h3 class='datas_list'>tel. ".$data['telephone']."</h2>";
                     }
                 }
                 ?>
