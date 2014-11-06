@@ -40,8 +40,11 @@
                         $data = $db->get_student_data($id);
                         echo "<img src='../galery_student/".$data['photoname'] ."' class='photo'/>";
                         echo "<h2 class='datas_list_name'>".$data['name']." ".$data['last_name']."</h2>";
-                        echo "<h3 class='datas_list'>".$data['address']."</h2>";
+                        echo "<h3 class='datas_list'>".$data['address']."</h2>";                                              
                         echo "<h3 class='datas_list'>tel. ".$data['telephone']."</h2>";
+                        
+                        echo "<h3><a href=references.php>Opinie nauczycieli o studencie</a></h3>";
+                        
                         echo "<h3 class='datas_list2'>wykształcenie</h2>";
                         echo "<h3 class='datas_list'>".$data['education']."</h2>";
                         echo "<h3 class='datas_list2'>języki</h2>";

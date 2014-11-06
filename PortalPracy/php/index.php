@@ -11,13 +11,13 @@
         <script src='../js/jquery-2.1.1.js' type='text/javascript'></script>
         <script src="../js/jquery-ui.js" type='text/javascript'></script>
         <script>
-            $(document).ready(function() {
-
+            $(function() {
+                $("#tabs").tabs();
                 var icons = {
                     header: "ui-icon-circle-arrow-e",
                     activeHeader: "ui-icon-circle-arrow-s"
                 };
-                $("#accordion1, #accordion2").accordion({
+                $("#accordion1").accordion({
                     collapsible: true,
                     active: false,
                     icons: icons,
@@ -51,7 +51,6 @@
                         return false; // Cancels the default action
                     }
                 });
-                $("#tabs").tabs({active: 0});
             });
         </script>
     </head>
@@ -71,109 +70,50 @@
             <div id="content">
                 <!--                STUDENT-->
                 <?php
-                include_once 'classDatabase.php';
-                $db = new Database();
                 if (isset($_SESSION['name'])) {
                     if ($_SESSION['usertype'] == 'student') {
-                        if (isset($_POST['send_response'])) {
-                            include_once 'classOfferToStudent.php';
-                            $soffer = OfferToStudent::make_new_to_response();
-                            $soffer->send_response();
-                        } else if (isset($_POST['send_application'])) {
-                            include_once 'classApplication.php';
-                            $app = Application::make_new_to_add();
-                            $app->add_application();
-                        } else {
-                            ?>
-                            <div id="tabs">
-                                <ul>
-                                    <li><a href="#accordion1">Oferty dla mnie</a></li>
-                                    <li><a href="#accordion2">Oferty ogólne</a></li>
-                                </ul>
-                                <!--oferty dla studenta-->
-                                <div id="accordion1">
-                                    <?php
-                                    $result = $db->get_offer_to_student($_SESSION['id']);
-                                    if ($result->num_rows == 0) {
-                                        echo "<h3>brak ofert</h3>";
-                                    } else {
-                                        while ($obj = $result->fetch_object()) {
-                                            echo "<h3>Firma: <span class='conspicuous'>" . $obj->name . "</span> stanowisko: <span class='conspicuous'>" . $obj->job . "</span></h3>";
-                                            echo "<div>";
-                                            echo"<p><ul class='offer_description'>";
-                                            echo "<li><span class='bold'>Opis oferty:</span><br/> " . $obj->description . "</li>";
-                                            echo "<li><span class='bold'>Wymagania:</span><br/> " . $obj->requirements . "</li>";
-                                            echo "<li><span class='bold'>Miejsce pracy: </span>" . $obj->place_of_work . "</li>";
-                                            echo "<li><span class='bold'>Forma zatrudnienia: </span>" . $obj->employment_status . "</li>";
-                                            echo "<li><span class='bold'>Wymiar pracy (liczba godzin w tygodniu): </span>" . $obj->number_of_hours . "</li>";
-                                            echo "<li><span class='bold'>Długość umowy: </span>" . $obj->length_of_contract . "</li>";
-                                            echo "<li><span class='bold'>Wynagrodzenie: </span>" . $obj->salary . "</li>";
-                                            echo "<li>Data wysłania oferty: <span class='bold'>" . $obj->date_send . "</span></li>";
-                                            echo "<li>Oferta ważna od <span class='bold'>" . $obj->date_from . " </span>do <span class='bold'>" . $obj->date_to . "</span></li>";
-                                            echo "<li><span class='bold'><a href='profile_company.php?id=" . $obj->company_id . "'>Zobacz profil firmy</a></span></li>";
-                                            echo "</ul></p>";
-                                            echo "<p>";
-                                            if ($obj->response == NULL) {
-                                                ?>
-                                                <form id='send_response' action ='index.php' method='POST'>
-                                                    <input type='hidden' name='offer_id' <?php echo" value='$obj->offer_to_id'" ?>/>
-                                                    <textarea type="text" id="response" name="response" rows='5' cols='37'></textarea></td>
-                                                    <br/>   
-                                                    <input type="submit" name= 'send_response' value="Wyślij odpowiedź">
-                                                </form>
-
-
-                                            <?php
-                                            }
-                                            echo "</p></div>";
-                                        }
+                        ?>
+                        <div id="tabs">
+                            <ul>
+                                <li><a href="#accordion1">Oferty dla mnie</a></li>
+                                <li><a href="#accordion2">Oferty ogólne</a></li>
+                            </ul>
+                            <!--oferty dla studenta-->
+                            <div id="accordion1">
+                                <?php
+                                include_once 'classDatabase.php';
+                                $db = new Database();
+                                $result = $db->get_offer_to_student($_SESSION['id']);
+                                if ($result->num_rows == 0) {
+                                    echo "<h3>brak ofert</h3>";
+                                } else {
+                                    while ($obj = $result->fetch_object()) {
+                                        echo "<h3>Firma: <span class='conspicuous'>" . $obj->name . "</span> stanowisko: <span class='conspicuous'>" . $obj->job . "</span></h3>";
+                                        echo "<div>";
+                                        echo"<p><ul class='offer_description'>"; 
+                                        echo "<li><span class='bold'>Opis oferty:</span><br/> " . $obj->description."</li>";
+                                        echo "<li><span class='bold'>Wymagania:</span><br/> " . $obj->requirements."</li>";
+                                        echo "<li><span class='bold'>Miejsce pracy: </span>" . $obj->place_of_work."</li>";
+                                        echo "<li><span class='bold'>Forma zatrudnienia: </span>" . $obj->employment_status."</li>";
+                                        echo "<li><span class='bold'>Wymiar pracy (liczba godzin w tygodniu): </span>" . $obj->number_of_hours."</li>";
+                                        echo "<li><span class='bold'>Długość umowy: </span>" . $obj->length_of_contract."</li>";
+                                        echo "<li><span class='bold'>Wynagrodzenie: </span>" . $obj->salary."</li>";
+                                        echo "<li>Data wysłania oferty: <span class='bold'>". $obj->date_send."</span></li>";
+                                        echo "<li>Oferta ważna od <span class='bold'>". $obj->date_from. " </span>do <span class='bold'>".$obj->date_to. "</span></li>";
+                                        echo "<li><span class='bold'><a href='profile_company.php?id=" . $obj->company_id . "'>Zobacz profil firmy</a></span></li>";
+                                        echo "</ul></p>";
+                                        echo "</div>";
                                     }
-                                    ?>
-                                </div>
-                                <!--oferty ogólne-->
-                                <div id="accordion2">
-                                    <?php
-                                    $result = $db->get_offer();
-                                    if ($result->num_rows == 0) {
-                                        echo "<h3>brak ofert</h3>";
-                                    } else {
-                                        while ($obj = $result->fetch_object()) {
-                                            echo "<h3>Firma: <span class='conspicuous'>" . $obj->name . "</span> stanowisko: <span class='conspicuous'>" . $obj->job . "</span></h3>";
-                                            echo "<div>";
-                                            echo"<p><ul class='offer_description'>";
-                                            echo "<li><span class='bold'>Opis oferty:</span><br/> " . $obj->description . "</li>";
-                                            echo "<li><span class='bold'>Wymagania:</span><br/> " . $obj->requirements . "</li>";
-                                            echo "<li><span class='bold'>Miejsce pracy: </span>" . $obj->place_of_work . "</li>";
-                                            echo "<li><span class='bold'>Forma zatrudnienia: </span>" . $obj->employment_status . "</li>";
-                                            echo "<li><span class='bold'>Wymiar pracy (liczba godzin w tygodniu): </span>" . $obj->number_of_hours . "</li>";
-                                            echo "<li><span class='bold'>Długość umowy: </span>" . $obj->length_of_contract . "</li>";
-                                            echo "<li><span class='bold'>Wynagrodzenie: </span>" . $obj->salary . "</li>";
-                                            echo "<li>Oferta ważna od <span class='bold'>" . $obj->date_from . " </span>do <span class='bold'>" . $obj->date_to . "</span></li>";
-                                            echo "<li><span class='bold'><a href='profile_company.php?id=" . $obj->company_id . "'>Zobacz profil firmy</a></span></li>";
-                                            echo "</ul></p>";
-
-                                            echo "<h4 class='bold'>&rArr;Aplikuj: </h4><p>";
-                                            ?>
-                                            <form id='send_application' action ='index.php' method='POST' enctype="multipart/form-data">
-                                                <input type='hidden' name='offer_id' <?php echo" value='$obj->offer_id'" ?>/>
-                                                <input type='hidden' name='student_id' <?php echo" value='" . $_SESSION['id'] . "'" ?>/>
-                                                <label for="cv">CV </label>
-                                                <input type="file" name="cv" id='cv'/>  <br/>
-                                                <label for="motivation_letter">List motywacyjny </label>
-                                                <input type="file" name="motivation_letter" id='motivation_letter'/> <br/>
-                                                <input type="submit" name= 'send_application' value="Wyślij aplikację">
-                                            </form>
-
-
-                                            <?php
-                                            echo "</p></div>";
-                                        }
-                                    }
-                                    ?>
-                                </div>
+                                }
+                                ?>
                             </div>
-                            <?php
-                        }
+                            <!--oferty ogólne-->
+                            <div id="accordion2">
+                                <?php
+                                ?>
+                            </div>
+                        </div>
+                        <?php
                     }
                 }
                 ?>

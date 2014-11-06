@@ -16,7 +16,6 @@ class Offer {
     protected $date_from;
     protected $date_to;
     protected $company_id;
-    protected $offer_id;
 
     function __construct() {
         $this->mysqli = new Database();
@@ -40,10 +39,6 @@ class Offer {
         $this->date_from = addslashes(strip_tags(trim($_POST['date_from'])));
         $this->date_to = addslashes(strip_tags(trim($_POST['date_to'])));
         $this->company_id = $company_id;
-    }
-
-    public function set_offer_id() {
-        $this->offer_id = $_POST['offer_id'];
     }
 
     function add_offer() {
@@ -210,10 +205,6 @@ class Offer {
 
     public function get_company_id() {
         return $this->company_id;
-    }
-
-    public function get_offer_id() {
-        return $this->offer_id;
     }
 
 }

@@ -151,7 +151,7 @@ class Company extends User {
 
     function check_email() {
         $ok = true;
-        if ($this->email == '' or $this->mysqli->check_company_email($this->email)) {
+        if ($this->email == '' or $this->mysqli->chceck_company_email($this->email)) {
             $ok = false;
         }
         return $ok;

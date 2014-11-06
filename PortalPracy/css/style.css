@@ -41,7 +41,7 @@ a:hover {
 
 img {
     border: 1px solid #555555;
-	width: 120px;
+    width: 120px;
 }
 
 img.block {
@@ -293,10 +293,6 @@ div.clear {
 }
 
 #accordion1 a {
-    color:#FF0000;
-}
-
-#accordion2 a {
     color:#FF0000;
 }
 

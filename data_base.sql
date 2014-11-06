@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas wygenerowania: 19 Paź 2014, 19:45
--- Wersja serwera: 5.6.14
--- Wersja PHP: 5.5.6
+-- Czas wygenerowania: 06 Lis 2014, 22:35
+-- Wersja serwera: 5.5.34
+-- Wersja PHP: 5.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `ask_for_reference` (
   PRIMARY KEY (`ask_id`),
   KEY `student_id` (`student_id`,`teacher_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Zrzut danych tabeli `ask_for_reference`
@@ -73,7 +73,8 @@ CREATE TABLE IF NOT EXISTS `ask_for_reference` (
 
 INSERT INTO `ask_for_reference` (`ask_id`, `student_id`, `teacher_id`, `date`, `status`) VALUES
 (1, 3, 2, '2014-10-17', 0),
-(2, 3, 3, '2014-10-18', 0);
+(2, 3, 3, '2014-10-18', 0),
+(3, 3, 1, '2014-10-25', 0);
 
 -- --------------------------------------------------------
 
@@ -205,7 +206,19 @@ CREATE TABLE IF NOT EXISTS `refernces` (
   PRIMARY KEY (`references_id`),
   KEY `student_id` (`student_id`,`teacher_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Zrzut danych tabeli `refernces`
+--
+
+INSERT INTO `refernces` (`references_id`, `student_id`, `teacher_id`, `content`) VALUES
+(1, 1, 3, 'ok ok ok ok ok ok ok '),
+(2, 2, 8, 'qwewrtfqwertyui rtyuio rty ufgh vb fghj rtyui fghjk fghjk tyuio rtyuik rctyunm fgbhn'),
+(4, 1, 1, 'dfgbhnjmk erftgyhujik rtfgyhuji rdftgyhuji rdftgyhujik '),
+(5, 1, 2, 'fdv fghjk yuio ftgyhuji fddf fghjk vbnm, xcvbnm rtyui dfghjkl '),
+(6, 3, 5, 'iuhygtfyguhijkjihugytf ugfttrfgyhu rty edrfty htftfgbn ugrcvbuni nuhvtfvgbun '),
+(7, 2, 5, 'ftghbnjm ftgybhunjm rftgyhu ygvbuijn mubtf ybyvygbn inygvtygvbu knj');
 
 -- --------------------------------------------------------
 

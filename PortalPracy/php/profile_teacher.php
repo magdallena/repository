@@ -33,8 +33,8 @@
                     } else {
                         $id = $_GET['id'];
                     }
-                    $allstudents = $db->get_teacher_number();
-                    if ($id > $allstudents or $id == -1) {
+                    $allteachers = $db->get_teacher_number();
+                    if ($id > $allteachers or $id == -1) {
                         echo "<h3>niepoprawny numer nauczyciela</h3>";
                     } else {
                         $data = $db->get_teacher_data($id);

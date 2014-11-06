@@ -84,7 +84,7 @@ class Database {
         }
     }
 
-    function check_student_email($email) {
+    function chceck_student_email($email) {
         if ($result = $this->db->query("SELECT `e_mail` FROM `student` WHERE `e_mail`='$email'")) {
             if ($result->num_rows == 0) {
                 $result->close();
@@ -96,7 +96,7 @@ class Database {
         }
     }
 
-    function check_teacher_email($email) {
+    function chceck_teacher_email($email) {
         if ($result = $this->db->query("SELECT `e_mail` FROM `teacher` WHERE `e_mail`='$email'")) {
             if ($result->num_rows == 0) {
                 $result->close();
@@ -108,7 +108,7 @@ class Database {
         }
     }
 
-    function check_company_email($email) {
+    function chceck_company_email($email) {
         if ($result = $this->db->query("SELECT `e_mail` FROM `company` WHERE `e_mail`='$email'")) {
             if ($result->num_rows == 0) {
                 $result->close();
@@ -340,6 +340,20 @@ class Database {
         }
         return $all;
     }
+    
+    function get_references_list($start, $onpage, $id) {
+        if ($result = $this->db->query("SELECT * FROM `references` WHERE `student_id`=$id LIMIT $start, $onpage")) {
+            return $result;
+        }
+    }
+    
+    function get_references_number() {
+        if ($result = $this->db->query("SELECT * FROM `references`")) {
+            $all_refs = $result->num_rows;
+            $result->close();
+        } else echo "na nic to zapytanie jest";
+        return $all_refs;
+    }
 
     function get_company_list($start, $onpage) {
         if ($result = $this->db->query("SELECT * FROM `company` LIMIT $start, $onpage")) {
@@ -397,52 +411,9 @@ class Database {
 
     function get_offer_to_student($student_id) {
         if ($result = $this->db->query("SELECT * FROM `offer_to_student` o JOIN `company` c ON o.`company_id`=c.`company_id` "
-                . "WHERE `student_id`='$student_id' AND curdate( ) BETWEEN `date_from` AND `date_to` ORDER BY `date_to`")) {
+                . "WHERE `student_id`='$student_id'")) {
             return $result;
         }
     }
 
-    function get_offer() {
-        if ($result = $this->db->query("SELECT * FROM `offer` o JOIN `company` c ON o.`company_id`=c.`company_id` "
-                . "WHERE curdate( ) BETWEEN `date_from` AND `date_to` ORDER BY `date_to`")) {
-            return $result;
-        }
-    }
-
-    function check_response_to_offer($offer_id) { 
-        if ($result = $this->db->query("SELECT `response` FROM `offer_to_student` WHERE `offer_to_id`='$offer_id'")) {
-            $obj = $result->fetch_object(); var_dump( $obj->response);
-            if ($obj->response == NULL) { 
-                return false; 
-            } else {
-                return true; 
-            }
-        } 
-    }
-
-    function update_offer_to_student($offer) { 
-        $stmt = $this->db->prepare("UPDATE `offer_to_student` SET `response` = ?, `response_date` = ? WHERE `offer_to_id` = ?");
-        $stmt->bind_param('ssi', $offer->get_response(), $offer->get_date_response(), $offer->get_offer_id());
-        $stmt->execute();
-        $stmt->close();
-    }
-    
-    function check_application($student_id, $offer_id) {
-        if ($result = $this->db->query("SELECT * FROM `application` WHERE `student_id`='$student_id' AND `offer_id`='$offer_id'")) {
-             if ($result->num_rows == 0) {
-                $result->close();
-                return false;
-            } else {
-                $result->close();
-                return true;
-            }
-        }
-    } 
-    
-    function insert_application($application) {
-        $stmt = $this->db->prepare("INSERT INTO `application` VALUES(NULL,?,?,?,0,?,?, NULL, NULL)");
-        $stmt->bind_param('iisss', $application->get_offer_id(), $application->get_student_id(), $application->get_date(), $application->get_cv(), $application->get_motivation_letter());
-        $stmt->execute();
-        $stmt->close();
-    } 
 }

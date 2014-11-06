@@ -3,12 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/classCompany.php</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/classOfferToStudent.php</file>
             <file>file:/C:/xampp/htdocs/PortalPracy/php/classDatabase.php</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/classApplication.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/samplemail.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/list_teacher.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/list_company.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/list_student.php</file>
             <file>file:/C:/xampp/htdocs/PortalPracy/php/index.php</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/classOffer.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/send_request.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/profile_teacher.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/references.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/profile_student.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/classPage.php</file>
         </group>
     </open-files>
 </project-private>
