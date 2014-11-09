@@ -41,7 +41,6 @@ a:hover {
 
 img {
     border: 1px solid #555555;
-    width: 120px;
 }
 
 img.block {
@@ -225,8 +224,9 @@ td {
     padding-top: 15px;
 }
 td input {
-    height: 20px;
+    height: 30px;
 }
+
 .register_button {
     font-size: 100%;
     padding: 3px;
@@ -278,13 +278,14 @@ td input {
 div.clear {
     clear:both;
 }
-#tabs {
+#tabs, #tabs2 {
     font-size:90%;
 }
 
 .conspicuous {
-    color: rgba(216, 28, 28, 1);;
+    color: crimson;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .offer_description li{
@@ -292,15 +293,15 @@ div.clear {
     padding-bottom: 10px;
 }
 
-#accordion1 a {
-    color:#FF0000;
+#accordion1 a, #accordion2 a, #accordion3 a, #accordion4 a{
+    color:crimson;
 }
 
 .bold {
     font-weight: bold;
-}
-
-.datas_list {
+    color: crimson;
+    font-style: italic;
+} .datas_list {
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -318,4 +319,110 @@ div.clear {
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 15px;
+}
+
+.icon {
+    height: 20px;
+    width: 25px;
+    border: 0;
+}
+
+/* information table*/
+.information_table {
+	margin:15px 0px;
+        padding:0px;
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #000000;
+	
+	-moz-border-radius-bottomleft:14px;
+	-webkit-border-bottom-left-radius:14px;
+	border-bottom-left-radius:14px;
+	
+	-moz-border-radius-bottomright:14px;
+	-webkit-border-bottom-right-radius:14px;
+	border-bottom-right-radius:14px;
+	
+	-moz-border-radius-topright:14px;
+	-webkit-border-top-right-radius:14px;
+	border-top-right-radius:14px;
+	
+	-moz-border-radius-topleft:14px;
+	-webkit-border-top-left-radius:14px;
+	border-top-left-radius:14px;
+}.information_table table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}.information_table tr:last-child td:last-child {
+	-moz-border-radius-bottomright:14px;
+	-webkit-border-bottom-right-radius:14px;
+	border-bottom-right-radius:14px;
+}
+.information_table table tr:first-child td:first-child {
+	-moz-border-radius-topleft:14px;
+	-webkit-border-top-left-radius:14px;
+	border-top-left-radius:14px;
+}
+.information_table table tr:first-child td:last-child {
+	-moz-border-radius-topright:14px;
+	-webkit-border-top-right-radius:14px;
+	border-top-right-radius:14px;
+}.information_table tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:14px;
+	-webkit-border-bottom-left-radius:14px;
+	border-bottom-left-radius:14px;
+}.information_table tr:hover td{
+	background-color:#fce8e8;
+		
+
+}
+.information_table td{
+	vertical-align:middle;
+	
+	background-color:#ffffff;
+
+	border:1px solid #000000;
+	border-width:0px 1px 1px 0px;
+	text-align:left;
+	padding:12px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#000000;
+}.information_table tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.information_table tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.information_table tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.information_table tr:first-child td{
+		background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+	background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
+
+	background-color:#ff5656;
+	border:0px solid #000000;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:16px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#ffffff;
+}
+.information_table tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+	background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
+
+	background-color:#ff5656;
+}
+.information_table tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.information_table tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
 }

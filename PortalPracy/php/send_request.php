@@ -46,7 +46,10 @@
                                     echo "</select></td></tr>";
                                 }
                                 ?>
-
+                                <tr>
+                                    <td>Napisz wiadomość:</td>
+                                    <td><textarea type="text" id="message" name="message" rows='5' cols='37'></textarea></td>
+                                </tr>
                                 <tr>
                                     <td></td>
                                     <td><input type="submit" name= 'send_request' value="Wyślij prośbę"></td>

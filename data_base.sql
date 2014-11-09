@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas wygenerowania: 06 Lis 2014, 22:35
--- Wersja serwera: 5.5.34
--- Wersja PHP: 5.4.22
+-- Czas wygenerowania: 09 Lis 2014, 19:01
+-- Wersja serwera: 5.6.14
+-- Wersja PHP: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -41,14 +41,18 @@ CREATE TABLE IF NOT EXISTS `application` (
   KEY `student_id` (`student_id`),
   KEY `date` (`date`),
   KEY `date_2` (`date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Zrzut danych tabeli `application`
 --
 
 INSERT INTO `application` (`application_id`, `offer_id`, `student_id`, `date`, `status`, `cv`, `motivation_letter`, `response`, `response_date`) VALUES
-(1, 2, 3, '2014-10-19', '0', 'cv-32014-10-19-19-42.txt', 'motivation_letter-32014-10-19-19-42.txt', NULL, NULL);
+(1, 2, 3, '2014-10-19', '0', 'cv-32014-10-19-19-42.txt', 'motivation_letter-32014-10-19-19-42.txt', 'zdgsdf', '2014-11-03'),
+(2, 5, 3, '2014-11-03', '0', 'bla.txt', 'bla2.txt', 'asdfsdf', '2014-11-03'),
+(3, 5, 1, '2014-11-03', '0', 'bla.txt', 'bla2.txt', 'sfdsdf', '2014-11-03'),
+(4, 6, 3, '2014-11-03', '0', 'cv-32014-11-03-20-07.txt', 'motivation_letter-32014-11-03-20-07.txt', NULL, NULL),
+(6, 7, 3, '2014-11-03', '0', 'cv-32014-11-03-20-11.txt', 'motivation_letter-32014-11-03-20-11.txt', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -60,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `ask_for_reference` (
   `ask_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `teacher_id` int(11) NOT NULL,
+  `message` text NOT NULL,
   `date` date NOT NULL,
   `status` tinyint(4) NOT NULL COMMENT '0 - oczekujące, 1 - zignorowane lub wysłane',
   PRIMARY KEY (`ask_id`),
@@ -71,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `ask_for_reference` (
 -- Zrzut danych tabeli `ask_for_reference`
 --
 
-INSERT INTO `ask_for_reference` (`ask_id`, `student_id`, `teacher_id`, `date`, `status`) VALUES
-(1, 3, 2, '2014-10-17', 0),
-(2, 3, 3, '2014-10-18', 0),
-(3, 3, 1, '2014-10-25', 0);
+INSERT INTO `ask_for_reference` (`ask_id`, `student_id`, `teacher_id`, `message`, `date`, `status`) VALUES
+(1, 3, 2, 'sfsdfvds', '2014-10-17', 0),
+(2, 3, 8, 'asdsadf', '2014-10-18', 1),
+(3, 3, 1, 'dfsjdbskzdvlkisefugoluskd', '2014-11-25', 0);
 
 -- --------------------------------------------------------
 
@@ -154,7 +159,7 @@ INSERT INTO `offer` (`offer_id`, `company_id`, `job`, `description`, `requiremen
 (4, 3, 'java developer', 'asfdadfs', 'dfsdf', 'asdfadf', 'umowa o pracę', 20, '1 rok', 1000, '2014-10-17', '2014-10-17'),
 (5, 3, 'java developer', 'asd', 'asdasd', 'asdasd', 'staż', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17'),
 (6, 3, 'java developer', 'sdf', 'sdfsdf', 'asdfadf', 'umowa o pracę', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17'),
-(7, 3, 'java developer', 'dfsdf', 'sdfsdg', 'asdasd', 'umowa o pracę', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17');
+(7, 2, 'java developer', 'dfsdf', 'sdfsdg', 'asdasd', 'umowa o pracę', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17');
 
 -- --------------------------------------------------------
 
@@ -190,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `offer_to_student` (
 
 INSERT INTO `offer_to_student` (`offer_to_id`, `company_id`, `student_id`, `job`, `description`, `requirements`, `place_of_work`, `employment_status`, `number_of_hours`, `length_of_contract`, `salary`, `date_from`, `date_to`, `date_send`, `response`, `response_date`) VALUES
 (1, 3, 3, 'java developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-18', '2014-12-18', '2014-10-17', 'adfdsfsdf', '2014-10-19'),
-(2, 3, 3, 'php developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-16', '2014-12-18', '2014-10-17', NULL, NULL);
+(2, 3, 3, 'php developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-16', '2014-12-18', '2014-10-17', NULL, '2014-11-09');
 
 -- --------------------------------------------------------
 
@@ -306,15 +311,21 @@ ALTER TABLE `application`
 -- Ograniczenia dla tabeli `ask_for_reference`
 --
 ALTER TABLE `ask_for_reference`
-  ADD CONSTRAINT `ask_for_reference_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ask_for_reference_ibfk_2` FOREIGN KEY (`ask_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ask_for_reference_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `student_ident` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `company_ident` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `offer`
+--
+ALTER TABLE `offer`
+  ADD CONSTRAINT `company` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `offer_to_student`
@@ -327,8 +338,8 @@ ALTER TABLE `offer_to_student`
 -- Ograniczenia dla tabeli `refernces`
 --
 ALTER TABLE `refernces`
-  ADD CONSTRAINT `refernces_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `refernces_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `teacher` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

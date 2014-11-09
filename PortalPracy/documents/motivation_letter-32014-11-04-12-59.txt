@@ -1,0 +1,157 @@
+Welcome to Git (version 1.9.4-preview20140929)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git status
+On branch master
+
+Initial commit
+
+nothing to commit (create/copy files and use "git add" to track)
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git pull origin master
+Warning: Permanently added the RSA host key for IP address '192.30.252.128' to t
+he list of known hosts.
+Enter passphrase for key '/c/Users/Magda/.ssh/id_rsa':
+remote: Counting objects: 85, done.
+remote: Total 85 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (85/85), done.
+From github.com:magdallena/repository
+ * branch            master     -> FETCH_HEAD
+ * [new branch]      master     -> origin/master
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git status
+On branch master
+nothing to commit, working directory clean
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   PortalPracy/css/style.css
+        modified:   PortalPracy/js/company_validate.js
+        modified:   PortalPracy/js/jquery-2.1.1.js
+        modified:   PortalPracy/js/jquery.validate.js
+        modified:   PortalPracy/js/student_validate.js
+        modified:   PortalPracy/js/switching_register_forms.js
+        modified:   PortalPracy/js/teacher_validate.js
+        modified:   PortalPracy/nbproject/private/private.xml
+        modified:   PortalPracy/php/change_password.php
+        modified:   PortalPracy/php/change_photo.php
+        modified:   PortalPracy/php/classCompany.php
+        modified:   PortalPracy/php/classDatabase.php
+        modified:   PortalPracy/php/classPage.php
+        modified:   PortalPracy/php/classStudent.php
+        modified:   PortalPracy/php/classTeacher.php
+        modified:   PortalPracy/php/edit_data.php
+        modified:   PortalPracy/php/index.php
+        modified:   PortalPracy/php/list_company.php
+        modified:   PortalPracy/php/list_student.php
+        modified:   PortalPracy/php/list_teacher.php
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        PortalPracy/php/profile_company.php
+        PortalPracy/php/profile_student.php
+        PortalPracy/php/profile_teacher.php
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git add -A
+warning: LF will be replaced by CRLF in PortalPracy/css/style.css.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/company_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/jquery-2.1.1.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/jquery.validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/student_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/switching_register_forms.
+js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/teacher_validate.js.
+The file will have its original line endings in your working directory.
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   PortalPracy/nbproject/private/private.xml
+        modified:   PortalPracy/php/change_password.php
+        modified:   PortalPracy/php/change_photo.php
+        modified:   PortalPracy/php/classCompany.php
+        modified:   PortalPracy/php/classDatabase.php
+        modified:   PortalPracy/php/classPage.php
+        modified:   PortalPracy/php/classStudent.php
+        modified:   PortalPracy/php/classTeacher.php
+        modified:   PortalPracy/php/edit_data.php
+        modified:   PortalPracy/php/index.php
+        modified:   PortalPracy/php/list_company.php
+        modified:   PortalPracy/php/list_student.php
+        modified:   PortalPracy/php/list_teacher.php
+        new file:   PortalPracy/php/profile_company.php
+        new file:   PortalPracy/php/profile_student.php
+        new file:   PortalPracy/php/profile_teacher.php
+
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git commit -m "14.10"
+[master 519f4cc] 14.10
+ 16 files changed, 431 insertions(+), 286 deletions(-)
+ rewrite PortalPracy/php/list_company.php (66%)
+ rewrite PortalPracy/php/list_student.php (65%)
+ create mode 100644 PortalPracy/php/profile_company.php
+ create mode 100644 PortalPracy/php/profile_student.php
+ create mode 100644 PortalPracy/php/profile_teacher.php
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git push -u origin master
+Enter passphrase for key '/c/Users/Magda/.ssh/id_rsa':
+Counting objects: 40, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (22/22), done.
+Writing objects: 100% (22/22), 3.68 KiB | 0 bytes/s, done.
+Total 22 (delta 17), reused 0 (delta 0)
+To git@github.com:magdallena/repository.git
+   01f2641..519f4cc  master -> master
+Branch master set up to track remote branch master from origin.
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+nothing to commit, working directory clean
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$ git pull origin master
+Enter passphrase for key '/c/Users/Magda/.ssh/id_rsa':
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 3 (delta 1)
+Unpacking objects: 100% (3/3), done.
+From github.com:magdallena/repository
+ * branch            master     -> FETCH_HEAD
+   519f4cc..67e0a41  master     -> origin/master
+Updating 519f4cc..67e0a41
+Fast-forward
+ jakisPlik | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 jakisPlik
+
+Magda@PCMAGDA /C/Users/Magda/Desktop/repozytorium (master)
+$

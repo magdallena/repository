@@ -58,7 +58,7 @@ class Page {
                 <li><a href="profile_teacher.php">Moje konto</a></li>
                 <li><a href="edit_data.php">Edytuj dane</a></li>
                 <li><a href="change_password.php">Zmień hasło</a></li>
-                <li><a href="#">Prośby o referencje 
+                <li><a href="index.php">Prośby o referencje 
                         <?php
                         include_once 'classDatabase.php';
                         $db = new Database();

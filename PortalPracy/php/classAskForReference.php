@@ -6,6 +6,7 @@ class AskForReference {
     private $student_id;
     private $teacher_id;
     private $date;
+    private $message;
 
     function __construct() {
         $this->mysqli = new Database();
@@ -16,6 +17,7 @@ class AskForReference {
         $obj->set_student_id($student);
         $obj->set_teacher_id($teacher);
         $obj->set_date();
+        $obj->set_message();
         return $obj;
     }
     
@@ -44,7 +46,12 @@ class AskForReference {
         $date = new DateTime('now');
         $this->date = $date->format('Y-m-d');
     }
-    public function get_student_id() {
+    
+    public function set_message() {
+        $this->message = addslashes(strip_tags(trim($_POST['message'])));
+    }
+
+        public function get_student_id() {
         return $this->student_id;
     }
 
@@ -54,6 +61,10 @@ class AskForReference {
 
     public function get_date() {
         return $this->date;
+    }
+
+    public function get_message() {
+        return $this->message;
     }
 
 
