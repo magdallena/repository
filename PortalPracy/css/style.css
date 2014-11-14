@@ -329,100 +329,242 @@ div.clear {
 
 /* information table*/
 .information_table {
-	margin:15px 0px;
-        padding:0px;
-	width:100%;
-	box-shadow: 10px 10px 5px #888888;
-	border:1px solid #000000;
-	
-	-moz-border-radius-bottomleft:14px;
-	-webkit-border-bottom-left-radius:14px;
-	border-bottom-left-radius:14px;
-	
-	-moz-border-radius-bottomright:14px;
-	-webkit-border-bottom-right-radius:14px;
-	border-bottom-right-radius:14px;
-	
-	-moz-border-radius-topright:14px;
-	-webkit-border-top-right-radius:14px;
-	border-top-right-radius:14px;
-	
-	-moz-border-radius-topleft:14px;
-	-webkit-border-top-left-radius:14px;
-	border-top-left-radius:14px;
+    margin:15px 0px;
+    padding:0px;
+    width:100%;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #000000;
+
+    -moz-border-radius-bottomleft:14px;
+    -webkit-border-bottom-left-radius:14px;
+    border-bottom-left-radius:14px;
+
+    -moz-border-radius-bottomright:14px;
+    -webkit-border-bottom-right-radius:14px;
+    border-bottom-right-radius:14px;
+
+    -moz-border-radius-topright:14px;
+    -webkit-border-top-right-radius:14px;
+    border-top-right-radius:14px;
+
+    -moz-border-radius-topleft:14px;
+    -webkit-border-top-left-radius:14px;
+    border-top-left-radius:14px;
 }.information_table table{
     border-collapse: collapse;
-        border-spacing: 0;
-	width:100%;
-	height:100%;
-	margin:0px;padding:0px;
+    border-spacing: 0;
+    width:100%;
+    height:100%;
+    margin:0px;padding:0px;
 }.information_table tr:last-child td:last-child {
-	-moz-border-radius-bottomright:14px;
-	-webkit-border-bottom-right-radius:14px;
-	border-bottom-right-radius:14px;
+    -moz-border-radius-bottomright:14px;
+    -webkit-border-bottom-right-radius:14px;
+    border-bottom-right-radius:14px;
 }
 .information_table table tr:first-child td:first-child {
-	-moz-border-radius-topleft:14px;
-	-webkit-border-top-left-radius:14px;
-	border-top-left-radius:14px;
+    -moz-border-radius-topleft:14px;
+    -webkit-border-top-left-radius:14px;
+    border-top-left-radius:14px;
 }
 .information_table table tr:first-child td:last-child {
-	-moz-border-radius-topright:14px;
-	-webkit-border-top-right-radius:14px;
-	border-top-right-radius:14px;
+    -moz-border-radius-topright:14px;
+    -webkit-border-top-right-radius:14px;
+    border-top-right-radius:14px;
 }.information_table tr:last-child td:first-child{
-	-moz-border-radius-bottomleft:14px;
-	-webkit-border-bottom-left-radius:14px;
-	border-bottom-left-radius:14px;
+    -moz-border-radius-bottomleft:14px;
+    -webkit-border-bottom-left-radius:14px;
+    border-bottom-left-radius:14px;
 }.information_table tr:hover td{
-	background-color:#fce8e8;
-		
+    background-color:#fce8e8;
+
 
 }
 .information_table td{
-	vertical-align:middle;
-	
-	background-color:#ffffff;
+    vertical-align:middle;
 
-	border:1px solid #000000;
-	border-width:0px 1px 1px 0px;
-	text-align:left;
-	padding:12px;
-	font-size:14px;
-	font-family:Arial;
-	font-weight:normal;
-	color:#000000;
+    background-color:#ffffff;
+
+    border:1px solid #000000;
+    border-width:0px 1px 1px 0px;
+    text-align:left;
+    padding:12px;
+    font-size:14px;
+    font-family:Arial;
+    font-weight:normal;
+    color:#000000;
 }.information_table tr:last-child td{
-	border-width:0px 1px 0px 0px;
+    border-width:0px 1px 0px 0px;
 }.information_table tr td:last-child{
-	border-width:0px 0px 1px 0px;
+    border-width:0px 0px 1px 0px;
 }.information_table tr:last-child td:last-child{
-	border-width:0px 0px 0px 0px;
+    border-width:0px 0px 0px 0px;
 }
 .information_table tr:first-child td{
-		background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
-	background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
+    background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+    background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
 
-	background-color:#ff5656;
-	border:0px solid #000000;
-	text-align:center;
-	border-width:0px 0px 1px 1px;
-	font-size:16px;
-	font-family:Arial;
-	font-weight:bold;
-	color:#ffffff;
+    background-color:#ff5656;
+    border:0px solid #000000;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:16px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#ffffff;
 }
 .information_table tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
-	background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
+    background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+    background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");	background: -o-linear-gradient(top,#ff5656,7f0000);
 
-	background-color:#ff5656;
+    background-color:#ff5656;
 }
 .information_table tr:first-child td:first-child{
-	border-width:0px 0px 1px 0px;
+    border-width:0px 0px 1px 0px;
 }
 .information_table tr:first-child td:last-child{
-	border-width:0px 0px 1px 1px;
+    border-width:0px 0px 1px 1px;
+}
+
+/*KOMENTARZE*/
+#references, #comments { 
+    display: block; 
+    width: 100%; 
+    background: #fff; 
+    padding: 14px 20px; 
+    -webkit-border-radius: 4px; 
+    -moz-border-radius: 4px; 
+    border-radius: 4px; 
+    -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    box-sizing: border-box;
+    margin-top: 25px;
+
+}
+
+#references a, #comments a { 
+    color: #896dc6; 
+    text-decoration: none; 
+}
+
+.commentbox{ 
+    background-color: #ececec;
+    //width: 450px;
+    padding: 10px;
+    margin-top: 5px;
+    width: max-content;
+}
+
+#comments .commentbox{
+    background-color: #F8E5F7;
+}
+
+.commentfooter{
+    background: url(../images/arrow.gif) 20px 0 no-repeat; 
+    padding-left: 58px;
+    padding-top: 1px;
+    margin-bottom: 2em;
+    font-size: 90%;
+    color: #4A4A4A;
+}
+
+#comments .commentfooter {
+    background: url(../images/arrow2.gif) 20px 0 no-repeat; 
+}
+
+#references div textarea {
+    float:right;
+    margin-top:15px;
+    background-color: #FEEBB2;
+    width:auto;
+    height:auto;
+    width: 100%;
+}
+
+#references div input {
+    float:right;
+    margin-bottom:15px;
+    color: #FEEBB2;
+    background-color:black;
+    font-size:110%;
+    padding:8px;
+    margin-left: 100px;
+}
+
+#comments div textarea {
+    float:right;
+    margin-top:15px;
+    background-color: #F8E5F7;
+    width:auto;
+    height:auto;
+    width: 100%;
+}
+
+#comments div input {
+    float:right;
+    margin-bottom:15px;
+    color: #F8E5F7;
+    background-color:black;
+    font-size:110%;
+    padding:8px;
+    margin-left: 100px;
+}
+
+/*rating*/
+.rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
 }

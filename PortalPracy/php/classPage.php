@@ -87,18 +87,18 @@ class Page {
     }
 
     function dopaging($onpage, $all, $filename) {
-        $allpages = ceil($all / $onpage);
+        $allpages = ceil($all / $onpage); 
         if (!isset($_GET['page']) or $_GET['page'] > $allpages) {
             $current_page = 1;
         } else {
             $current_page = $_GET['page'];
-        }
-        $start = ($current_page - 1) * $onpage;
+        } 
+        $start = ($current_page - 1) * $onpage; 
         $prev = $current_page - 1;
         $next = $current_page + 1;
         echo "<div id='pages'><ul>";
         if ($current_page > 1) {
-            echo "<li><a href='" . $filename . "?page=" . $prev . "'>Poprzednia</a></li>";
+            echo "<li><a href='" . $filename . "page=" . $prev . "'>Poprzednia</a></li>";
         }
         for ($i = 1; $i <= $allpages; $i++) {
             if ($i == $current_page) {
@@ -106,10 +106,10 @@ class Page {
             } else {
                 echo "<li>";
             }
-            echo "<a href='" . $filename . "?page=" . $i . "'>" . $i . "</a></li>";
+            echo "<a href='" . $filename . "page=" . $i . "'>" . $i . "</a></li>";
         }
         if ($current_page < $allpages) {
-            echo "<li><a href='" . $filename . "?page=" . $next . "'>Następna</a></li>";
+            echo "<li><a href='" . $filename . "page=" . $next . "'>Następna</a></li>";
         }
         echo "</ul></div>";
         echo "<div class='clear'></div>";

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas wygenerowania: 09 Lis 2014, 19:01
+-- Czas wygenerowania: 14 Lis 2014, 11:10
 -- Wersja serwera: 5.6.14
 -- Wersja PHP: 5.5.6
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `application` (
   KEY `student_id` (`student_id`),
   KEY `date` (`date`),
   KEY `date_2` (`date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Zrzut danych tabeli `application`
@@ -92,10 +92,23 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `company_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `content` text NOT NULL,
+  `date` date NOT NULL,
+  `rate` int(11) NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `company_id` (`company_id`,`student_id`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Zrzut danych tabeli `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `company_id`, `student_id`, `content`, `date`, `rate`) VALUES
+(1, 1, 2, 'cbkjs sdhsdv  dscj', '2014-11-09', 5),
+(2, 1, 3, 'sdfg sfg', '2014-11-03', 4),
+(3, 1, 1, 'fdb fd dfg', '2014-11-01', 5),
+(4, 2, 2, 'fg xdf cx', '2014-11-03', 3),
+(5, 3, 1, 'xvn  dgh dftghj', '2014-11-05', 2);
 
 -- --------------------------------------------------------
 
@@ -200,30 +213,45 @@ INSERT INTO `offer_to_student` (`offer_to_id`, `company_id`, `student_id`, `job`
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `refernces`
+-- Struktura tabeli dla tabeli `references`
 --
 
-CREATE TABLE IF NOT EXISTS `refernces` (
+CREATE TABLE IF NOT EXISTS `references` (
   `references_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `teacher_id` int(11) NOT NULL,
   `content` text NOT NULL,
+  `date` date NOT NULL,
   PRIMARY KEY (`references_id`),
   KEY `student_id` (`student_id`,`teacher_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
--- Zrzut danych tabeli `refernces`
+-- Zrzut danych tabeli `references`
 --
 
-INSERT INTO `refernces` (`references_id`, `student_id`, `teacher_id`, `content`) VALUES
-(1, 1, 3, 'ok ok ok ok ok ok ok '),
-(2, 2, 8, 'qwewrtfqwertyui rtyuio rty ufgh vb fghj rtyui fghjk fghjk tyuio rtyuik rctyunm fgbhn'),
-(4, 1, 1, 'dfgbhnjmk erftgyhujik rtfgyhuji rdftgyhuji rdftgyhujik '),
-(5, 1, 2, 'fdv fghjk yuio ftgyhuji fddf fghjk vbnm, xcvbnm rtyui dfghjkl '),
-(6, 3, 5, 'iuhygtfyguhijkjihugytf ugfttrfgyhu rty edrfty htftfgbn ugrcvbuni nuhvtfvgbun '),
-(7, 2, 5, 'ftghbnjm ftgybhunjm rftgyhu ygvbuijn mubtf ybyvygbn inygvtygvbu knj');
+INSERT INTO `references` (`references_id`, `student_id`, `teacher_id`, `content`, `date`) VALUES
+(1, 1, 3, 'ok ok ok ok ok ok ok ', '2014-11-03'),
+(2, 2, 8, 'qwewrtfqwertyui rtyuio rty ufgh vb fghj rtyui fghjk fghjk tyuio rtyuik rctyunm fgbhn', '2014-11-05'),
+(4, 1, 1, 'dfgbhnjmk erftgyhujik rtfgyhuji rdftgyhuji rdftgyhujik ', '2014-11-07'),
+(5, 1, 2, 'fdv fghjk yuio ftgyhuji fddf fghjk vbnm, xcvbnm rtyui dfghjkl ', '2014-11-02'),
+(6, 3, 5, 'iuhygtfyguhijkjihugytf ugfttrfgyhu rty edrfty htftfgbn ugrcvbuni nuhvtfvgbun ', '2014-11-04'),
+(7, 2, 5, 'ftghbnjm ftgybhunjm rftgyhu ygvbuijn mubtf ybyvygbn inygvtygvbu knj', '2014-11-05'),
+(8, 1, 8, 'referencje...', '2014-11-10'),
+(9, 1, 8, 'Napisz referencje...', '2014-11-10'),
+(10, 1, 8, 'Napisz referencje...', '2014-11-10'),
+(11, 1, 8, 'Napisz referencje...', '2014-11-10'),
+(12, 1, 8, 'Napisz referencje...', '2014-11-10'),
+(13, 1, 8, 'moje referencje...', '2014-11-10'),
+(14, 1, 8, 'Napisz referencje...', '2014-11-10'),
+(15, 1, 8, 'Napisz referencje...', '2014-11-10'),
+(16, 1, 8, 'Napisz referencje...moj', '2014-11-10'),
+(17, 1, 8, 'Napisz referencje...moj', '2014-11-10'),
+(18, 1, 8, 'Napisz referencje...', '2014-11-10'),
+(19, 1, 8, 'Napisz referencje...', '2014-11-10'),
+(20, 1, 8, 'Moje referencje...', '2014-11-10'),
+(21, 1, 8, 'Napisz referencje...hdfghdf', '2014-11-10');
 
 -- --------------------------------------------------------
 
@@ -311,15 +339,15 @@ ALTER TABLE `application`
 -- Ograniczenia dla tabeli `ask_for_reference`
 --
 ALTER TABLE `ask_for_reference`
-  ADD CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ask_for_reference_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ask_for_reference_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `student_ident` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `company_ident` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `company_ident` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_ident` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `offer`
@@ -335,11 +363,11 @@ ALTER TABLE `offer_to_student`
   ADD CONSTRAINT `offer_to_student_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ograniczenia dla tabeli `refernces`
+-- Ograniczenia dla tabeli `references`
 --
-ALTER TABLE `refernces`
-  ADD CONSTRAINT `teacher` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `student` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `references`
+  ADD CONSTRAINT `student` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

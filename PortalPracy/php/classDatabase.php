@@ -510,19 +510,38 @@ class Database {
         }
     }
 
-    function get_references_list($start, $onpage, $id) {
-        if ($result = $this->db->query("SELECT * FROM `references` WHERE `student_id`=$id LIMIT $start, $onpage")) {
+    function get_references_list($start, $onpage, $student_id) {
+        if ($result = $this->db->query("SELECT * FROM `references` r JOIN `teacher` t ON r.`teacher_id`=t.`teacher_id` WHERE `student_id`=$student_id ORDER BY `date` DESC, `references_id` DESC LIMIT $start, $onpage")) {
             return $result;
         }
     }
 
-    function get_references_number() {
-        if ($result = $this->db->query("SELECT * FROM `references`")) {
+    function get_references_number($student_id) {
+        if ($result = $this->db->query("SELECT * FROM `references` WHERE `student_id`=$student_id")) {
             $all_refs = $result->num_rows;
             $result->close();
-        } else
-            echo "na nic to zapytanie jest";
+        } 
         return $all_refs;
     }
 
+    function insert_reference($ref) {
+        $stmt = $this->db->prepare("INSERT INTO `references` VALUES(NULL,?,?,?,?)");
+        $stmt->bind_param('iiss', $ref->get_student_id(), $ref->get_teacher_id(), $ref->get_content(), $ref->get_date());
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    function get_comments_number($company_id) {
+        if ($result = $this->db->query("SELECT * FROM `comment` WHERE `company_id`=$company_id")) {
+            $all_refs = $result->num_rows;
+            $result->close();
+        } 
+        return $all_refs;
+    }
+    
+    function get_comments_list($start, $onpage, $company_id) {
+        if ($result = $this->db->query("SELECT * FROM `comment` c JOIN `student` s ON c.`student_id`=s.`student_id` WHERE `company_id`=$company_id ORDER BY `date` DESC, `comment_id` DESC LIMIT $start, $onpage")) {
+            return $result;
+        } else echo "niepoprawne zapytanie";
+    }
 }

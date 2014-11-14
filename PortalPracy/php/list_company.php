@@ -28,7 +28,7 @@
 
                     $onpage = 2;
                     $all = $db->get_company_number();
-                    $start = $page->dopaging($onpage, $all, "list_company.php");
+                    $start = $page->dopaging($onpage, $all, "list_company.php?");
 
                     echo "<table><tbody>";
                     $result = $db->get_company_list($start, $onpage);
@@ -45,7 +45,7 @@
                         echo "</tr>";
                     }
                     echo "</tbody></table>";
-                    $page->dopaging($onpage, $all, "list_teacher.php");
+                    $page->dopaging($onpage, $all, "list_company.php?");
                 } else {
                     echo "<h3>Aby zobaczyć listę firm, musisz się <a href='login.php'>zalogować</a></h3>";
                 }

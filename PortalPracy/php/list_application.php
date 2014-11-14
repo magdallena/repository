@@ -41,7 +41,7 @@
                             } else {
                                 $onpage = 2;
                                 $all = $db->get_number_of_application($offer_id);
-                                $start = $page->dopaging($onpage, $all, "list_application.php");
+                                $start = $page->dopaging($onpage, $all, "list_application.php?");
                                 $result = $db->get_application_data($offer_id, $start, $onpage);
 
                                 if ($result->num_rows == 0) {
@@ -92,7 +92,7 @@
                                     }
                                     echo "</table></div>";
                                 }
-                                $page->dopaging($onpage, $all, "list_application.php");
+                                $page->dopaging($onpage, $all, "list_application.php?");
                             }
                         }
                     }

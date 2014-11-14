@@ -28,7 +28,7 @@
 
                     $onpage = 2;
                     $all = $db->get_teacher_number();
-                    $start = $page->dopaging($onpage, $all, "list_teacher.php");
+                    $start = $page->dopaging($onpage, $all, "list_teacher.php?");
 
                     $result = $db->get_teacher_list($start, $onpage);
                     echo "<table><tbody>";
@@ -44,7 +44,7 @@
                         echo "</tr>";
                     }
                     echo "</tbody></table>";
-                    $page->dopaging($onpage, $all, "list_teacher.php");
+                    $page->dopaging($onpage, $all, "list_teacher.php?");
                 } else {
                     echo "<h3>Aby zobaczyć listę nauczycieli, musisz się <a href='login.php'>zalogować</a></h3>";
                 }

@@ -28,7 +28,7 @@
 
                     $onpage = 2;
                     $all = $db->get_student_number();
-                    $start = $page->dopaging($onpage, $all, "list_student.php");
+                    $start = $page->dopaging($onpage, $all, "list_student.php?");
 
                     $result = $db->get_student_list($start, $onpage);
                     echo "<table><tbody>";
@@ -45,7 +45,7 @@
                         echo "</tr>";
                     }
                     echo "</tbody></table>";
-                    $page->dopaging($onpage, $all, "list_student.php");
+                    $page->dopaging($onpage, $all, "list_student.php?");
                 } else {
                     echo "<h3>Aby zobaczyć listę studentów, musisz się <a href='login.php'>zalogować</a></h3>";
                 }

@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/classOfferToStudent.php</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/send_application.php</file>
             <file>file:/C:/xampp/htdocs/PortalPracy/php/classDatabase.php</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/js/send_application.js</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/classApplication.php</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/js/send_response_to_offer.js</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/send_response.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/profile_company.php</file>
             <file>file:/C:/xampp/htdocs/PortalPracy/php/index.php</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/list_application.php</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/send_response_to_application.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/css/style.css</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/js/send_reference.js</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/add_reference.php</file>
         </group>
     </open-files>
 </project-private>
