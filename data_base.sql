@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas wygenerowania: 14 Lis 2014, 11:10
+-- Czas wygenerowania: 16 Lis 2014, 19:43
 -- Wersja serwera: 5.6.14
 -- Wersja PHP: 5.5.6
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `application` (
   KEY `student_id` (`student_id`),
   KEY `date` (`date`),
   KEY `date_2` (`date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Zrzut danych tabeli `application`
@@ -52,7 +52,8 @@ INSERT INTO `application` (`application_id`, `offer_id`, `student_id`, `date`, `
 (2, 5, 3, '2014-11-03', '0', 'bla.txt', 'bla2.txt', 'asdfsdf', '2014-11-03'),
 (3, 5, 1, '2014-11-03', '0', 'bla.txt', 'bla2.txt', 'sfdsdf', '2014-11-03'),
 (4, 6, 3, '2014-11-03', '0', 'cv-32014-11-03-20-07.txt', 'motivation_letter-32014-11-03-20-07.txt', NULL, NULL),
-(6, 7, 3, '2014-11-03', '0', 'cv-32014-11-03-20-11.txt', 'motivation_letter-32014-11-03-20-11.txt', NULL, NULL);
+(6, 7, 3, '2014-11-03', '0', 'cv-32014-11-03-20-11.txt', 'motivation_letter-32014-11-03-20-11.txt', NULL, NULL),
+(13, 1, 3, '2014-11-15', '0', 'cv-32014-11-15-14-39.txt', 'motivation_letter-32014-11-15-14-39.txt', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `ask_for_reference` (
   PRIMARY KEY (`ask_id`),
   KEY `student_id` (`student_id`,`teacher_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Zrzut danych tabeli `ask_for_reference`
@@ -79,7 +80,8 @@ CREATE TABLE IF NOT EXISTS `ask_for_reference` (
 INSERT INTO `ask_for_reference` (`ask_id`, `student_id`, `teacher_id`, `message`, `date`, `status`) VALUES
 (1, 3, 2, 'sfsdfvds', '2014-10-17', 0),
 (2, 3, 8, 'asdsadf', '2014-10-18', 1),
-(3, 3, 1, 'dfsjdbskzdvlkisefugoluskd', '2014-11-25', 0);
+(3, 3, 1, 'dfsjdbskzdvlkisefugoluskd', '2014-11-25', 0),
+(4, 3, 6, 'ZDfSDfsxdfdf', '2014-11-16', 0);
 
 -- --------------------------------------------------------
 
@@ -97,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`comment_id`),
   KEY `company_id` (`company_id`,`student_id`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Zrzut danych tabeli `comment`
@@ -108,7 +110,11 @@ INSERT INTO `comment` (`comment_id`, `company_id`, `student_id`, `content`, `dat
 (2, 1, 3, 'sdfg sfg', '2014-11-03', 4),
 (3, 1, 1, 'fdb fd dfg', '2014-11-01', 5),
 (4, 2, 2, 'fg xdf cx', '2014-11-03', 3),
-(5, 3, 1, 'xvn  dgh dftghj', '2014-11-05', 2);
+(5, 3, 1, 'xvn  dgh dftghj', '2014-11-05', 2),
+(6, 1, 3, 'Napisz komentarz...', '2014-11-14', 4),
+(7, 1, 3, 'Napisz komentarz...', '2014-11-14', 3),
+(8, 1, 3, 'Napisz komentarz...', '2014-11-14', 2),
+(9, 1, 3, 'Napisz komentarz...', '2014-11-14', 3);
 
 -- --------------------------------------------------------
 
@@ -137,6 +143,45 @@ INSERT INTO `company` (`company_id`, `name`, `address`, `telephone`, `e_mail`, `
 (1, 'IT company', '90-090 Gdańsk ul. Morska 145', '456854876', 'itcompany@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-02', 'itcompany.jpg'),
 (2, 'DeveloperStudio', '12-345 Opole ul. Piłsudskiego 49', '876428400', 'devstudio@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-03', 'developer.jpg'),
 (3, 'itfirm', 'ul. Zana 2 \r\n99-999 Lublin', '111111111', 'it@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 1, '2014-10-09', 'itfirm2014-10-12-19-15.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `message`
+--
+
+CREATE TABLE IF NOT EXISTS `message` (
+  `message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_from` int(11) DEFAULT NULL,
+  `teacher_from` int(11) DEFAULT NULL,
+  `company_from` int(11) DEFAULT NULL,
+  `student_to` int(11) DEFAULT NULL,
+  `teacher_to` int(11) DEFAULT NULL,
+  `company_to` int(11) DEFAULT NULL,
+  `content` text,
+  `date` datetime NOT NULL,
+  `read` tinyint(4) NOT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `student_from` (`student_from`),
+  KEY `company_from` (`company_from`),
+  KEY `student_to` (`student_to`),
+  KEY `teacher_to` (`teacher_to`),
+  KEY `company_to` (`company_to`),
+  KEY `teacher_from` (`teacher_from`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Zrzut danych tabeli `message`
+--
+
+INSERT INTO `message` (`message_id`, `student_from`, `teacher_from`, `company_from`, `student_to`, `teacher_to`, `company_to`, `content`, `date`, `read`) VALUES
+(1, 3, NULL, NULL, 2, NULL, NULL, 'dsdf', '2014-11-16 11:50:18', 0),
+(2, 3, NULL, NULL, NULL, 7, NULL, 'dfsdf', '2014-11-16 11:54:32', 0),
+(3, 3, NULL, NULL, NULL, NULL, 2, 'xcvbxcb', '2014-11-16 11:56:32', 0),
+(4, 3, NULL, NULL, NULL, 8, NULL, 'safdsf', '2014-11-16 14:55:29', 0),
+(5, 3, NULL, NULL, NULL, 1, NULL, 'sdfsdfsd', '2014-11-16 15:05:26', 0),
+(6, 3, NULL, NULL, 2, NULL, NULL, 'sdfsdfsdf sdfs df', '2014-11-16 15:06:17', 0),
+(7, 2, NULL, NULL, 3, NULL, NULL, 'adfsdfdf', '2014-11-09 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -207,8 +252,8 @@ CREATE TABLE IF NOT EXISTS `offer_to_student` (
 --
 
 INSERT INTO `offer_to_student` (`offer_to_id`, `company_id`, `student_id`, `job`, `description`, `requirements`, `place_of_work`, `employment_status`, `number_of_hours`, `length_of_contract`, `salary`, `date_from`, `date_to`, `date_send`, `response`, `response_date`) VALUES
-(1, 3, 3, 'java developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-18', '2014-12-18', '2014-10-17', 'adfdsfsdf', '2014-10-19'),
-(2, 3, 3, 'php developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-16', '2014-12-18', '2014-10-17', NULL, '2014-11-09');
+(1, 3, 3, 'java developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-18', '2014-12-18', '2014-10-17', 'asfsdfsdfsdfsd', '2014-11-15'),
+(2, 3, 3, 'php developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-16', '2014-10-18', '2014-10-16', NULL, '2014-11-09');
 
 -- --------------------------------------------------------
 
@@ -348,6 +393,17 @@ ALTER TABLE `ask_for_reference`
 ALTER TABLE `comment`
   ADD CONSTRAINT `company_ident` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `student_ident` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ograniczenia dla tabeli `message`
+--
+ALTER TABLE `message`
+  ADD CONSTRAINT `company_from` FOREIGN KEY (`company_from`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `company_to` FOREIGN KEY (`company_to`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_from` FOREIGN KEY (`student_from`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_to` FOREIGN KEY (`student_to`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_from` FOREIGN KEY (`teacher_from`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_to` FOREIGN KEY (`teacher_to`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `offer`

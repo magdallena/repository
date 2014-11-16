@@ -19,15 +19,13 @@ $(document).ready(function() {
         })
                 // using the done promise callback
                 .done(function(data) {
-                    console.log("udalo sie");
-                    console.log(data);
                     var id = "offer" + data[0];
                     if (data[1]) { //ponowne przesłanie aplikacji
                         $("#" + id + " .error").text(data[1]);
 
                     } else if (data[2]) { //niepoprawny plik
                         $("#" + id + " .error").text(data[2]);
-                    } else {
+                    } else { 
                         var message = "<h3>Twoja aplikacja na tę ofertę została wysłana.</h3>";
                         eval("document.getElementById('" + id + "').innerHTML = '" + message + "'");
                     }

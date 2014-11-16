@@ -14,7 +14,6 @@
         <script src="../js/send_response_to_offer.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {
-
                 var icons = {
                     header: "ui-icon-circle-arrow-e",
                     activeHeader: "ui-icon-circle-arrow-s"
@@ -149,7 +148,7 @@
                                             if ($applic->num_rows == 1) {
                                                 $obj2 = $applic->fetch_object();
                                                 if (!$obj2->response == NULL) {
-                                                    echo "<img src='../images/message_icon.png'\ class='icon'>";
+                                                    echo "<img src='../images/message_icon.png' class='icon'\>";
                                                 }
                                             }
                                             echo " Firma: <span class='conspicuous'>" . $obj->name . "</span> stanowisko: <span class='conspicuous'>" . $obj->job . "</span></h3>";

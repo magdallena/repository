@@ -1,0 +1,386 @@
+touch README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:magdallena/animated-spice.git
+git push -u origin master
+
+
+
+
+=====================================================
+BRITENET
+=====================================================
+
+Basic GIT configurationEdit
+Repository
+$ git clone "https://repos.britenet.com.pl/sonae.git"
+Edit
+Configuration
+$ git config --global user.name "First Name Last Name" 
+$ git config --global user.email firstname.lastname@britenet.com.pl
+$ git config --global credential.helper store
+$ git config --global http.sslVerify false
+$ git config --global pull.ff only
+$ git config --global merge.ff only
+$ git config --global push.default simple
+Pull.ff only and merge ff.only options will only allow for fast-forward merges, that does not produce conflicts. 
+Push.default simple will set the default push behavior to only pushing current branch and not all changed branches.
+
+Edit
+Development branches
+Dev branch:
+
+git checkout dev
+Use case branch:
+
+git checkout -b uc_01
+git commit …
+git push
+git checkout dev
+git merge uc_01
+Dev branch (also known as “unstable” branch) and optional use case branches are the only branches new code can be committed to. All changes from use case branches have to be merged into dev branch before they can be tested.
+
+Edit
+Testing branch
+Merge instruction:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Welcome to Git (version 1.9.4-preview20140815)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git init
+Reinitialized existing Git repository in c:/Users/MK/Desktop/repo/.git/
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git remote add origin git@github.com:magdallena/repository.git
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git push -u origin master
+Enter passphrase for key '/c/Users/MK/.ssh/id_rsa':
+error: src refspec master does not match any.
+error: failed to push some refs to 'git@github.com:magdallena/repository.git'
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git pull
+Enter passphrase for key '/c/Users/MK/.ssh/id_rsa':
+remote: Counting objects: 40, done.
+remote: Total 40 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (40/40), done.
+From github.com:magdallena/repository
+ * [new branch]      master     -> origin/master
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> master
+
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git pull origin master
+Enter passphrase for key '/c/Users/MK/.ssh/id_rsa':
+From github.com:magdallena/repository
+ * branch            master     -> FETCH_HEAD
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   PortalPracy/css/style.css
+        modified:   PortalPracy/index.php
+        modified:   PortalPracy/nbproject/private/private.properties
+        modified:   PortalPracy/nbproject/private/private.xml
+        modified:   PortalPracy/php/classCompany.php
+        modified:   PortalPracy/php/classDatabase.php
+        modified:   PortalPracy/php/classPage.php
+        modified:   PortalPracy/php/classStudent.php
+        modified:   PortalPracy/php/classTeacher.php
+        modified:   PortalPracy/php/classUser.php
+        modified:   PortalPracy/php/login.php
+        modified:   PortalPracy/php/login_checking.php
+        modified:   PortalPracy/php/logout.php
+        modified:   PortalPracy/php/register.php
+        modified:   data_base.sql
+        deleted:    temp
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        PortalPracy/galery_company/
+        PortalPracy/galery_student/
+        PortalPracy/images/n_image.gif
+        PortalPracy/js/
+        PortalPracy/php/change_password.php
+        PortalPracy/php/change_photo.php
+        PortalPracy/php/edit_data.php
+        PortalPracy/php/index.php
+        PortalPracy/php/list_company.php
+        PortalPracy/php/list_student.php
+        PortalPracy/php/list_teacher.php
+        PortalPracy/samplemail.php
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git add -A
+warning: LF will be replaced by CRLF in PortalPracy/css/style.css.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in data_base.sql.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/company_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/jquery-2.1.1.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/jquery.validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/student_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/switching_register_forms.
+js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/teacher_validate.js.
+The file will have its original line endings in your working directory.
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git status
+warning: LF will be replaced by CRLF in PortalPracy/css/style.css.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in data_base.sql.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/company_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/student_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/switching_register_forms.
+js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/teacher_validate.js.
+The file will have its original line endings in your working directory.
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   PortalPracy/css/style.css
+        new file:   PortalPracy/galery_company/developer.jpg
+        new file:   PortalPracy/galery_company/itcompany.jpg
+        new file:   PortalPracy/galery_company/itfirm2014-10-12-19-15.jpg
+        new file:   PortalPracy/galery_student/kowalska2014-10-10-17-49.jpg
+        new file:   PortalPracy/galery_student/minska.jpg
+        new file:   PortalPracy/galery_student/wrona.jpg
+        new file:   PortalPracy/images/n_image.gif
+        modified:   PortalPracy/index.php
+        new file:   PortalPracy/js/company_validate.js
+        new file:   PortalPracy/js/jquery-2.1.1.js
+        new file:   PortalPracy/js/jquery.validate.js
+        new file:   PortalPracy/js/student_validate.js
+        new file:   PortalPracy/js/switching_register_forms.js
+        new file:   PortalPracy/js/teacher_validate.js
+        modified:   PortalPracy/nbproject/private/private.properties
+        modified:   PortalPracy/nbproject/private/private.xml
+        new file:   PortalPracy/php/change_password.php
+        new file:   PortalPracy/php/change_photo.php
+        modified:   PortalPracy/php/classCompany.php
+        modified:   PortalPracy/php/classDatabase.php
+        modified:   PortalPracy/php/classPage.php
+        modified:   PortalPracy/php/classStudent.php
+        modified:   PortalPracy/php/classTeacher.php
+        modified:   PortalPracy/php/classUser.php
+        new file:   PortalPracy/php/edit_data.php
+        renamed:    PortalPracy/index.php -> PortalPracy/php/index.php
+        new file:   PortalPracy/php/list_company.php
+        new file:   PortalPracy/php/list_student.php
+        new file:   PortalPracy/php/list_teacher.php
+        modified:   PortalPracy/php/login.php
+        modified:   PortalPracy/php/login_checking.php
+        modified:   PortalPracy/php/logout.php
+        modified:   PortalPracy/php/register.php
+        new file:   PortalPracy/samplemail.php
+        modified:   data_base.sql
+        deleted:    temp
+
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git commit -m "refresh - 12.10"
+[master warning: LF will be replaced by CRLF in PortalPracy/css/style.css.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in data_base.sql.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/company_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/student_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/switching_register_forms.
+js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/teacher_validate.js.
+The file will have its original line endings in your working directory.
+01f2641] refresh - 12.10
+warning: LF will be replaced by CRLF in PortalPracy/css/style.css.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/company_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/jquery-2.1.1.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/jquery.validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/student_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/switching_register_forms.
+js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in PortalPracy/js/teacher_validate.js.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in data_base.sql.
+The file will have its original line endings in your working directory.
+ 37 files changed, 13065 insertions(+), 367 deletions(-)
+ create mode 100644 PortalPracy/galery_company/developer.jpg
+ create mode 100644 PortalPracy/galery_company/itcompany.jpg
+ create mode 100644 PortalPracy/galery_company/itfirm2014-10-12-19-15.jpg
+ create mode 100644 PortalPracy/galery_student/kowalska2014-10-10-17-49.jpg
+ create mode 100644 PortalPracy/galery_student/minska.jpg
+ create mode 100644 PortalPracy/galery_student/wrona.jpg
+ create mode 100644 PortalPracy/images/n_image.gif
+ rewrite PortalPracy/index.php (99%)
+ create mode 100644 PortalPracy/js/company_validate.js
+ create mode 100644 PortalPracy/js/jquery-2.1.1.js
+ create mode 100644 PortalPracy/js/jquery.validate.js
+ create mode 100644 PortalPracy/js/student_validate.js
+ create mode 100644 PortalPracy/js/switching_register_forms.js
+ create mode 100644 PortalPracy/js/teacher_validate.js
+ create mode 100644 PortalPracy/php/change_password.php
+ create mode 100644 PortalPracy/php/change_photo.php
+ create mode 100644 PortalPracy/php/edit_data.php
+ rename PortalPracy/{ => php}/index.php (83%)
+ create mode 100644 PortalPracy/php/list_company.php
+ create mode 100644 PortalPracy/php/list_student.php
+ create mode 100644 PortalPracy/php/list_teacher.php
+ rewrite PortalPracy/php/login.php (90%)
+ create mode 100644 PortalPracy/samplemail.php
+ delete mode 100644 temp
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$ git push -u origin master
+Enter passphrase for key '/c/Users/MK/.ssh/id_rsa':
+Counting objects: 67, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (43/43), done.
+Writing objects: 100% (45/45), 268.65 KiB | 0 bytes/s, done.
+Total 45 (delta 17), reused 0 (delta 0)
+To git@github.com:magdallena/repository.git
+   f1bfa30..01f2641  master -> master
+Branch master set up to track remote branch master from origin.
+
+MK@MK-KOMPUTER /C/Users/MK/Desktop/repo (master)
+$
+git checkout testing
+git pull
+git merge dev
+git push
+Cherry pick instruction:
+
+git checkout testing
+git pull
+git cherry-pick COMMIT_HASH
+git push
+To test simply switch to testing branch, pull changes from remote, merge changes from dev branch and push them to the server. Alternatively, you can cherry pick specific commits from dev branch (not recommended).
+
+If bugs are found during this phase, developer should push fixes to the dev branch, which then can be merged into testing using the same procedure as above.
+
+Edit
+Master (stable) branch
+Master (stable) branch is the final branch in the development cycle. Changed from the testing branch should be merged into it and then tested for regressions.
+
+git checkout master
+git pull
+git merge testing
+git push
+
+
+
+
+
+
+
+===================================================================
+
+git init
+git clone
+
+
+ ssh -vT git@github.com - do sprawdzenia po³¹czenia
+
+git push -u origin master - wypchniêcie
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Quick setup — if you've done this kind of thing before
+
+ Set up in Desktop	or	
+HTTP
+SSH
+	
+We recommend every repository include a README, LICENSE, and .gitignore.
+…or create a new repository on the command line
+
+
+touch README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:magdallena/massive-octo-avenger.git
+git push -u origin master
+…or push an existing repository from the command line
+
+
+git remote add origin git@github.com:magdallena/massive-octo-avenger.git
+git push -u origin master
+…or import code from another repository
+
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+
+Import code

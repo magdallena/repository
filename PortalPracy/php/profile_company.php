@@ -5,13 +5,15 @@
         <meta charset="UTF-8">
         <title>Portal pracy dla studentów</title>
         <link href="../css/style.css" rel="stylesheet" type="text/css" />
-        <script type='text/javascript' src='../js/jquery-ui.js'></script>
-        <script type='text/javascript'>
-            $(':radio').change(
-                    function() {
-                        $('.choice').text(this.value + ' stars');
-                    }
-            );
+        <script type='text/javascript' src='../js/jquery-2.1.1.js'></script>
+        <script type='text/javascript' src='../js/send_comment.js'></script>
+        <script>
+            $(document).ready(function() {
+                $('label').click(function() {
+                    labelID = $(this).attr('for');
+                    $('#' + labelID).trigger('click');
+                });
+            });
         </script>
 
     </head>
@@ -51,8 +53,12 @@
                         echo "<div id='profile_description'>";
                         echo "<img src='../galery_company/" . $data['photoname'] . "' class='photo'/>";
                         echo "<h2 class='datas_list_name'>" . $data['name'] . "</h2>";
-                        echo "<h3 class='datas_list'>" . $data['address'] . "</h2>";
-                        echo "<h3 class='datas_list'>tel. " . $data['telephone'] . "</h2>";
+                        echo "<h3 class='datas_list'>" . $data['address'] . "</h3>";
+                        echo "<h3 class='datas_list'>tel. " . $data['telephone'] . "</h3>";
+                        include_once 'classComment.php';
+                        $com = Comment::make_new_to_count_average($id);
+                        echo "<h3 class='datas_list'>średnia ocen <span id='average'>".$com->count_average()."</span> (<span id='allvotes'>".$com->count_number_of_votes()."</span> głosów)</h3>";
+                        echo "<a href='list_offer_added.php?id=".$data['company_id']."'>Zobacz oferty umieszczone przez tę firmę</a>";
                         echo "</div>";
 
                         //komentarze
@@ -66,29 +72,21 @@
                                     <input type='hidden' name='student_id' <?php echo" value='" . $_SESSION['id'] . "'" ?>/>
                                     <textarea type="text" id='com_content' name="content" rows='5' cols='50'>Napisz komentarz...</textarea>
                                     <br/>  <div class='clear'></div> 
-                                    <span>Oceń firmę</span>
-
 
                                     <fieldset class="rating">
-                                        <legend>Please rate:</legend>
-                                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
-                                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
-                                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
-                                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
-                                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                                        <legend>Oceń firmę</legend>
+                                        <input type='radio' name='rating' value='0' checked="checked">
+                                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5" class='label'>5 stars</label>
+                                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4" class='label'>4 stars</label>
+                                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3" class='label'>3 stars</label>
+                                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2" class='label'>2 stars</label>
+                                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1" class='label'>1 star</label>
+                                        <input type='radio' name='rating' value='0' checked="checked">
                                     </fieldset>
-
-
-
-
-
-
-
-
                                     <input type="submit" name= 'add_comment' value="Wyślij">
+                                    <span class='error'></span>
                                 </form>
                             </div>
-                            <span class='error'></span>
                             <div class='clear'></div>
                             <?php
                         }

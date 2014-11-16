@@ -7,8 +7,9 @@
             <file>file:/C:/xampp/htdocs/PortalPracy/php/profile_company.php</file>
             <file>file:/C:/xampp/htdocs/PortalPracy/php/index.php</file>
             <file>file:/C:/xampp/htdocs/PortalPracy/css/style.css</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/js/send_reference.js</file>
-            <file>file:/C:/xampp/htdocs/PortalPracy/php/add_reference.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/send_request.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/profile_teacher.php</file>
+            <file>file:/C:/xampp/htdocs/PortalPracy/php/list_offer_added.php</file>
         </group>
     </open-files>
 </project-private>

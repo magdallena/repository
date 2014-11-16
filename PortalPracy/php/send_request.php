@@ -33,17 +33,24 @@
                         <form action="send_request.php" method="POST" id="add_offer">
                             <table>
                                 <?php
-                                if (!isset($_GET['teacher_id'])) {
-                                    echo "<tr><td>Wybierz nauczyciela</td>";
-                                    echo "<td><select name='teacher_id'>";
-                                    include_once 'classDatabase.php';
+                                include_once 'classDatabase.php';
                                     $db = new Database();
                                     $all = $db->get_teacher_number();
+                                
+                                if (!isset($_GET["teacher_id"]) || $_GET["teacher_id"] > $all) {
+                                    echo "<tr><td>Wybierz nauczyciela</td>";
+                                    echo "<td><select name='teacher_id'>";
+                                    
                                     $result = $db->get_teacher_list(0, $all);
                                     while ($obj = $result->fetch_object()) {
                                         echo"<option value='$obj->teacher_id'>" . $obj->name . " " . $obj->last_name . "</option>";
                                     }
                                     echo "</select></td></tr>";
+                                } else {
+                                    $id=$_GET["teacher_id"];
+                                    $teacher=$db->get_teacher_data($id);
+                                    echo "<input type='hidden' name='teacher_id' value='$id'/>";
+                                    echo "<h3>Referencje do: ".$teacher['degree']." ".$teacher['name']." ".$teacher['last_name']."</h3>";
                                 }
                                 ?>
                                 <tr>

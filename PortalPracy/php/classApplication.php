@@ -46,11 +46,9 @@ class Application {
 
     function add_application() {
         if ($this->mysqli->check_application($this->student_id, $this->offer_id)) {
-            $array[1] = "<h3>Już aplikowałeś na tę ofertę.</h3>";
+            $array[1] = "Już aplikowałeś na tę ofertę.";
         } else if ($this->check_file("cv") && $this->check_file("motivation_letter")) {
             $this->mysqli->insert_application($this);
-            $array[0] = $this->offer_id;
-            echo json_encode($array);
         } else {
             $array[2] = 'Niepoprawny plik (dostępne rozszerzenia: .txt, .docx, .doc, .pdf, .odt).';
         }

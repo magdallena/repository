@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <title>Portal pracy dla studentów</title>
         <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <script type='text/javascript' src='../js/tooltips.js'></script>
     </head>
     <body>
         <div id="header">
@@ -23,6 +24,16 @@
 
                 <?php
                 if (isset($_SESSION['name'])) {
+                    ?>
+                    <div class="search">
+                        <h4>Wyszukaj nauczyciela (wpisz nazwisko):</h4>
+                        <form>
+                            <span class='tooltips'><input type="text" onkeyup="show_hint(this.value, 'hint_teacher.php?q=')">
+                                <span id='txtHint'></span>   
+                            </span>
+                        </form>
+                    </div>
+                    <?php
                     include_once 'classDatabase.php';
                     $db = new Database();
 

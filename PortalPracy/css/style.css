@@ -522,7 +522,7 @@ div.clear {
    it doesn’t make the test unnecessarily selective */
 .rating:not(:checked) > input {
     position:absolute;
-    top:-9999px;
+    /*top:-9999px; <-przeładowuje */
     clip:rect(0,0,0,0);
 }
 
@@ -562,9 +562,120 @@ div.clear {
     color: #ea0;
     text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
 }
-
+/*
 .rating > label:active {
     position:relative;
     top:2px;
     left:2px;
+}*/
+
+/*searching*/
+.search {
+    text-align: right;
+    margin: auto 80px 50px auto;
+}
+
+span.tooltips {
+    position: relative;
+    display: inline;
+}
+span.tooltips span {
+    position: absolute;
+    width:250px;
+    color: #FFFFFF;
+    background: #000000;
+    /*height: 30px;*/
+    line-height: 30px;
+    text-align: center;
+    visibility: hidden;
+    border-radius: 6px;
+    opacity: 0.95;
+    top: 30px;
+    left: 50%;
+    margin-left: -76px;
+    z-index: 999;
+}
+span.tooltips span:after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -8px;
+    width: 0; height: 0;
+    border-bottom: 8px solid #000000;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+}
+#txtHint a{
+    color: #ea0;
+}
+
+.offer_active {
+    color:crimson;
+}
+
+.offer_inactive {
+    color:black;
+}
+
+/*new message*/
+#new_message {
+    border: 1px solid #CCA383;
+    width: 70%;
+    background: #C9B989;
+    padding: 3px;
+    margin-bottom :20px;
+}
+#new_message legend {
+    background: #B57340;
+    padding: 6px;
+    font-weight: bold;
+}
+
+#new_message textarea {
+    width: 100%;
+}
+
+#new_message input {
+    background: #B57340;
+    color: #FEEBB2;
+    padding: 5px;
+    border:0 none;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+.message {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 9px;
+    box-shadow: 0px 0px 5px #000000;
+    background: rgba(241,231,103,1);
+    background: -moz-linear-gradient(left, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(241,231,103,1)), color-stop(100%, rgba(254,182,69,1)));
+    background: -webkit-linear-gradient(left, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%);
+    background: -o-linear-gradient(left, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%);
+    background: -ms-linear-gradient(left, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%);
+    background: linear-gradient(to right, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645', GradientType=1 );
+}
+
+.message_header {
+    font-size:80%;
+    color:#7f0000;
+}
+.message_content {
+    padding: 5px;
+    font-size: 110%;
+    color: black;
+}
+
+#received, #sent {
+    margin: 15px;
+}
+
+.unread {
+    font-weight: bold;
 }

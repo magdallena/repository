@@ -181,6 +181,7 @@ class Database {
             } else {
                 $obj = $result->fetch_object();
                 $array = array();
+                $array['teacher_id']=$obj->teacher_id;
                 $array['name'] = $obj->name;
                 $array['last_name'] = $obj->last_name;
                 $array['degree'] = $obj->academic_degree;
@@ -197,6 +198,7 @@ class Database {
             } else {
                 $obj = $result->fetch_object();
                 $array = array();
+                $array['company_id'] = $obj->company_id;
                 $array['name'] = $obj->name;
                 $array['address'] = $obj->address;
                 $array['telephone'] = $obj->telephone;
@@ -391,7 +393,7 @@ class Database {
     function get_asks_for_reference($teacher_id) {
         if ($result = $this->db->query("SELECT * FROM `ask_for_reference` a JOIN `student` s ON a.`student_id`=s.`student_id` WHERE `teacher_id`='$teacher_id' AND a.`status`='0' ORDER BY `date` DESC")) {
             return $result;
-        } 
+        }
     }
 
     function get_offer_to_student($student_id) {
@@ -476,6 +478,30 @@ class Database {
         }
     }
 
+    function check_offer_to_with_company($offer_id, $company_id) {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student` WHERE `company_id`='$company_id' AND `offer_to_id`='$offer_id'")) {
+            if ($result->num_rows == 0) {
+                $result->close();
+                return false;
+            } else {
+                $result->close();
+                return true;
+            }
+        }
+    }
+
+    function check_offer_to_with_student($offer_id, $student_id) {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student` WHERE `student_id`='$student_id' AND `offer_to_id`='$offer_id'")) {
+            if ($result->num_rows == 0) {
+                $result->close();
+                return false;
+            } else {
+                $result->close();
+                return true;
+            }
+        }
+    }
+
     function get_application_data($offer_id, $start, $onpage) {
         if ($result = $this->db->query("SELECT * FROM `application` a JOIN `offer` o ON o.`offer_id`=a.`offer_id` "
                 . "JOIN `student` s ON s.`student_id`=a.`student_id` WHERE a.`offer_id`='$offer_id' ORDER BY `date` LIMIT $start, $onpage")) {
@@ -520,7 +546,7 @@ class Database {
         if ($result = $this->db->query("SELECT * FROM `references` WHERE `student_id`=$student_id")) {
             $all_refs = $result->num_rows;
             $result->close();
-        } 
+        }
         return $all_refs;
     }
 
@@ -530,18 +556,254 @@ class Database {
         $stmt->execute();
         $stmt->close();
     }
-    
+
     function get_comments_number($company_id) {
         if ($result = $this->db->query("SELECT * FROM `comment` WHERE `company_id`=$company_id")) {
             $all_refs = $result->num_rows;
             $result->close();
-        } 
+        }
         return $all_refs;
     }
-    
+
     function get_comments_list($start, $onpage, $company_id) {
         if ($result = $this->db->query("SELECT * FROM `comment` c JOIN `student` s ON c.`student_id`=s.`student_id` WHERE `company_id`=$company_id ORDER BY `date` DESC, `comment_id` DESC LIMIT $start, $onpage")) {
             return $result;
-        } else echo "niepoprawne zapytanie";
+        } else
+            echo "niepoprawne zapytanie";
+    }
+
+    function insert_comment($com) {
+        $stmt = $this->db->prepare("INSERT INTO `comment` VALUES(NULL,?,?,?,?,?)");
+        $stmt->bind_param('iissi', $com->get_company_id(), $com->get_student_id(), $com->get_content(), $com->get_date(), $com->get_rate());
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function get_offer_number() {
+        if ($result = $this->db->query("SELECT * FROM `offer`")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
+    }
+
+    function get_offer_list($start, $onpage) {
+        if ($result = $this->db->query("SELECT * FROM `offer` o JOIN `company` c ON o.`company_id`=c.`company_id` ORDER BY `date_to` DESC LIMIT $start, $onpage ")) {
+            return $result;
+        }
+    }
+
+    function get_offer_to_student_number($student_id) {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student` WHERE `student_id` =$student_id")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
+    }
+
+    function get_offer_to_number() {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student`")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
+    }
+
+    function get_offer_to_list($student_id, $start, $onpage) {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student` o JOIN `company` c ON o.`company_id`=c.`company_id` WHERE `student_id` =$student_id ORDER BY `date_send` DESC LIMIT $start, $onpage ")) {
+            return $result;
+        }
+    }
+
+    function get_offer_applied_number($student_id) {
+        if ($result = $this->db->query("SELECT * FROM `application` WHERE `student_id` =$student_id")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
+    }
+
+    function get_offer_applied_list($student_id, $start, $onpage) {
+        if ($result = $this->db->query("SELECT * FROM `offer` o JOIN `company` c ON o.`company_id`=c.`company_id` JOIN `application` a ON a.`offer_id` = o.`offer_id` WHERE `student_id` =$student_id ORDER BY `date` DESC LIMIT $start, $onpage ")) {
+            return $result;
+        }
+    }
+
+    function get_offer_added_number($company_id) {
+        if ($result = $this->db->query("SELECT * FROM `offer` WHERE `company_id` =$company_id")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
+    }
+
+    function get_offer_added_list($company_id, $start, $onpage) {
+        if ($result = $this->db->query("SELECT * FROM `offer`  WHERE `company_id` =$company_id ORDER BY `date_to` DESC LIMIT $start, $onpage ")) {
+            return $result;
+        }
+    }
+    
+    function get_offer_to_added_number($company_id) {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student` WHERE `company_id` =$company_id")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
+    }
+
+    function get_offer_to_added_list($company_id, $start, $onpage) {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student`  WHERE `company_id` =$company_id ORDER BY `date_to` DESC LIMIT $start, $onpage ")) {
+            return $result;
+        }
+    }
+    function get_offer_to_data($offer_to_id) {
+        if ($result = $this->db->query("SELECT * FROM `offer_to_student` o JOIN `company` c ON o.`company_id`=c.`company_id` WHERE `offer_to_id`='$offer_to_id'")) {
+            if ($result->num_rows == 0) {
+                return false;
+            } else {
+                $obj = $result->fetch_object();
+                return $obj;
+            }
+        }
+    }
+
+    function get_offer_data($offer_id) {
+        if ($result = $this->db->query("SELECT * FROM `offer` o JOIN `company` c ON o.`company_id`=c.`company_id` WHERE `offer_id`='$offer_id'")) {
+            if ($result->num_rows == 0) {
+                return false;
+            } else {
+                $obj = $result->fetch_object();
+                return $obj;
+            }
+        }
+    }
+    
+    function insert_message_ss($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,?, NULL, NULL, ?, NULL, NULL, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_student_from(), $m->get_student_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function insert_message_st($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,?, NULL, NULL, NULL, ?, NULL, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_student_from(), $m->get_teacher_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    function insert_message_sc($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,?, NULL, NULL, NULL, NULL, ?, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_student_from(), $m->get_company_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    function insert_message_ts($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, ?, NULL, ?, NULL, NULL, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_teacher_from(), $m->get_student_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function insert_message_tt($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, ?, NULL, NULL, ?, NULL, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_teacher_from(), $m->get_teacher_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    function insert_message_tc($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, ?, NULL, NULL, NULL, ?, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_teacher_from(), $m->get_company_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    function insert_message_cs($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, NULL, ?, ?, NULL, NULL, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_company_from(), $m->get_student_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function insert_message_ct($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, NULL, ?, NULL, ?, NULL, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_company_from(), $m->get_teacher_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    function insert_message_cc($m) {
+        $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, NULL, ?, NULL, NULL, ?, ?, ?, 0)");
+        $stmt->bind_param('iiss', $m->get_company_from(), $m->get_company_to(), $m->get_content(), $m->get_datetime());
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    function get_message_from_student($student_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `student_from` =$student_id ORDER BY `date` DESC")) {
+            return $result;
+        }
+    }
+    
+    function get_message_from_teacher($teacher_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `teacher_from` =$teacher_id ORDER BY `date` DESC")) {
+            return $result;
+        }
+    }
+    
+    function get_message_from_company($company_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `company_from` =$company_id ORDER BY `date` DESC")) {
+            return $result;
+        }
+    }
+    
+    function get_message_to_student($student_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `student_to` =$student_id ORDER BY `date` DESC")) {
+            return $result;
+        }
+    }
+    
+    function get_message_to_teacher($teacher_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `teacher_to` =$teacher_id ORDER BY `date` DESC")) {
+            return $result;
+        }
+    }
+    
+    function get_message_to_company($company_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `company_to` =$company_id ORDER BY `date` DESC")) {
+            return $result;
+        }
+    }
+    
+    function update_message_read($id) {
+        if ($result = $this->db->query("UPDATE `message` SET `read` = '1' WHERE `message_id` = " . $id)) {
+            
+        }
+    }
+    
+    function get_message_to_student_number($student_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `student_to` =$student_id AND `read`=0")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
+    }
+    
+    function get_message_to_teacher_number($teacher_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `teacher_to` =$teacher_id AND `read`=0")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
+    }
+    
+    function get_message_to_company_number($company_id) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `company_to` =$company_id AND `read`=0")) {
+            $all_offers = $result->num_rows;
+            $result->close();
+        }
+        return $all_offers;
     }
 }

@@ -31,7 +31,20 @@ class Page {
                 <li><a href="list_student.php">Studenci</a></li>
                 <li><a href="list_teacher.php">Nauczyciele</a></li>
                 <li><a href="list_company.php">Firmy</a></li>
-                
+                <li><a href="messages.php">Wiadomości';
+        include_once 'classDatabase.php';
+        $db = new Database();
+        if ($_SESSION['usertype'] == 'student') {
+            $num_mes = $db->get_message_to_student_number($_SESSION['id']);
+            echo " ($num_mes)";
+        } else if ($_SESSION['usertype'] == 'nauczyciel') {
+            $num_mes = $db->get_message_to_teacher_number($_SESSION['id']);
+            echo " ($num_mes)";
+        } else if ($_SESSION['usertype'] == 'firma') {
+            $num_mes = $db->get_message_to_company_number($_SESSION['id']);
+            echo " ($num_mes)";
+        }
+        echo '</a></li>
             </ul>
         </div>';
     }
@@ -46,7 +59,9 @@ class Page {
                 <li><a href="change_photo.php">Zmień zdjęcie</a></li>
                 <li><a href="change_password.php">Zmień hasło</a></li>
                 <li><a href="send_request.php">Wyślij prośbę o referencje</a></li>
-                <li><a href="#"></a></li>
+                <li><a href="list_offer_all.php">Oferty</a></li>
+                <li><a href="list_offer_to_all.php">Oferty do mnie</a></li>
+                <li><a href="list_offer_applied_all.php">Oferty, na które aplikowałem </a></li>
             </ul>
             <?php
         }
@@ -66,6 +81,7 @@ class Page {
                         echo '(' . $result->num_rows . ')';
                         ?>
                     </a></li>
+                <li><a href="list_offer_all.php">Wszystkie oferty</a></li>
                 <li><a href="#"></a></li>
             </ul>
             <?php
@@ -81,19 +97,21 @@ class Page {
                 <li><a href="change_password.php">Zmień hasło</a></li>
                 <li><a href="add_offer.php">Umieść ofertę</a></li>
                 <li><a href="add_offer.php?student=true">Wyślij ofertę do studenta</a></li>
+                <li><a href="list_offer_added.php">Oferty ogólne</a></li>
+                <li><a href="list_offer_to_added.php">Oferty do studenta</a></li>
             </ul>
             <?php
         }
     }
 
     function dopaging($onpage, $all, $filename) {
-        $allpages = ceil($all / $onpage); 
+        $allpages = ceil($all / $onpage);
         if (!isset($_GET['page']) or $_GET['page'] > $allpages) {
             $current_page = 1;
         } else {
             $current_page = $_GET['page'];
-        } 
-        $start = ($current_page - 1) * $onpage; 
+        }
+        $start = ($current_page - 1) * $onpage;
         $prev = $current_page - 1;
         $next = $current_page + 1;
         echo "<div id='pages'><ul>";

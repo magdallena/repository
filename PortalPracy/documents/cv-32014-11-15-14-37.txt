@@ -1,0 +1,14 @@
+13.10: 
+- 	Utworzenie bazy danych, stworzenie strony g³ównej i kaskadowego arkusza stylów.
+-	Logowanie i rejestracja
+- 	Edycja danych, zmiana has³a, zmiana zdjêcia
+20.10 :
+	 Przegl¹danie listy profili studentów, nauczycieli i firm. Wyœwietlenie szczegó³ów profilu.
+27.10:
+	Wysy³anie i  wyszukanie oferty, udzielenie odpowiedzi na ofertê.
+3.11:
+ 	Wysy³anie referencji przez nauczyciela oraz wys³anie proœby o referencje przez studenta. Wysy³anie komentarzy na temat firmy.
+10.11:
+	Funkcje administratora: usuwanie kont, edycja profili, aktywacja kont, usuwanie ofert, komentarzy i referencji; funcka odzyskiwania has³a.
+17.11:
+	Testy.
