@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas wygenerowania: 16 Lis 2014, 23:17
--- Wersja serwera: 5.5.34
--- Wersja PHP: 5.4.22
+-- Czas wygenerowania: 17 Lis 2014, 07:47
+-- Wersja serwera: 5.6.14
+-- Wersja PHP: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -220,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `offer` (
   `date_to` date NOT NULL,
   PRIMARY KEY (`offer_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Zrzut danych tabeli `offer`
@@ -233,7 +233,9 @@ INSERT INTO `offer` (`offer_id`, `company_id`, `job`, `description`, `requiremen
 (4, 3, 'java developer', 'asfdadfs', 'dfsdf', 'asdfadf', 'umowa o pracę', 20, '1 rok', 1000, '2014-10-17', '2014-10-17'),
 (5, 3, 'java developer', 'asd', 'asdasd', 'asdasd', 'staż', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17'),
 (6, 3, 'java developer', 'sdf', 'sdfsdf', 'asdfadf', 'umowa o pracę', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17'),
-(7, 2, 'java developer', 'dfsdf', 'sdfsdg', 'asdasd', 'umowa o pracę', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17');
+(7, 2, 'java developer', 'dfsdf', 'sdfsdg', 'asdasd', 'umowa o pracę', 40, '3 miesiące', 0, '2014-10-17', '2014-11-17'),
+(8, 8, 'c++', 'sfv', 'sdfv', 'lublin', 'umowa o dzieło', 40, '6 miesiecy', 1500, '2014-11-13', '2015-01-13'),
+(9, 12, 'network aministrator', 'fv dgn fg hdgb ', 'gh b hdgh dbv hdgb ', 'lublin', 'umowa zlecenie', 40, '3 miesiace', 0, '2014-11-17', '2014-12-26');
 
 -- --------------------------------------------------------
 
@@ -261,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `offer_to_student` (
   PRIMARY KEY (`offer_to_id`),
   KEY `company_id` (`company_id`,`student_id`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Zrzut danych tabeli `offer_to_student`
@@ -269,7 +271,9 @@ CREATE TABLE IF NOT EXISTS `offer_to_student` (
 
 INSERT INTO `offer_to_student` (`offer_to_id`, `company_id`, `student_id`, `job`, `description`, `requirements`, `place_of_work`, `employment_status`, `number_of_hours`, `length_of_contract`, `salary`, `date_from`, `date_to`, `date_send`, `response`, `response_date`) VALUES
 (1, 3, 3, 'java developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-18', '2014-12-18', '2014-10-17', 'asfsdfsdfsdfsd', '2014-11-15'),
-(2, 3, 3, 'php developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-16', '2014-10-18', '2014-10-16', NULL, '2014-11-09');
+(2, 3, 3, 'php developer', 'mmmmmmmmmm', 'mmmmmmmmmmm', 'mmm', 'umowa o dzieło', 40, '3 miesiące', 0, '2014-10-16', '2014-10-18', '2014-10-16', NULL, '2014-11-09'),
+(3, 5, 3, 'network aministrator', 'xcgvzf zdfzdfg xdfbzdf', 'dsvzdfb zdfbdfgsg fhhjmc ', 'lublin', 'umowa o prace', 40, '1 rok', 0, '2014-11-16', '2015-01-15', '2014-11-16', NULL, NULL),
+(4, 10, 3, 'android developer', 'zdvfc   oipftgy stg ', ' sfgh jf ncg yjjd', 'lublin', 'umowa zlecenie', 20, '3 miesiace', 1000, '2014-11-16', '2014-12-23', '2014-11-15', 'taksd fsdvf  df', '2014-11-17');
 
 -- --------------------------------------------------------
 

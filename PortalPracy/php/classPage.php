@@ -34,15 +34,17 @@ class Page {
                 <li><a href="messages.php">Wiadomości';
         include_once 'classDatabase.php';
         $db = new Database();
-        if ($_SESSION['usertype'] == 'student') {
-            $num_mes = $db->get_message_to_student_number($_SESSION['id']);
-            echo " ($num_mes)";
-        } else if ($_SESSION['usertype'] == 'nauczyciel') {
-            $num_mes = $db->get_message_to_teacher_number($_SESSION['id']);
-            echo " ($num_mes)";
-        } else if ($_SESSION['usertype'] == 'firma') {
-            $num_mes = $db->get_message_to_company_number($_SESSION['id']);
-            echo " ($num_mes)";
+        if (isset($_SESSION['usertype'])) {
+            if ($_SESSION['usertype'] == 'student') {
+                $num_mes = $db->get_message_to_student_number($_SESSION['id']);
+                echo " ($num_mes)";
+            } else if ($_SESSION['usertype'] == 'nauczyciel') {
+                $num_mes = $db->get_message_to_teacher_number($_SESSION['id']);
+                echo " ($num_mes)";
+            } else if ($_SESSION['usertype'] == 'firma') {
+                $num_mes = $db->get_message_to_company_number($_SESSION['id']);
+                echo " ($num_mes)";
+            }
         }
         echo '</a></li>
             </ul>
