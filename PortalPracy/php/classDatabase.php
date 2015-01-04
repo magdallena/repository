@@ -181,7 +181,7 @@ class Database {
             } else {
                 $obj = $result->fetch_object();
                 $array = array();
-                $array['teacher_id']=$obj->teacher_id;
+                $array['teacher_id'] = $obj->teacher_id;
                 $array['name'] = $obj->name;
                 $array['last_name'] = $obj->last_name;
                 $array['degree'] = $obj->academic_degree;
@@ -335,8 +335,22 @@ class Database {
         }
     }
 
+    function get_teacher_inactive_list($start, $onpage) {
+        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `active`=0 ORDER BY `account_creation_date` DESC LIMIT $start, $onpage")) {
+            return $result;
+        }
+    }
+
     function get_teacher_number() {
         if ($result = $this->db->query("SELECT * FROM `teacher`")) {
+            $all = $result->num_rows;
+            $result->close();
+        }
+        return $all;
+    }
+
+    function get_teacher_inactive_number() {
+        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `active`=0")) {
             $all = $result->num_rows;
             $result->close();
         }
@@ -349,8 +363,22 @@ class Database {
         }
     }
 
+    function get_company_inactive_list($start, $onpage) {
+        if ($result = $this->db->query("SELECT * FROM `company` WHERE `active`=0 ORDER BY `account_creation_date` DESC LIMIT $start, $onpage")) {
+            return $result;
+        }
+    }
+
     function get_company_number() {
         if ($result = $this->db->query("SELECT * FROM `company`")) {
+            $all = $result->num_rows;
+            $result->close();
+        }
+        return $all;
+    }
+
+    function get_company_inactive_number() {
+        if ($result = $this->db->query("SELECT * FROM `company` WHERE `active`=0")) {
             $all = $result->num_rows;
             $result->close();
         }
@@ -642,7 +670,7 @@ class Database {
             return $result;
         }
     }
-    
+
     function get_offer_to_added_number($company_id) {
         if ($result = $this->db->query("SELECT * FROM `offer_to_student` WHERE `company_id` =$company_id")) {
             $all_offers = $result->num_rows;
@@ -656,6 +684,7 @@ class Database {
             return $result;
         }
     }
+
     function get_offer_to_data($offer_to_id) {
         if ($result = $this->db->query("SELECT * FROM `offer_to_student` o JOIN `company` c ON o.`company_id`=c.`company_id` WHERE `offer_to_id`='$offer_to_id'")) {
             if ($result->num_rows == 0) {
@@ -677,7 +706,7 @@ class Database {
             }
         }
     }
-    
+
     function insert_message_ss($m) {
         $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,?, NULL, NULL, ?, NULL, NULL, ?, ?, 0)");
         $stmt->bind_param('iiss', $m->get_student_from(), $m->get_student_to(), $m->get_content(), $m->get_datetime());
@@ -691,14 +720,14 @@ class Database {
         $stmt->execute();
         $stmt->close();
     }
-    
+
     function insert_message_sc($m) {
         $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,?, NULL, NULL, NULL, NULL, ?, ?, ?, 0)");
         $stmt->bind_param('iiss', $m->get_student_from(), $m->get_company_to(), $m->get_content(), $m->get_datetime());
         $stmt->execute();
         $stmt->close();
     }
-    
+
     function insert_message_ts($m) {
         $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, ?, NULL, ?, NULL, NULL, ?, ?, 0)");
         $stmt->bind_param('iiss', $m->get_teacher_from(), $m->get_student_to(), $m->get_content(), $m->get_datetime());
@@ -712,14 +741,14 @@ class Database {
         $stmt->execute();
         $stmt->close();
     }
-    
+
     function insert_message_tc($m) {
         $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, ?, NULL, NULL, NULL, ?, ?, ?, 0)");
         $stmt->bind_param('iiss', $m->get_teacher_from(), $m->get_company_to(), $m->get_content(), $m->get_datetime());
         $stmt->execute();
         $stmt->close();
     }
-    
+
     function insert_message_cs($m) {
         $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, NULL, ?, ?, NULL, NULL, ?, ?, 0)");
         $stmt->bind_param('iiss', $m->get_company_from(), $m->get_student_to(), $m->get_content(), $m->get_datetime());
@@ -733,56 +762,56 @@ class Database {
         $stmt->execute();
         $stmt->close();
     }
-    
+
     function insert_message_cc($m) {
         $stmt = $this->db->prepare("INSERT INTO `message` VALUES(NULL,NULL, NULL, ?, NULL, NULL, ?, ?, ?, 0)");
         $stmt->bind_param('iiss', $m->get_company_from(), $m->get_company_to(), $m->get_content(), $m->get_datetime());
         $stmt->execute();
         $stmt->close();
     }
-    
+
     function get_message_from_student($student_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `student_from` =$student_id ORDER BY `date` DESC")) {
             return $result;
         }
     }
-    
+
     function get_message_from_teacher($teacher_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `teacher_from` =$teacher_id ORDER BY `date` DESC")) {
             return $result;
         }
     }
-    
+
     function get_message_from_company($company_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `company_from` =$company_id ORDER BY `date` DESC")) {
             return $result;
         }
     }
-    
+
     function get_message_to_student($student_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `student_to` =$student_id ORDER BY `date` DESC")) {
             return $result;
         }
     }
-    
+
     function get_message_to_teacher($teacher_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `teacher_to` =$teacher_id ORDER BY `date` DESC")) {
             return $result;
         }
     }
-    
+
     function get_message_to_company($company_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `company_to` =$company_id ORDER BY `date` DESC")) {
             return $result;
         }
     }
-    
+
     function update_message_read($id) {
         if ($result = $this->db->query("UPDATE `message` SET `read` = '1' WHERE `message_id` = " . $id)) {
             
         }
     }
-    
+
     function get_message_to_student_number($student_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `student_to` =$student_id AND `read`=0")) {
             $all_offers = $result->num_rows;
@@ -790,7 +819,7 @@ class Database {
         }
         return $all_offers;
     }
-    
+
     function get_message_to_teacher_number($teacher_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `teacher_to` =$teacher_id AND `read`=0")) {
             $all_offers = $result->num_rows;
@@ -798,12 +827,98 @@ class Database {
         }
         return $all_offers;
     }
-    
+
     function get_message_to_company_number($company_id) {
         if ($result = $this->db->query("SELECT * FROM `message`  WHERE `company_to` =$company_id AND `read`=0")) {
             $all_offers = $result->num_rows;
             $result->close();
         }
         return $all_offers;
+    }
+
+    function check_student_email_name($email, $name) {
+        if ($result = $this->db->query("SELECT * FROM `student` WHERE `e_mail`='$email' and `last_name`='$name'")) {
+            if ($result->num_rows == 0) {
+                echo $result->num_rows;
+                $result->close();
+                return false;
+            } else {
+                $result->close();
+                return true;
+            }
+        }
+    }
+
+    function check_teacher_email_name($email, $name) {
+        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `e_mail`='$email' and `last_name`='$name'")) {
+            if ($result->num_rows == 0) {
+                echo $result->num_rows;
+                $result->close();
+                return false;
+            } else {
+                $result->close();
+                return true;
+            }
+        }
+    }
+
+    function check_company_email_name($email, $name) {
+        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `e_mail`='$email' and `name`='$name'")) {
+            if ($result->num_rows == 0) {
+                echo $result->num_rows;
+                $result->close();
+                return false;
+            } else {
+                $result->close();
+                return true;
+            }
+        }
+    }
+
+    function update_company_active($id) {
+        if ($result = $this->db->query("UPDATE `company` SET `active` = '1' WHERE `company_id` = " . $id)) {
+            
+        }
+    }
+
+    function update_teacher_active($id) {
+        if ($result = $this->db->query("UPDATE `teacher` SET `active` = '1' WHERE `teacher_id` = " . $id)) {
+            
+        }
+    }
+
+    function delete_student($id) {
+        $stmt = $this->db->prepare("DELETE FROM `student` WHERE `student_id` = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function delete_teacher($id) {
+        $stmt = $this->db->prepare("DELETE FROM `teacher` WHERE `teacher_id` = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function delete_company($id) {
+        $stmt = $this->db->prepare("DELETE FROM `company` WHERE `company_id` = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    function delete_reference($id) {
+        $stmt = $this->db->prepare("DELETE FROM `references` WHERE `references_id` = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+    
+    function delete_comment($id) {
+        $stmt = $this->db->prepare("DELETE FROM `comment` WHERE `comments_id` = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
     }
 }

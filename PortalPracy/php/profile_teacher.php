@@ -39,10 +39,15 @@
                     } else {
                         $data = $db->get_teacher_data($id);
 //                        echo "nauczyciel nr " . $id;
-                        echo "<h2 class='datas_list_name'>".$data['name']." ".$data['last_name']."</h2>";
-                        echo "<h3 class='datas_list'>".$data['degree']."</h3>";
-                        echo "<h3 class='datas_list'>tel. ".$data['telephone']."</h3>";
-                        echo "<a href='send_request.php?teacher_id=".$data['teacher_id']."'>Wyślij zapytanie o referencje</a>";
+                        if($data == false) {
+                            echo "<h3>Niepoprawny numer nauczyciela (konto może być usunięte)</h3>";
+                        } else {
+                            echo "<h2 class='datas_list_name'>".$data['name']." ".$data['last_name']."</h2>";
+                            echo "<h3 class='datas_list'>".$data['degree']."</h3>";
+                            echo "<h3 class='datas_list'>tel. ".$data['telephone']."</h3>";
+                            echo "<a href='send_request.php?teacher_id=".$data['teacher_id']."'>Wyślij zapytanie o referencje</a>";
+                        }
+                        
                     }
                 }
                 ?>

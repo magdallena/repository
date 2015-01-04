@@ -6,7 +6,7 @@ $result = $db->get_teacher_list(0, $db->get_teacher_number());
 $a = array();
 $i = 0;
 while ($obj = $result->fetch_object()) {
-    $a[$obj->teacher_id] = $obj->academic_degree . " " . $obj->last_name . " " . $obj->name;
+    $a[$obj->teacher_id] = $obj->last_name . " " . $obj->name . ", ".$obj->academic_degree;
     $i++;
 }
 $q = $_REQUEST["q"];

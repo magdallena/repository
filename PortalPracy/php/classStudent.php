@@ -358,11 +358,10 @@ class Student extends User {
         } else {
             session_start();
             $admin = $this->mysqli->check_admin($this->email);
+            $_SESSION['usertype'] = "student";
             if ($admin == 1) {
-                $_SESSION['usertype'] = "admin";
-            } else {
-                $_SESSION['usertype'] = "student";
-            }
+                $_SESSION['admin'] = TRUE;
+            } 
             $_SESSION['name'] = $this->email;
             $_SESSION['id']= $this->mysqli->get_student_id($this->email);
             echo "<h3 class='padding'>Użytkownik zalogowany jako: " . $_SESSION['name'] . " <a href='logout.php'>(wyloguj)</a></h3>";
@@ -409,6 +408,13 @@ class Student extends User {
                 header('Refresh: 3; index.php');
             }
         }
+    }
+    
+    function reset_password() {
+        //TO DO: wyslac maila z nowym haslem $this->pass
+        $this->password = md5($this->password);
+        $this->mysqli->update_student_password($this);
+        
     }
 
     public function get_name() {

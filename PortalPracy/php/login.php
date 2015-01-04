@@ -47,7 +47,7 @@
                             <td><input type="password" id="password" name="password"></td>
                         </tr>
                         <tr>
-                            <td> <p><a href="#">Zapomniałeś hasła?</a></p></td>
+                            <td> <p><a href="remind_password.php">Zapomniałeś hasła?</a></p></td>
                         </tr>
                         <tr>
                             <td></td>

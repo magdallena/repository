@@ -258,7 +258,11 @@ class Company extends User {
             echo"<p><a href='change_photo.php'>Przejdź do formularza zmiany zdjęcia.</a></p>";
         }
     }
-    
+    function reset_password() {
+        //TO DO: wyslac maila z nowym haslem $this->pass
+        $this->password = md5($this->password);
+        $this->mysqli->update_company_password($this);
+    }
     public function get_name() {
         return $this->name;
     }

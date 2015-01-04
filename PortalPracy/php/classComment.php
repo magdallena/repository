@@ -12,13 +12,15 @@ class Comment {
     private $date;
     private $content;
     private $rate;
+    private $comment_id;
 
     function __construct() {
         $this->mysqli = new Database();
     }
 
-    public static function make_new_to_display($student_id, $student_name, $student_last_name, $date, $content, $rate) {
+    public static function make_new_to_display($comment_id,$student_id, $student_name, $student_last_name, $date, $content, $rate) {
         $obj = new Comment();
+        $obj->set_comment_id($comment_id);
         $obj->set_student_id($student_id);
         $obj->set_student_name($student_name);
         $obj->set_student_last_name($student_last_name);
@@ -69,13 +71,16 @@ class Comment {
 
     function display() {
         $string = '';
-        $string.= "<div class='commentbox'>";
+        $string.= "<div class='commentbox' id='commentbox".$this->comment_id."'>";
         $string.= $this->content;
         $string.= "</div>";
         $string.= "<div class='commentfooter'>";
         $string.= "<a href='profile_student.php?id=" . $this->student_id . "'>" . $this->student_name . " " . $this->student_last_name . "</a>, ";
         $string.= $this->date;
         $string.= ", ocena: " . $this->rate;
+        if (isset($_SESSION['admin'])) {
+            $string.="&nbsp;&nbsp;&nbsp; <a id='delete".$this->comment_id."' class='conspicuous' onclick='delete_comment(" . $this->comment_id . ")'>USUŃ</a>";
+        }
         $string.= "</div>";
         return $string;
     }
@@ -98,7 +103,12 @@ class Comment {
         }
         return round($average,2);
     }
-    public function set_student_id($student_id) {
+    
+    public function set_comment_id($comment_id) {
+        $this->comment_id = $comment_id;
+    }
+
+        public function set_student_id($student_id) {
         $this->student_id = $student_id;
     }
 

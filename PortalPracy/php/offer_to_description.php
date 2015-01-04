@@ -81,7 +81,7 @@
                             echo "</div>";
 
                             echo "<hr/><div id = 'offers" . $offer_to_id . "'>";
-                            if ($obj->response == NULL) {
+                            if (!isset($obj->response)) {
                                 if ($_SESSION ['usertype'] == 'student' && $active) {
                                     ?>
                                     <form class='send_response' action ='javascript:;' method='POST'>

@@ -37,7 +37,7 @@ class Teacher extends User {
         $obj->set_id($id);
         return $obj;
     }
-    
+
     function set_parameters() {
         $this->name = addslashes(strip_tags(trim($_POST['name'])));
         $this->last_name = addslashes(strip_tags(trim($_POST['last_name'])));
@@ -59,9 +59,9 @@ class Teacher extends User {
     }
 
     function set_id($id) {
-        $this->id=$id;
+        $this->id = $id;
     }
-    
+
     function __construct() {
         parent::__construct();
         $this->mysqli = new Database();
@@ -200,7 +200,7 @@ class Teacher extends User {
             session_start();
             $_SESSION['usertype'] = "nauczyciel";
             $_SESSION['name'] = $this->email;
-            $_SESSION['id']= $this->mysqli->get_teacher_id($this->email);
+            $_SESSION['id'] = $this->mysqli->get_teacher_id($this->email);
             echo "<h3>Użytkownik zalogowany jako: " . $_SESSION['name'] . " <a href='logout.php'>(wyloguj)</a></h3>";
             header('Refresh: 2; index.php');
         }
@@ -232,6 +232,12 @@ class Teacher extends User {
         }
     }
 
+    function reset_password() {
+        //TO DO: wyslac maila z nowym haslem $this->pass
+        $this->password = md5($this->password);
+        $this->mysqli->update_teacher_password($this);
+    }
+
     public function get_name() {
         return $this->name;
     }
@@ -251,10 +257,9 @@ class Teacher extends User {
     public function get_date() {
         return $this->date;
     }
-    
+
     public function get_id() {
         return $this->id;
     }
-
 
 }

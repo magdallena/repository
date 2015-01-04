@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas wygenerowania: 17 Lis 2014, 07:47
+-- Czas wygenerowania: 04 Sty 2015, 17:26
 -- Wersja serwera: 5.6.14
 -- Wersja PHP: 5.5.6
 
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `company` (
   `e_mail` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `account_create_date` date NOT NULL,
+  `account_creation_date` date NOT NULL,
   `photoname` varchar(30) NOT NULL,
   PRIMARY KEY (`company_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
@@ -145,15 +145,14 @@ CREATE TABLE IF NOT EXISTS `company` (
 -- Zrzut danych tabeli `company`
 --
 
-INSERT INTO `company` (`company_id`, `name`, `address`, `telephone`, `e_mail`, `password`, `active`, `account_create_date`, `photoname`) VALUES
+INSERT INTO `company` (`company_id`, `name`, `address`, `telephone`, `e_mail`, `password`, `active`, `account_creation_date`, `photoname`) VALUES
 (1, 'IT company', '90-090 Gdańsk ul. Morska 145', '456854876', 'itcompany@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-02', 'itcompany.jpg'),
 (2, 'DeveloperStudio', '12-345 Opole ul. Piłsudskiego 49', '876428400', 'devstudio@poczta.pl', 'ef73781effc5774100f87fe2f437a435', 1, '2014-09-03', 'developer.jpg'),
 (3, 'itfirm', 'ul. Zana 2 \r\n99-999 Lublin', '111111111', 'it@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 1, '2014-10-09', 'itfirm2014-10-12-19-15.jpg'),
 (4, 'programos', 'lipowa 12 11-222 Lublin', '123232323', 'programos@kontakt.com', 'qwertyui', 1, '2014-11-16', 'firma.jpg'),
 (5, 'zaqxsw', 'wert131 12-132 kjhfdgs', '123456789', 'firma@poczta.com', 'qwertyui', 1, '2014-11-05', 'firma2.jpg'),
-(6, 'developer', 'qwewtre 5 89-098 khdfkhkl', '123456789', 'developer@poczta.com', 'qwertyui', 0, '2014-11-03', 'firma.jpg'),
 (7, 'BIcompany', 'polna 6 12-123 Wrocław', '123456789', 'BI@poczta.com', 'qwertyui', 1, '2014-10-14', 'firma3.jpg'),
-(8, 'firmaIT', 'pogodna 123 12-345 Konin', '123456789', 'firma@poczta.pl', 'qwertyui', 0, '2014-09-08', 'firma2.jpg'),
+(8, 'firmaIT', 'pogodna 123 12-345 Konin', '123456789', 'firma@poczta.pl', 'qwertyui', 1, '2014-09-08', 'firma2.jpg'),
 (9, 'itcorporation', 'poiouyt 234 98-900 Warszawa', '123456789', 'itcorp@poczta.com', 'qwertyui', 1, '2014-09-07', 'firma3.jpg'),
 (10, 'abcd', 'qwerty 1 11-111 qwerty', '123456789', 'abdc@poczta.com', 'qwertyui', 1, '2014-07-14', 'firma.jpg'),
 (11, 'XXXX', 'yuiop 23/8 12-345 zxcvbnm', '12312121212', 'xxxx@poczta.pl', 'qwertyui', 1, '2014-05-21', 'firma2.jpg'),
@@ -297,25 +296,16 @@ CREATE TABLE IF NOT EXISTS `references` (
 --
 
 INSERT INTO `references` (`references_id`, `student_id`, `teacher_id`, `content`, `date`) VALUES
-(1, 1, 3, 'ok ok ok ok ok ok ok ', '2014-11-03'),
 (2, 2, 8, 'qwewrtfqwertyui rtyuio rty ufgh vb fghj rtyui fghjk fghjk tyuio rtyuik rctyunm fgbhn', '2014-11-05'),
-(4, 1, 1, 'dfgbhnjmk erftgyhujik rtfgyhuji rdftgyhuji rdftgyhujik ', '2014-11-07'),
-(5, 1, 2, 'fdv fghjk yuio ftgyhuji fddf fghjk vbnm, xcvbnm rtyui dfghjkl ', '2014-11-02'),
-(6, 3, 5, 'iuhygtfyguhijkjihugytf ugfttrfgyhu rty edrfty htftfgbn ugrcvbuni nuhvtfvgbun ', '2014-11-04'),
 (7, 2, 5, 'ftghbnjm ftgybhunjm rftgyhu ygvbuijn mubtf ybyvygbn inygvtygvbu knj', '2014-11-05'),
-(8, 1, 8, 'referencje...', '2014-11-10'),
 (9, 1, 8, 'Napisz referencje...', '2014-11-10'),
-(10, 1, 8, 'Napisz referencje...', '2014-11-10'),
 (11, 1, 8, 'Napisz referencje...', '2014-11-10'),
-(12, 1, 8, 'Napisz referencje...', '2014-11-10'),
 (13, 1, 8, 'moje referencje...', '2014-11-10'),
 (14, 1, 8, 'Napisz referencje...', '2014-11-10'),
 (15, 1, 8, 'Napisz referencje...', '2014-11-10'),
 (16, 1, 8, 'Napisz referencje...moj', '2014-11-10'),
-(17, 1, 8, 'Napisz referencje...moj', '2014-11-10'),
 (18, 1, 8, 'Napisz referencje...', '2014-11-10'),
 (19, 1, 8, 'Napisz referencje...', '2014-11-10'),
-(20, 1, 8, 'Moje referencje...', '2014-11-10'),
 (21, 1, 8, 'Napisz referencje...hdfghdf', '2014-11-10');
 
 -- --------------------------------------------------------
@@ -354,7 +344,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 INSERT INTO `student` (`student_id`, `name`, `last_name`, `address`, `telephone`, `e_mail`, `password`, `education`, `languages`, `experience`, `skills`, `interest`, `employment_form`, `change_of_residence`, `salary`, `status`, `account_creation_date`, `is_admin`, `photoname`) VALUES
 (1, 'Kamil', 'Wrona', '00-999 Warszawa ul. Cicha 17', '876654234', 'kmil.kamil@poczta.pl', 'ef73781effc5774100f87fe2f437a435', '2008-2011 II LO w Warszawie', 'angielski - poziom zaawansowany\r\nniemiecki - poziom zaawansowany', 'brak', 'PHP - poziom dobry\r\nJava - poziom dobry', 'sport, samochody', 'praktyki/staż', 0, 0, 'poszukuję praktyk lub stażu', '2014-09-01', 0, 'wrona.jpg'),
 (2, 'Agata', 'Mińska', '11-234 Łódź ul. Jasna 3 m. 7', '343434341', 'magdagrzesinska@gmail.com', 'ef73781effc5774100f87fe2f437a435', '2002-2005 XII LO w Krakowie\r\n2005-2010 Informatyka Uniwersytet Jagielloński', 'rosyjski - zaawansowany\r\nfrancuski - zaawansowany\r\nangielski - średni\r\nniemiecki - podstawy', '2010-2014 staż i praca w IT Business Solutions - programista Java i JavaScript', 'JavaScript - zaawansowany\r\nHTML5 - zaawansowany\r\nc++ - zaawansowany\r\nJava - zaawansowany\r\nSQL - średni', 'muzyka, kulinaria, ogrodnictwo', 'umowa o pracę', 1, 3000, 'poszukuję pracy', '2014-09-01', 1, 'minska.jpg'),
-(3, 'magda', 'kowalska', 'ul.zana 2\r\n20-202 Lublin', '999999999', 'magda@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 'blabal', 'blabalblabal', 'blabalblabal2', 'blabal2', 'blabal\r\nblabal\r\nblabal', 'staż', 0, 1000, 'employed', '2014-10-09', 0, 'kowalska2014-10-10-17-49.jpg'),
+(3, 'magda', 'kowalska', 'ul.zana 2\r\n20-202 Lublin', '999999999', 'magda@o2.pl', '22d7fe8c185003c98f97e5d6ced420c7', 'blabal', 'blabalblabal', 'blabalblabal2', 'blabal2', 'blabal\r\nblabal\r\nblabal', 'staż', 0, 1000, 'employed', '2014-10-09', 1, 'kowalska2014-10-10-17-49.jpg'),
 (4, 'anna', 'polska', 'trtruyrr 12 78-789 jhghgjh', '98765443234', 'polska@poczta.pl', 'qwertyui', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.\r\nEtiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.\r\nEtiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.\r\nEtiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.\r\nEtiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.\r\nEtiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'staż', 1, 1500, 'poszukuję', '2014-09-09', 0, 'student4.jpg'),
 (5, 'agnieszka', 'walczak', 'ertyuioyt 6 45-456 jhfgddghkjg', '87654456789', 'walczak@poczta.pl', 'qwertyui', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'umowa o pracę', 0, 1200, 'poszukuję', '2014-08-18', 0, 'student5.jpg'),
 (6, 'jan', 'jankowski', 'iutdfgkhjhgcv 4 98-966 gjgj khuytrterfg', '3436344643', 'jankowski@poczta.pl', 'qwertyui', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.\r\n', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.Etiam auctor est et elementum cursus.\r\nIn gravida nulla at dui scelerisque, sed dapibus lectus maximus.', 'praktyki', 0, 700, 'poszukuję', '2014-07-10', 0, 'student.jpg'),
@@ -414,7 +404,7 @@ INSERT INTO `teacher` (`teacher_id`, `name`, `last_name`, `academic_degree`, `te
 (12, 'kamila', 'woś', 'magister', 987657453, 'kamilawos@poczta.pl', 'qwertyui', 1, '2014-04-17'),
 (13, 'damian', 'kowalski', 'doktor', 567432345, 'kowalski@poczta.pl', 'qwertyui', 1, '2014-09-09'),
 (14, 'daria', 'kowalska-nowak', 'doktor', 2147483647, 'dknowak@poczta.pl', 'qwertyui', 0, '2014-11-13'),
-(15, 'agata', 'orzeł', 'profesor', 987567432, 'orzel@poczta.pl', 'qwertyui', 0, '2014-11-15'),
+(15, 'agata', 'orzeł', 'profesor', 987567432, 'orzel@poczta.pl', 'qwertyui', 1, '2014-11-15'),
 (16, 'paweł', 'joć', 'profesor', 2147483647, 'joc@poczta.pl', 'qwertyui', 1, '2014-08-13'),
 (17, 'gertruda', 'wiącek', 'profesor', 2147483647, 'wiacek@poczta.pl', 'qwertyui', 1, '2014-09-30'),
 (18, 'piotr', 'polanecki', 'profesor', 2147483647, 'polanecki@poczta.pl', 'qwertyui', 1, '2014-03-21'),

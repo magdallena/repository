@@ -69,20 +69,20 @@
 
                             if ($_SESSION['usertype'] == 'student') {
                                 $applic = $db->get_application_data_for_student($_SESSION['id'], $obj->offer_id);
-                                $obj2=$applic->fetch_object();
+                                $obj2 = $applic->fetch_object();
                                 if ($applic->num_rows == 1) {
                                     echo "<h3>Twoja aplikacja na tę ofertę została wysłana.</h3>";
                                     echo "<span class='conspicuous'><a href='../documents/" . $obj2->cv . "' download>cv</a></span>";
                                     echo "<br/>";
                                     echo "<span class='conspicuous'><a href='../documents/" . $obj2->motivation_letter . "' download>list motywacyjny</a></span>";
                                     $obj2 = $applic->fetch_object();
-                                    if ($obj2->response == NULL) {
-                                        echo "<h3>Nie otrzymałeś jeszcze odpowiedzi</h3>";
+                                    if (!isset($obj2->response)) {
+                                        echo "<h3 class='conspicuous'>Nie otrzymałeś jeszcze odpowiedzi</h3>";
                                     } else {
                                         echo "<p><span class='bold'>&rArr;&rArr;&rArr;Odpowiedź z dnia " . $obj2->response_date . ":</span><br/>";
                                         echo $obj2->response . "</p>";
                                     }
-                                } else if($active){
+                                } else if ($active) {
                                     echo "<h3 >&rArr;&rArr;&rArr;APLIKUJ: </h3><div id = 'offer" . $obj->offer_id . "'>";
                                     ?>
                                     <form class='send_application'  action="javascript:;" method='POST' enctype="multipart/form-data">
@@ -127,16 +127,16 @@
 
             </div><!-- content -->
             <div id="sidebar">
-<?php
-$page->dosidebar();
-?>
+                <?php
+                $page->dosidebar();
+                ?>
             </div><!-- sidebar -->
             <div class="clearing">&nbsp;</div>
         </div><!-- main -->
 
-<?php
-$page->dofooter();
-?>
+        <?php
+        $page->dofooter();
+        ?>
     </body>
 </html>
 

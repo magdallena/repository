@@ -26,38 +26,25 @@
         <div id="main">
             <div id="content">
                 <?php
-                if (isset($_SESSION['admin']) && isset($_GET['user']) && isset($_GET['id'])) { 
-                    if(isset($_GET['user']) ){
-                        $user=$_GET['user'];
-                        
-                    }
-                    if(isset($_GET['id']) ){
-                        $id=$_GET['id'];
-                    }
-                    
-                } else 
-                if ($_SESSION['usertype'] == 'student') {
-                    $user='student';
-                    $id=$_SESSION['id'];
-                } else if ($_SESSION['usertype'] == 'nauczyciel') {
-                    $user='nauczyciel';
-                    $id=$_SESSION['id'];
-                } else if ($_SESSION['usertype'] == 'firma') {
-                    $user='firma';
-                    $id=$_SESSION['id'];
-                }
                 
-                if($user == 'student'){
+                if (isset($_SESSION['admin'])) {
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                if ($_SESSION['usertype'] == 'student') {
                     if (isset($_POST['student_editdata_submit'])) {
                         include_once 'classStudent.php';
-                        //poprawić
-                        //$student = Student::make_new_to_edit($_SESSION['name']); - name=email
-                        //$student->update_data();
+                        $student = Student::make_new_to_edit($_SESSION['name']);
+                        $student->update_data();
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
-                        $array = $db->get_student_data($id);
-                        if($array != false) {
+                        $array = $db->get_student_data($_SESSION['id']);
                         ?>
                         <form id="student_edit_data" action='edit_data.php' method='POST'>
                             <table>
@@ -123,18 +110,17 @@
                         </form> 
                     <?php
                     }
-                    }
-                } else if($user == 'nauczyciel') {
+                }
+
+                if ($_SESSION['usertype'] == 'nauczyciel') {
                     if (isset($_POST['teacher_editdata_submit'])) {
                         include_once 'classTeacher.php';
-                        //poprawić
-                        //$teacher = Teacher::make_new_to_edit($_SESSION['name']);
-                        //$teacher->update_data();
+                        $teacher = Teacher::make_new_to_edit($_SESSION['name']);
+                        $teacher->update_data();
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
-                        $array = $db->get_teacher_data($id);
-                        if($array != false) {
+                        $array = $db->get_teacher_data($_SESSION['id']);
                         ?>
                         <form id="teacher_edit_data" action='edit_data.php' method='POST'>
                             <table>
@@ -162,17 +148,17 @@
                         </form>
                     <?php
                     }
-                    }
-                } else if($user == 'firma') {
+                }
+
+                if ($_SESSION['usertype'] == 'firma') {
                     if (isset($_POST['company_editdata_submit'])) {
                         include_once 'classCompany.php';
-                        //poprawic
-                        //$company = Company::make_new_to_edit($_SESSION['name']);
-                        //$company->update_data();
+                        $company = Company::make_new_to_edit($_SESSION['name']);
+                        $company->update_data();
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
-                        $array = $db->get_company_data($id);
+                        $array = $db->get_company_data($_SESSION['id']);
                         ?>
                         <form id="company_edit_data" action='edit_data.php' method='POST'>
                             <table>
@@ -197,10 +183,6 @@
                     <?php
                     }
                 }
-                
-                
-                
-                
                 ?>
             </div><!-- content -->
             <div id="sidebar">

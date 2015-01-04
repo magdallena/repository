@@ -104,6 +104,22 @@ class Page {
             </ul>
             <?php
         }
+        
+        if(isset($_SESSION['admin'])) {
+            ?> 
+            <h2>Funkcje administratora</h2>
+            <ul>
+                <li><a href="list_activation_teacher.php">Aktywacja kont nauczycieli</a></li>
+                <li><a href="list_activation_company.php">Aktywacja kont firm</a></li>
+                <li><a href="change_photo.php"></a></li>
+                <li><a href="change_password.php"></a></li>
+                <li><a href="add_offer.php"></a></li>
+                <li><a href="add_offer.php?student=true"></a></li>
+                <li><a href="list_offer_added.php"></a></li>
+                <li><a href="list_offer_to_added.php"></a></li>
+            </ul>
+            <?php
+        }
     }
 
     function dopaging($onpage, $all, $filename) {
