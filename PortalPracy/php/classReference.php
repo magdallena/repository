@@ -61,6 +61,18 @@ class Reference {
             $this->set_teacher_last_name($teacher_data['last_name']);
             $this->set_teacher_degree($teacher_data['degree']);
             $array[0] = $this->display();
+            
+            $email = new PHPMailer();
+            $email->From      = 'portalpracydlastudentow@gmail.com';
+            $email->FromName  = 'Portal Pracy';
+            $email->Subject   = 'Nowe referencje';
+            $email->Body      = 'Nowe referencje od: ' . $teacher_data['degree'] . ' ' . $teacher_data['name'] . ' ' . $teacher_data['last_name'] . ':\r\n'
+                                . $this->content;
+            $email->AddAddress( $this->mysqli->get_student_data($this->student_id)['email'] );
+            if( $email->Send()) {}
+            
+            
+            
         }
         echo json_encode($array);
     }

@@ -29,6 +29,18 @@ class AskForReference {
         else {
             $this->mysqli->insert_request($this);
             echo "<h3>Zapytanie o referencje zostało wysłane</h3>";
+            
+            $student_data = $this->mysqli->get_student_data($this->student_id);
+            require_once("class.phpmailer.php");
+            $email = new PHPMailer();
+            $email->From      = 'portalpracydlastudentow@gmail.com';
+            $email->FromName  = 'Portal Pracy';
+            $email->Subject   = 'Nowa prosba o referencje';
+            $email->Body      = "Otrzymałeś nową prośbę o referencje\r\n"
+                    . "OD: " . $student_data['name'] . ' ' . $student_data['last_name'] . "\r\n"
+                    . $this->message;
+            $email->AddAddress( $this->mysqli->get_teacher_data($this->teacher_id)['email'] );
+            if( $email->Send()) {}
         }
         
     }

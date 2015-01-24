@@ -335,7 +335,7 @@ class Student extends User {
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
             $hour2=new DateTime("now");
             $hour=$hour2->format("H-i");
-            $newname = $this->name . $this->date .'-'.$hour. '.' . $extension;
+            $newname = $this->last_name . $this->date .'-'.$hour. '.' . $extension;
             $path = "../galery_student/" . $newname;
             $tmp_name = $_FILES['photo']['tmp_name'];
             $this->photo = $newname; 
@@ -354,7 +354,7 @@ class Student extends User {
         $checkresult = $this->mysqli->check_student($this->email, $this->password);
         if (!$checkresult) {
             echo "<h3>Niepoprawna nazwa użytkownika (student) i/lub hasło</h3>";
-            echo "<p><a href='change_password.php'>Powrót do formularza zmiany hasła</a></p>";
+            echo "<p><a href='login.php'>Powrót do formularza logowania</a></p>";
         } else {
             session_start();
             $admin = $this->mysqli->check_admin($this->email);
@@ -412,6 +412,19 @@ class Student extends User {
     
     function reset_password() {
         //TO DO: wyslac maila z nowym haslem $this->pass
+        require_once("class.phpmailer.php");
+        $email = new PHPMailer();
+        $email->From      = 'portalpracydlastudentow@gmail.com';
+        $email->FromName  = 'Portal Pracy';
+        $email->Subject   = 'Nowe haslo';
+        $email->Body      = "Twoje nowe hasło to: \r\n"
+                        . $this->password . "\r\n"
+                        ."Po zalogowaniu możesz je zmienić.";
+        $email->AddAddress( $this->email );
+    //$email->AddAttachment( $file_to_attach , 'image.jpg' );
+
+        if( $email->Send()) {}
+
         $this->password = md5($this->password);
         $this->mysqli->update_student_password($this);
         

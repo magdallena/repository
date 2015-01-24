@@ -46,9 +46,7 @@
                         $id = $_GET['id'];
                     }
                     $allstudents = $db->get_company_number();
-                    if ($id > $allstudents or $id == -1) {
-                        echo "<h3>niepoprawny numer firmy</h3>";
-                    } else {
+                    
                         $data = $db->get_company_data($id);
 //                        echo "firma nr " . $id;
                         if($data == false) {
@@ -108,7 +106,7 @@
                             echo "</div>";
                             echo "</div>";
                         }
-                    }
+                    
                 }
                 ?>
 

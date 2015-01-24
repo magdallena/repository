@@ -48,15 +48,8 @@
                     include_once 'classDatabase.php';
                     $teacher = Teacher::make_new_to_register();
                     $teacher->create_teacher();
-//                TO DO: wyslac maila do admina
-                    $db = new Database();
-                    $to = $db->get_admin_email();
-                    echo $to;
-                    $subject = "Portal pracy: założono nowe konto";
-                    $message = "";
-                    if (mail($to, $subject, $message)) {
-                        echo "email zostal wyslany ";
-                    }
+//                TO DO: wyslac maila do admina DONE?
+                    
                 } else if (isset($_POST['company_reg_submit'])) {
                     include_once 'classCompany.php';
                     $company = Company::make_new_to_register();
@@ -140,8 +133,15 @@
                                     </tr>
                                     <tr>
                                         <td><label for="status">Status zatrudnienia:</label></td>
-                                        <td><input type="radio" name="status" value="employed"/>Zatrudniony</td>
-                                        <td><input type="radio" name="status" value="unemployed" checked="checked"/>Niezatrudniony</td>
+                                        <td><select name='status'>
+                                                <option value='poszukuję pracy'>poszukuję pracy</option>
+                                                <option value='poszukuję stażu'>poszukuję stażu</option>
+                                                <option value='poszukuję praktyk'>poszukuję praktyk</option>
+                                                <option value='zatrudniony'>zatrudniony</option>
+                                                <option value='poszukuję innego zatrudnienia'>poszukuję innego zatrudnienia</option>
+                                                <option value='niezatrudniony'>niezatrudniony</option>
+                                                <option value='nie poszukuję zatrudnienia'>nie poszukuję zatrudnienia</option>
+                                            </select></td>
                                     </tr>
                                     <tr>
                                         <td><label for="photo">Zdjęcie:</label></td>

@@ -214,3 +214,56 @@ function delete_comment(id) {
     xmlHttp.open("GET", address, true);
     xmlHttp.send(null);
 }
+
+function end_offer(id) {
+    AjaxInit();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4) {
+            a = xmlHttp.responseText;
+            if (a != "false") {
+                //odpowiedz 
+                end_offer_feedback();
+
+            } 
+        }
+    };
+    var address = "end_offer.php?id=" + id;
+    xmlHttp.open("GET", address, true);
+    xmlHttp.send(null);
+}
+
+function end_offer_feedback() {
+    eval("document.getElementById('end_offer').innerHTML = 'oferta zakończy się dzisiaj'");
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    } 
+
+    if(mm<10) {
+        mm='0'+mm
+    } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    eval("document.getElementById('date_to').innerHTML = '"+today+"'");
+}
+
+function end_offer_to(id) {
+    AjaxInit();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4) {
+            a = xmlHttp.responseText;
+            if (a != "false") {
+                //odpowiedz 
+                end_offer_feedback();
+
+            } 
+        }
+    };
+    var address = "end_offer_to.php?id=" + id;
+    xmlHttp.open("GET", address, true);
+    xmlHttp.send(null);
+}

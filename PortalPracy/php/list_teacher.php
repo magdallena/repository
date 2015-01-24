@@ -48,7 +48,7 @@
                     include_once 'classDatabase.php';
                     $db = new Database();
 
-                    $onpage = 2;
+                    $onpage = 5;
                     $all = $db->get_teacher_number();
                     $start = $page->dopaging($onpage, $all, "list_teacher.php?");
 
@@ -60,7 +60,7 @@
                         echo "<td><a href='profile_teacher.php?id=" . $obj->teacher_id . "'><h3>" . $obj->name . " " . $obj->last_name . "</h3></a></td>";
                         if (isset($_SESSION['admin'])) {
 
-                            echo "<td id='activate$obj->teacher_id'><a href='edytuj.php?id=" . $obj->teacher_id . "' class='edit'>Edytuj</a></td>";
+                            echo "<td id='activate$obj->teacher_id'><a href='edit_data.php?user=nauczyciel&id=" . $obj->teacher_id . "' class='edit'>Edytuj</a></td>";
                             echo "<td id='delete$obj->teacher_id'><a class='delete' onClick='confirm_delete($obj->teacher_id);'>Usuń</a></td>";
                         }
                         echo "</tr>";

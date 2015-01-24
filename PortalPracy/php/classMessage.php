@@ -134,6 +134,47 @@ class Message {
             }
 
             $array[0] = $this->display_sent();
+            
+            if(!is_null($this->student_to)) {
+                $to = $this->mysqli->get_student_data($this->student_to)['email'];
+            }
+            if(!is_null($this->teacher_to)) {
+                $to = $this->mysqli->get_student_data($this->teacher_to)['email'];
+            }
+            
+            if(!is_null($this->company_to)) {
+                $to = $this->mysqli->get_student_data($this->company_to)['email'];
+            }
+            
+            if(!is_null($this->student_from)) {
+                $student_data = $this->mysqli->get_student_data($this->student_from);
+                $from = $student_data['name'] . ' ' . $student_data ['last_name'];
+            }
+            
+            if(!is_null($this->teacher_from)) {
+                $teacher_data = $this->mysqli->get_teacher_data($this->teacher_from);
+                $from = $teacher_data['degree'] . ' ' . $teacher_data['name'] . ' ' . $teacher_data ['last_name'];
+            }
+            
+            if(!is_null($this->company_from_from)) {
+                $company_data = $this->mysqli->get_student_data($this->company_from);
+                $from = $company_data['name'] ;
+            }
+            
+            require_once("class.phpmailer.php");
+            $email = new PHPMailer();
+            $email->From      = 'portalpracydlastudentow@gmail.com';
+            $email->FromName  = 'Portal Pracy';
+            $email->Subject   = 'Nowa wiadomość';
+            $email->Body      = "Otrzymałeś nową wiadomość\r\n"
+                    . "OD: " . $from . "\r\n"
+                    . $this->content;
+            $email->AddAddress( $to );
+            if( $email->Send()) {}
+            
+            
+            
+            
         }
         echo json_encode($array);
     }

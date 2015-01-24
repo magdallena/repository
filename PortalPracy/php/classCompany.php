@@ -99,6 +99,25 @@ class Company extends User {
         } else {
             $this->mysqli->insert_company($this);
             echo "<h3'>Konto zostało utworzone, ale nie jest jeszcze aktywne. Musisz poczekać na akceptację administratora.</h3>";
+        
+            require_once("class.phpmailer.php");
+            $email = new PHPMailer();
+            $email->From      = 'portalpracydlastudentow@gmail.com';
+            $email->FromName  = 'Portal Pracy';
+            $email->Subject   = 'Nowe konto';
+            $email->Body      = "Założono nowe konto (firma)\r\n"
+                    . "Dane:\r\n"
+                    . "Nazwa: " . $this->name . "\r\n"
+                    . "Adres: " . $this->address . "\r\n"
+                    . "Numer telefonu: " . $this->telephone . "\r\n"
+                    . "Sprawdź te dane i podejmij decyzję o aktywacji.";
+            $email->AddAddress( $this->mysqli->get_admin_email() );
+            $file_to_attach = '../galery_company/'.$this->photo;
+            $email->AddAttachment( $file_to_attach , 'image.jpg' );
+            if( $email->Send()) {}
+            
+            //TO DO wysłać email z załącznikiem
+            
         }
     }
 
@@ -260,6 +279,18 @@ class Company extends User {
     }
     function reset_password() {
         //TO DO: wyslac maila z nowym haslem $this->pass
+        require_once("class.phpmailer.php");
+        $email = new PHPMailer();
+        $email->From      = 'portalpracydlastudentow@gmail.com';
+        $email->FromName  = 'Portal Pracy';
+        $email->Subject   = 'Nowe haslo';
+        $email->Body      = "Twoje nowe hasło to: \r\n"
+                        . $this->password . "\r\n"
+                        ."Po zalogowaniu możesz je zmienić.";
+        $email->AddAddress( $this->email );
+        
+        if( $email->Send()) {}
+        
         $this->password = md5($this->password);
         $this->mysqli->update_company_password($this);
     }

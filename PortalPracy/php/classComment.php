@@ -56,6 +56,18 @@ class Comment {
             $array[0] = $this->display();
             $array[3] = $this->count_average();
             $array[4] = $this->count_number_of_votes();
+            
+            $email = new PHPMailer();
+            $email->From      = 'portalpracydlastudentow@gmail.com';
+            $email->FromName  = 'Portal Pracy';
+            $email->Subject   = 'Nowy komentarz';
+            $email->Body      = 'Nowy komentarz od: ' . $student_data['name'] . ' ' . $student_data['last_name'] . ':\r\n'
+                                . $this->content;
+            $email->AddAddress( $this->mysqli->get_company_data($this->company_id)['email'] );
+            if( $email->Send()) {}
+
+            
+            
         }
         echo json_encode($array);
     }

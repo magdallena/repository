@@ -34,7 +34,7 @@
                 $name = htmlspecialchars($_POST['name']);   
                 $bytes = openssl_random_pseudo_bytes(5,$cstrong);               
                 $password = bin2hex($bytes);
-                var_dump($password);
+                //var_dump($password);
                 $db = new Database();
                 if ($_POST['usertype'] == 'type_student') {
                     if (!$db->check_student_email_name($email, $name)) {

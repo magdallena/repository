@@ -13,4 +13,3 @@ $id =$_GET['id'];
 include_once 'classDatabase.php';
 $db = new Database();
 $db->delete_reference($id);
-//TO DO wyslac maila

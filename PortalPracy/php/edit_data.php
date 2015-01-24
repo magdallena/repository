@@ -26,40 +26,59 @@
         <div id="main">
             <div id="content">
                 <?php
+                include_once 'classDatabase.php';
+                $db = new Database();
                 if (isset($_SESSION['admin']) && isset($_GET['user']) && isset($_GET['id'])) { 
                     if(isset($_GET['user']) ){
                         $user=$_GET['user'];
-                        
+                        if(isset($_GET['id']) ){
+                            $id=$_GET['id'];
+                        }
+                        if($user=='student') {
+                            $email=$db->get_student_data($id)['email'];
+                        } else if($user=='nauczyciel'){
+                            $email=$db->get_teacher_data($id)['email'];
+                        } else if($user=='firma') {
+                            $email=$db->get_company_data($id)['email'];
+                        }
                     }
-                    if(isset($_GET['id']) ){
-                        $id=$_GET['id'];
-                    }
+                    
                     
                 } else 
                 if ($_SESSION['usertype'] == 'student') {
                     $user='student';
                     $id=$_SESSION['id'];
+                    $email=$_SESSION['name'];
                 } else if ($_SESSION['usertype'] == 'nauczyciel') {
                     $user='nauczyciel';
                     $id=$_SESSION['id'];
+                    $email=$_SESSION['name'];
                 } else if ($_SESSION['usertype'] == 'firma') {
                     $user='firma';
                     $id=$_SESSION['id'];
+                    $email=$_SESSION['name'];
                 }
                 
                 if($user == 'student'){
                     if (isset($_POST['student_editdata_submit'])) {
                         include_once 'classStudent.php';
-                        //poprawić
-                        //$student = Student::make_new_to_edit($_SESSION['name']); - name=email
-                        //$student->update_data();
+                        
+                        $student = Student::make_new_to_edit($email); 
+                        $student->update_data();
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
                         $array = $db->get_student_data($id);
                         if($array != false) {
+                            if(isset($_GET['user']) && isset($_GET['id']))
+                            {
+                                echo "<form id='student_edit_data' action='edit_data.php?user=".$_GET['user']."&id=".$_GET['id']."' method='POST'>";
+                            }
+                            else {
+                                echo "<form id='student_edit_data' action='edit_data.php' method='POST'>";
+                            }
                         ?>
-                        <form id="student_edit_data" action='edit_data.php' method='POST'>
+                        
                             <table>
                                 <tr>
                                     <td><label for="name">Imię:</label></td>
@@ -112,8 +131,15 @@
                                 </tr>
                                 <tr>
                                     <td><label for="status">Status zatrudnienia:</label></td>
-                                    <td><input type="radio" name="status" value="employed" <?php if ($array['status'] == "employed") echo "checked" ?> />Zatrudniony</td>
-                                    <td><input type="radio" name="status" value="unemployed" <?php if ($array['status'] == "unemployed") echo "checked" ?> />Niezatrudniony</td>
+                                    <td><select name="status">
+                                        <option value='poszukuję pracy'>poszukuję pracy</option>
+                                                <option value='poszukuję stażu' <?php if ($array['status'] == "poszukuję stażu") echo "selected" ?>>poszukuję stażu</option>
+                                                <option value='poszukuję praktyk' <?php if ($array['status'] == "poszukuję praktyk") echo "selected" ?>>poszukuję praktyk</option>
+                                                <option value='zatrudniony' <?php if ($array['status'] == "zatrudniony") echo "selected" ?>>zatrudniony</option>
+                                                <option value='poszukuję innego zatrudnienia' <?php if ($array['status'] == "poszukuję innego zatrudnienia") echo "selected" ?>>poszukuję innego zatrudnienia</option>
+                                                <option value='niezatrudniony' <?php if ($array['status'] == "niezatrudniony") echo "selected" ?>>niezatrudniony</option>
+                                                <option value='nie poszukuję zatrudnienia' <?php if ($array['status'] == "nie poszukuję zatrudnienia") echo "selected" ?>>nie poszukuję zatrudnienia</option>
+                                    </select></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -124,19 +150,26 @@
                     <?php
                     }
                     }
-                } else if($user == 'nauczyciel') {
+                } else if($user == 'nauczyciel') { 
                     if (isset($_POST['teacher_editdata_submit'])) {
                         include_once 'classTeacher.php';
-                        //poprawić
-                        //$teacher = Teacher::make_new_to_edit($_SESSION['name']);
-                        //$teacher->update_data();
+                        
+                        $teacher = Teacher::make_new_to_edit($email);
+                        $teacher->update_data();
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
                         $array = $db->get_teacher_data($id);
                         if($array != false) {
+                            if(isset($_GET['user']) && isset($_GET['id']))
+                            {
+                                echo "<form id='teacher_edit_data' action='edit_data.php?user=".$_GET['user']."&id=".$_GET['id']."' method='POST'>";
+                            }
+                            else {
+                                echo "<form id='teacher_edit_data' action='edit_data.php' method='POST'>";
+                            }
                         ?>
-                        <form id="teacher_edit_data" action='edit_data.php' method='POST'>
+                        
                             <table>
                                 <tr>
                                     <td><label for="name">Imię:</label></td>
@@ -166,15 +199,23 @@
                 } else if($user == 'firma') {
                     if (isset($_POST['company_editdata_submit'])) {
                         include_once 'classCompany.php';
-                        //poprawic
-                        //$company = Company::make_new_to_edit($_SESSION['name']);
-                        //$company->update_data();
+                        
+                        $company = Company::make_new_to_edit($email);
+                        $company->update_data();
                     } else {
                         include_once 'classDatabase.php';
                         $db = new Database();
                         $array = $db->get_company_data($id);
+                        if($array!=false) {
+                            if(isset($_GET['user']) && isset($_GET['id']))
+                            {
+                                echo "<form id='company_edit_data' action='edit_data.php?user=".$_GET['user']."&id=".$_GET['id']."' method='POST'>";
+                            }
+                            else {
+                                echo "<form id='company_edit_data' action='edit_data.php' method='POST'>";
+                            }
                         ?>
-                        <form id="company_edit_data" action='edit_data.php' method='POST'>
+                        
                             <table>
                                 <tr>
                                     <td><label for="name">Nazwa:</label></td>
@@ -195,6 +236,7 @@
                             </table>
                         </form>
                     <?php
+                        }
                     }
                 }
                 

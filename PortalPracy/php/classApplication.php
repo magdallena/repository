@@ -49,6 +49,29 @@ class Application {
             $array[1] = "Już aplikowałeś na tę ofertę.";
         } else if ($this->check_file("cv") && $this->check_file("motivation_letter")) {
             $this->mysqli->insert_application($this);
+            
+            $student_data = $this->mysqli->get_student_data($this->student_id);
+            $offer_data = $this->mysqli->get_offer_data($this->offer_id)->fetch_object();
+           
+            require_once("class.phpmailer.php");
+            $email = new PHPMailer();
+            $email->From      = 'portalpracydlastudentow@gmail.com';
+            $email->FromName  = 'Portal Pracy';
+            $email->Subject   = 'Nowa aplikacja';
+            $email->Body      = "Wysłano aplikację na twoją ofertę.\r\n"
+                    . "OD:" . $student_data['name'] . ' ' . $student_data['last_name']
+                    . "OFERTA: \r\n"
+                    . "Stanowisko: " . $offer_data->job . "\r\n"
+                    . "Numer telefonu: " . $this->telephone . "\r\n"
+                    . "Sprawdź te dane i podejmij decyzję o aktywacji.";
+            $email->AddAddress( $this->mysqli->get_company_data($offer_data->company_id)['email'] );
+            $file_to_attach = '../documents/'.$this->cv;
+            $email->AddAttachment( $file_to_attach );
+            $file_to_attach2 = '../documents/'.$this->motivation_letter;
+            $email->AddAttachment( $file_to_attach2 );
+        if( $email->Send()) {}           
+            
+            
         } else {
             $array[2] = 'Niepoprawny plik (dostępne rozszerzenia: .txt, .docx, .doc, .pdf, .odt).';
         }
@@ -63,6 +86,23 @@ class Application {
             $this->mysqli->update_application_with_response($this);
             $array[1] = $this->response;
             $array[2] = $this->response_date;
+            
+            $offer_data = $this->mysqli->get_offer_data($this->offer_id)->fetch_object();
+            
+            require_once("class.phpmailer.php");
+            $email = new PHPMailer();
+            $email->From      = 'portalpracydlastudentow@gmail.com';
+            $email->FromName  = 'Portal Pracy';
+            $email->Subject   = 'Odpowiedz na aplikacje';
+            $email->Body      = "Otrzymałeś odpowiedź na twoją aplikację\r\n"
+                    . "OFERTA \r\n"
+                    . "Firma: " . $this->mysqli->get_company_data($offer_data->company_id)['name'] . "\r\n"
+                    . "Stanowisko" . $offer_data->job . "\r\n\r\n"
+                    . $this->response;
+            $email->AddAddress( $this->mysqli->get_student_data($this->student_id)['email'] );
+            if( $email->Send()) {}
+            
+            
         }
         $array[0] = $this->id;
         echo json_encode($array);

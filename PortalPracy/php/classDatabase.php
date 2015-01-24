@@ -14,7 +14,7 @@ class Database {
         $this->server = 'localhost';
         $this->user = 'root';
         $this->password = '';
-        $this->basename = 'data_base';
+        $this->basename = 'data_base_new';
         $this->db = new mysqli($this->server, $this->user, $this->password, $this->basename);
         if ($this->db->connect_error) {
             die('Blad polaczenia z baza danych (' . $this->db->connect_errno . ') ' . $this->db->connect_error);
@@ -40,7 +40,7 @@ class Database {
     }
 
     function check_teacher($email, $password) {
-        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `e_mail`='$email' and `password`='$password'")) {
+        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `e_mail`='$email' and `password`='$password' and `active`=1")) {
             if ($result->num_rows == 0) {
                 $result->close();
                 return false;
@@ -52,7 +52,7 @@ class Database {
     }
 
     function check_company($email, $password) {
-        if ($result = $this->db->query("SELECT * FROM `company` WHERE `e_mail`='$email' and `password`='$password'")) {
+        if ($result = $this->db->query("SELECT * FROM `company` WHERE `e_mail`='$email' and `password`='$password' and `active`=1")) {
             if ($result->num_rows == 0) {
                 $result->close();
                 return false;
@@ -97,7 +97,7 @@ class Database {
     }
 
     function check_teacher_email($email) {
-        if ($result = $this->db->query("SELECT `e_mail` FROM `teacher` WHERE `e_mail`='$email'")) {
+        if ($result = $this->db->query("SELECT `e_mail` FROM `teacher` WHERE `e_mail`='$email' and `active`=1")) {
             if ($result->num_rows == 0) {
                 $result->close();
                 return false;
@@ -109,7 +109,7 @@ class Database {
     }
 
     function check_company_email($email) {
-        if ($result = $this->db->query("SELECT `e_mail` FROM `company` WHERE `e_mail`='$email'")) {
+        if ($result = $this->db->query("SELECT `e_mail` FROM `company` WHERE `e_mail`='$email' and `active`=1")) {
             if ($result->num_rows == 0) {
                 $result->close();
                 return false;
@@ -157,6 +157,7 @@ class Database {
                 $array = array();
                 $array['name'] = $obj->name;
                 $array['last_name'] = $obj->last_name;
+                $array['email'] = $obj->e_mail;
                 $array['address'] = $obj->address;
                 $array['telephone'] = $obj->telephone;
                 $array['education'] = $obj->education;
@@ -175,7 +176,7 @@ class Database {
     }
 
     function get_teacher_data($id) {
-        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `teacher_id`='$id'")) {
+        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `teacher_id`='$id' and `active`=1")) {
             if ($result->num_rows == 0) {
                 return false;
             } else {
@@ -183,6 +184,7 @@ class Database {
                 $array = array();
                 $array['teacher_id'] = $obj->teacher_id;
                 $array['name'] = $obj->name;
+                $array['email'] = $obj->e_mail;
                 $array['last_name'] = $obj->last_name;
                 $array['degree'] = $obj->academic_degree;
                 $array['telephone'] = $obj->telephone;
@@ -192,7 +194,7 @@ class Database {
     }
 
     function get_company_data($id) {
-        if ($result = $this->db->query("SELECT * FROM `company` WHERE `company_id`='$id'")) {
+        if ($result = $this->db->query("SELECT * FROM `company` WHERE `company_id`='$id' and `active`=1")) {
             if ($result->num_rows == 0) {
                 return false;
             } else {
@@ -200,6 +202,7 @@ class Database {
                 $array = array();
                 $array['company_id'] = $obj->company_id;
                 $array['name'] = $obj->name;
+                $array['email'] = $obj->e_mail;
                 $array['address'] = $obj->address;
                 $array['telephone'] = $obj->telephone;
                 $array['photoname'] = $obj->photoname;
@@ -274,7 +277,7 @@ class Database {
     }
 
     function get_teacher_id($email) {
-        if ($result = $this->db->query("SELECT `teacher_id` FROM `teacher` WHERE `e_mail`='$email'")) {
+        if ($result = $this->db->query("SELECT `teacher_id` FROM `teacher` WHERE `e_mail`='$email' ")) {
             $obj = $result->fetch_object();
             return $obj->teacher_id;
         }
@@ -302,14 +305,14 @@ class Database {
     }
 
     function get_company_photo($id) {
-        if ($result = $this->db->query("SELECT `photoname` FROM `company` WHERE `company_id`='$id'")) {
+        if ($result = $this->db->query("SELECT `photoname` FROM `company` WHERE `company_id`='$id'and `active`=1")) {
             $obj = $result->fetch_object();
             return $obj->photoname;
         }
     }
 
     function get_company_name($id) {
-        if ($result = $this->db->query("SELECT `name` FROM `company` WHERE `company_id`='$id'")) {
+        if ($result = $this->db->query("SELECT `name` FROM `company` WHERE `company_id`='$id'and `active`=1")) {
             $obj = $result->fetch_object();
             return $obj->name;
         }
@@ -330,7 +333,7 @@ class Database {
     }
 
     function get_teacher_list($start, $onpage) {
-        if ($result = $this->db->query("SELECT * FROM `teacher` ORDER BY `last_name` LIMIT $start, $onpage")) {
+        if ($result = $this->db->query("SELECT * FROM `teacher` WHERE `active`=1 ORDER BY `last_name` LIMIT $start, $onpage")) {
             return $result;
         }
     }
@@ -358,7 +361,7 @@ class Database {
     }
 
     function get_company_list($start, $onpage) {
-        if ($result = $this->db->query("SELECT * FROM `company` LIMIT $start, $onpage")) {
+        if ($result = $this->db->query("SELECT * FROM `company` WHERE `active`=1 LIMIT $start, $onpage")) {
             return $result;
         }
     }
@@ -807,13 +810,13 @@ class Database {
     }
 
     function update_message_read($id) {
-        if ($result = $this->db->query("UPDATE `message` SET `read` = '1' WHERE `message_id` = " . $id)) {
+        if ($result = $this->db->query("UPDATE `message` SET `is_read` = '1' WHERE `message_id` = " . $id)) {
             
         }
     }
 
     function get_message_to_student_number($student_id) {
-        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `student_to` =$student_id AND `read`=0")) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `student_to` =$student_id AND `is_read`=0")) {
             $all_offers = $result->num_rows;
             $result->close();
         }
@@ -821,7 +824,7 @@ class Database {
     }
 
     function get_message_to_teacher_number($teacher_id) {
-        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `teacher_to` =$teacher_id AND `read`=0")) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `teacher_to` =$teacher_id AND `is_read`=0")) {
             $all_offers = $result->num_rows;
             $result->close();
         }
@@ -829,7 +832,7 @@ class Database {
     }
 
     function get_message_to_company_number($company_id) {
-        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `company_to` =$company_id AND `read`=0")) {
+        if ($result = $this->db->query("SELECT * FROM `message`  WHERE `company_to` =$company_id AND `is_read`=0")) {
             $all_offers = $result->num_rows;
             $result->close();
         }
@@ -839,7 +842,7 @@ class Database {
     function check_student_email_name($email, $name) {
         if ($result = $this->db->query("SELECT * FROM `student` WHERE `e_mail`='$email' and `last_name`='$name'")) {
             if ($result->num_rows == 0) {
-                echo $result->num_rows;
+                
                 $result->close();
                 return false;
             } else {
@@ -920,5 +923,43 @@ class Database {
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $stmt->close();
+    }
+    
+    function update_offer_end_today($id) {
+        $date = new DateTime('now');
+        $today = $date->format('Y-m-d');
+        $stmt = $this->db->prepare("UPDATE `offer` SET `date_to`=? WHERE `offer_id`=?");
+        $stmt->bind_param('si', $today, $id);
+        $stmt->execute();
+        $stmt->close(); 
+
+    } 
+    
+    function update_offer_to_end_today($id) {
+        $date = new DateTime('now');
+        $today = $date->format('Y-m-d');
+        $stmt = $this->db->prepare("UPDATE `offer_to_student` SET `date_to`=? WHERE `offer_to_id`=?");
+        $stmt->bind_param('si', $today, $id);
+        $stmt->execute();
+        $stmt->close(); 
+
+    }
+    
+    function get_asks_for_reference_data($id) {
+        if ($result = $this->db->query("SELECT * FROM `ask_for_reference` WHERE `ask_id`=$id")) {
+            return $result;
+        }
+    }
+    
+    function check_references_student_with_teacher($student_id, $teacher_id) {
+        if ($result = $this->db->query("SELECT * FROM `references` WHERE `studen_id`='$student_id' and `teacher_id`='$teacher_id'")) {
+            if ($result->num_rows == 0) {
+                $result->close();
+                return false;
+            } else {
+                $result->close();
+                return true;
+            }
+        }
     }
 }

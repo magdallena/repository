@@ -8,6 +8,7 @@
         <script type='text/javascript' src='../js/tooltips.js'></script>
         <script src='../js/jquery-2.1.1.js' type='text/javascript'></script>
         <script src="../js/send_application.js" type='text/javascript'></script>
+        <script type='text/javascript' src='../js/ajax.js'></script>
     </head>
     <body>
         <div id="header">
@@ -40,8 +41,11 @@
                             if (!$db->check_offer_with_company($offer_id, $_SESSION['id'])) {
                                 echo "<h3>Ta oferta nie należy do twojej firmy.</h3>";
                                 $ok = false;
-                            } else
+                                $owner = false;
+                            } else {
                                 $ok = true;
+                                $owner = true;
+                            }
                         }
                         if ($ok) {
                             $obj = $db->get_offer_data($offer_id);
@@ -50,6 +54,15 @@
                             if ($today >= $obj->date_from && $today <= $obj->date_to) {
                                 echo "<h3><span clas='conspicuous'>Oferta aktywna</span></h3>";
                                 $active = TRUE;
+                                if (isset($_SESSION['admin']) or $owner) {
+                                    $date = new DateTime('now');
+                                    $today = $date->format('Y-m-d');
+                                    if ($obj->date_to != $today) {
+                                        echo "<span id='end_offer'><a onClick='end_offer(" . $_GET['id'] . ");'>(zakończ ofertę dzisiaj)</a></span>";
+                                    } else {
+                                        echo '<span>oferta zakończy się dzisiaj</span>';
+                                    }
+                                }
                             } else {
                                 echo "<h3><span clas='conspicuous'>Oferta nieaktywna</span></h3>";
                                 $active = FALSE;
@@ -63,7 +76,7 @@
                             echo "<li><span class='bold'>Wymiar pracy (liczba godzin w tygodniu): </span>" . $obj->number_of_hours . "</li>";
                             echo "<li><span class='bold'>Długość umowy: </span>" . $obj->length_of_contract . "</li>";
                             echo "<li><span class='bold'>Wynagrodzenie: </span>" . $obj->salary . "</li>";
-                            echo "<li>Oferta ważna od <span class='bold'>" . $obj->date_from . " </span>do <span class='bold'>" . $obj->date_to . "</span></li>";
+                            echo "<li>Oferta ważna od <span class='bold'>" . $obj->date_from . " </span>do <span class='bold' id='date_to'>" . $obj->date_to . "</span></li>";
                             echo "</ul></p>";
                             echo "</div>";
 

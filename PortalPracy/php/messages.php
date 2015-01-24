@@ -114,7 +114,7 @@
                     }
                     include_once 'classMessage.php';
                     while ($obj = $result->fetch_object()) {
-                        $m = Message::make_new_to_display_received($obj->message_id, $obj->student_from, $obj->teacher_from, $obj->company_from, $obj->content, $obj->date, $obj->read);
+                        $m = Message::make_new_to_display_received($obj->message_id, $obj->student_from, $obj->teacher_from, $obj->company_from, $obj->content, $obj->date, $obj->is_read);
                         echo $m->display_received();
                     }
 

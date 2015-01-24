@@ -14,3 +14,11 @@ include_once 'classDatabase.php';
 $db = new Database();
 $db->update_teacher_active($id);
 //TO DO wyslac maila
+
+$email = new PHPMailer();
+$email->From      = 'portalpracydlastudentow@gmail.com';
+$email->FromName  = 'Portal Pracy';
+$email->Subject   = 'Twoje konto aktywowane';
+$email->Body      = 'Twoje konto na portalu pracy dla studentów jest już aktywne. Możesz się już zalogować';
+$email->AddAddress( $db->get_teacher_data($id)['email'] );
+if( $email->Send()) {}

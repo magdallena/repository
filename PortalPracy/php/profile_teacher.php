@@ -34,9 +34,7 @@
                         $id = $_GET['id'];
                     }
                     $allteachers = $db->get_teacher_number();
-                    if ($id > $allteachers or $id == -1) {
-                        echo "<h3>niepoprawny numer nauczyciela</h3>";
-                    } else {
+                    
                         $data = $db->get_teacher_data($id);
 //                        echo "nauczyciel nr " . $id;
                         if($data == false) {
@@ -48,7 +46,7 @@
                             echo "<a href='send_request.php?teacher_id=".$data['teacher_id']."'>Wyślij zapytanie o referencje</a>";
                         }
                         
-                    }
+                    
                 }
                 ?>
 

@@ -63,6 +63,21 @@ class OfferToStudent extends Offer {
             $array[2] = '<h3>Już wysłałeś odpowiedź na tę ofertę.</h3>';
         } else {
             $this->mysqli->update_offer_to_student($this);
+            
+            $student_data = $this->mysqli->get_student_data($this->student_id);
+                        
+            require_once("class.phpmailer.php");
+            $email = new PHPMailer();
+            $email->From      = 'portalpracydlastudentow@gmail.com';
+            $email->FromName  = 'Portal Pracy';
+            $email->Subject   = 'Odpowiedz na oferte';
+            $email->Body      = "Otrzymałeś odpowiedź na ofertę\r\n"
+                    ."OFERTA DO: " . $student_data['name'] . ' ' . $student_data['last_name'] . "\r\n"
+                    . "Stanowisko: " . $this->job . "\r\n"
+                    . $this->response;
+            $email->AddAddress( $this->mysqli->get_company_data($this->company_id)['email'] );
+            if( $email->Send()) {}
+            
         }
         $array[0] = $this->offer_id;
         echo json_encode($array);
