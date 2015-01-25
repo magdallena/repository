@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    
+    jQuery.validator.addMethod("emailordomain", function(value, element) {
+  return this.optional(element) || /[a-zA-Z0-9\.]*@[a-zA-Z0-9\.]*edu.pl$/.test(value); 
+}, "Please specify the correct url/email");
+    
     $('#student_register, #student_edit_data').validate({
         rules: {
             name: {
@@ -21,7 +26,9 @@ $(document).ready(function() {
             },
             email: {
                 required: true,
-                email: true
+                email: true,
+                emailordomain: true
+                //matches: '.+edu.pl'
             },
             password: {
                 required: true,
@@ -85,7 +92,9 @@ $(document).ready(function() {
             },
             email: {
                 required: "<br/>Pole wymagane.",
-                email: "<br/>Niepoprawny adres email."
+                email: "<br/>Niepoprawny adres email.",
+                emailordomain: "<br/>E-mail musi być w domenie edu.pl"
+                //matches: "<br/>E-mail musi być w domenie edu.pl"
             },
             password: {
                 required: "<br/>Pole wymagane.",

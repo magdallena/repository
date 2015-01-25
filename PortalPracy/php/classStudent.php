@@ -117,6 +117,12 @@ class Student extends User {
             $ok = false;
             echo "<h3>Niepoprawny email lub podany email już istnieje w bazie: " . $this->email . "</h3>";
         }
+        
+        if (!$this->check_email_domain()) {
+            $ok = false;
+            echo "<h3>Niepoprawny email (musi być w domenie edu.pl): " . $this->email . "</h3>";
+        }
+        
         if (!$this->check_password()) {
             $ok = false;
             echo "<h3>Niepoprawne hasło (min. 8 znaków)</h3>";
@@ -249,6 +255,10 @@ class Student extends User {
             $ok = false;
         }
         return $ok;
+    }
+    
+    function check_email_domain() {
+        return preg_match('/[a-zA-Z0-9\.]*@[a-zA-Z0-9\.]*edu.pl$/', $this->email);
     }
 
     function check_password() {

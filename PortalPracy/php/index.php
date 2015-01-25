@@ -13,7 +13,7 @@
         <script src="../js/send_application.js" type='text/javascript'></script>
         <script src="../js/send_response_to_offer.js" type="text/javascript"></script>
         <script>
-            var images = new Array('../images/employee.jpg', '../images/employer.jpg', '../images/teacher.jpg');
+            var images = new Array('../images/employee.jpg', '../images/teacher.jpg', '../images/employer.jpg');
             var index = 1;
 
             function rotateImage()
@@ -348,7 +348,7 @@
 
 
                     <div id="test">
-                        <img id="myImage" src="../images/employee.jpg" alt="image test" width="600" height="413"/>
+                        <img id="myImage" src="../images/test1.jpg" alt="image test" width="500" height="313"/>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
                     </div>
 
