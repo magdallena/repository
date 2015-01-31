@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     $email->FromName  = 'Your Name';
     $email->Subject   = 'Email with two attachments';
     $email->Body      = 'to jest email z zalacznikiem';
-    $email->AddAddress( 'magdagrzesinska@gmail.com' );
+    $email->AddAddress( 'magdalena.waszczynska.com' );
 
     $file_to_attach = 'images/image.jpg';
 

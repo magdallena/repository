@@ -38,7 +38,7 @@
 
 
             $(document).ready(function() {
-                setInterval(rotateImage, 5500);
+                setInterval(rotateImage, 5000);
                 var icons = {
                     header: "ui-icon-circle-arrow-e",
                     activeHeader: "ui-icon-circle-arrow-s"
@@ -348,8 +348,9 @@
 
 
                     <div id="test">
-                        <img id="myImage" src="../images/test1.jpg" alt="image test" width="500" height="313"/>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                        <!--<p><h3><font size="10">DOŁĄCZ DO NAS JUŻ DZIŚ</font></h3></p>-->
+                    <p></p>
+                    <img id="myImage" src="../images/employee.jpg" alt="image" width="680" height="433"/>   
                     </div>
 
 

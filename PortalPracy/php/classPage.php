@@ -10,7 +10,7 @@ class Page {
 
     function dofooter() {
         echo '<div id="footer">
-            <p>Copyright &copy; 2013, designed by <a href="http://www.alphastudio.pl/">Alpha Studio</a> | <a href="#">Privacy Policy</a></p>
+            <p>Copyright &copy; 2013, designed by <a href="http://www.alphastudio.pl/">Alpha Studio</a></p>
         </div>';
     }
 

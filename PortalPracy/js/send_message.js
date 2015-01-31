@@ -10,7 +10,7 @@ $(document).ready(function() {
             'recipient':$('select[name=recipient]').val()
 
         };
-
+// tu nie działa wysyłanie wiadomości
         // process the form
         $.ajax({
             type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
